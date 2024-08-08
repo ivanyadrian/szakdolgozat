@@ -46,7 +46,7 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Valami nem jó. Kérlek próbáld meg újra';
+      throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
     }
   }
   /// [ReAuthenticate] - ReAuthenticate User

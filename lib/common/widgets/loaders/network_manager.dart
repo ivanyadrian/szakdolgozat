@@ -9,6 +9,7 @@ import 'loaders.dart';
 class NetworkManager extends GetxController {
   static NetworkManager get instance => Get.find();
 
+
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   final Rx<ConnectivityResult> _connectionStatus = ConnectivityResult.none.obs;
@@ -24,7 +25,7 @@ class NetworkManager extends GetxController {
   Future<void> _updateConnectionStatus(ConnectivityResult result) async {
     _connectionStatus.value = result;
     if (_connectionStatus.value == ConnectivityResult.none) {
-      TLoaders.warningSnackBar(title: 'Nincs internet kapcsolat');
+      TLoaders.noInternetConnection(title: 'Hiba', message: "Az internetkapcsolat megszakadt");
     }
   }
 

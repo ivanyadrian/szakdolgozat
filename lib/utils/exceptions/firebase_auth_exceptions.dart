@@ -1,106 +1,106 @@
-/// Custom exception class to handle various Firebase authentication-related errors.
+/// Egyedi kivétel osztály, amely különféle Firebase hitelesítési hibákat kezel.
 class TFirebaseAuthException implements Exception {
-  /// The error code associated with the exception.
+  /// A kivételhez tartozó hibakód.
   final String code;
 
-  /// Constructor that takes an error code.
+  /// Konstruktor, amely hibakódot fogad.
   TFirebaseAuthException(this.code);
 
-  /// Get the corresponding error message based on the error code.
+  /// Az adott hibakódhoz tartozó hibaüzenet lekérése.
   String get message {
     switch (code) {
       case 'email-already-in-use':
-        return 'Ez az email cim mar regisztralva van. Hasznalj egy masikat.';
+        return 'Az e-mail cím már regisztrálva van. Kérlek, használj másik e-mail címet.';
       case 'invalid-email':
-        return 'The email address provided is invalid. Please enter a valid email.';
+        return 'A megadott e-mail cím érvénytelen. Kérlek, adj meg egy érvényes e-mail címet.';
       case 'weak-password':
-        return 'The password is too weak. Please choose a stronger password.';
+        return 'A jelszó túl gyenge. Kérlek, válassz egy erősebb jelszót.';
       case 'user-disabled':
-        return 'This user account has been disabled. Please contact support for assistance.';
+        return 'Ez a felhasználói fiók le van tiltva. Kérlek, lépj kapcsolatba a támogatással.';
       case 'user-not-found':
-        return 'Invalid login details. User not found.';
+        return 'Érvénytelen bejelentkezési adatok. Felhasználó nem található.';
       case 'wrong-password':
-        return 'Incorrect password. Please check your password and try again.';
+        return 'Helytelen jelszó. Kérlek, ellenőrizd a jelszót és próbálkozz újra.';
       case 'invalid-verification-code':
-        return 'Invalid verification code. Please enter a valid code.';
+        return 'Érvénytelen ellenőrző kód. Kérlek, adj meg egy érvényes kódot.';
       case 'invalid-verification-id':
-        return 'Invalid verification ID. Please request a new verification code.';
+        return 'Érvénytelen ellenőrző azonosító. Kérlek, kérj új ellenőrző kódot.';
       case 'quota-exceeded':
-        return 'Quota exceeded. Please try again later.';
+        return 'A kvóta túllépve. Kérlek, próbáld később.';
       case 'email-already-exists':
-        return 'The email address already exists. Please use a different email.';
+        return 'Az e-mail cím már létezik. Kérlek, használj másik e-mail címet.';
       case 'provider-already-linked':
-        return 'The account is already linked with another provider.';
+        return 'A fiók már össze van kapcsolva egy másik szolgáltatóval.';
       case 'requires-recent-login':
-        return 'This operation is sensitive and requires recent authentication. Please log in again.';
+        return 'Ez a művelet érzékeny, és friss hitelesítést igényel. Kérlek, jelentkezz be újra.';
       case 'credential-already-in-use':
-        return 'This credential is already associated with a different user account.';
+        return 'Ez a hitelesítő adat már másik felhasználói fiókhoz van társítva.';
       case 'user-mismatch':
-        return 'The supplied credentials do not correspond to the previously signed in user.';
+        return 'A megadott hitelesítő adatok nem egyeznek a korábban bejelentkezett felhasználóval.';
       case 'account-exists-with-different-credential':
-        return 'An account already exists with the same email but different sign-in credentials.';
+        return 'A megadott e-mail címhez már létezik fiók más bejelentkezési adatokkal.';
       case 'operation-not-allowed':
-        return 'This operation is not allowed. Contact support for assistance.';
+        return 'Ez a művelet nem engedélyezett. Kérlek, lépj kapcsolatba a támogatással.';
       case 'expired-action-code':
-        return 'The action code has expired. Please request a new action code.';
+        return 'A műveleti kód lejárt. Kérlek, kérj új műveleti kódot.';
       case 'invalid-action-code':
-        return 'The action code is invalid. Please check the code and try again.';
+        return 'A műveleti kód érvénytelen. Kérlek, ellenőrizd a kódot és próbálkozz újra.';
       case 'missing-action-code':
-        return 'The action code is missing. Please provide a valid action code.';
+        return 'A műveleti kód hiányzik. Kérlek, adj meg egy érvényes műveleti kódot.';
       case 'user-token-expired':
-        return 'The user\'s token has expired, and authentication is required. Please sign in again.';
+        return 'A felhasználói token lejárt, és új hitelesítés szükséges. Kérlek, jelentkezz be újra.';
       case 'user-not-found':
-        return 'No user found for the given email or UID.';
+        return 'Nem található felhasználó a megadott e-mail cím vagy UID alapján.';
       case 'invalid-credential':
-        return 'The supplied credential is malformed or has expired.';
+        return 'A megadott hitelesítő adat érvénytelen vagy lejárt.';
       case 'wrong-password':
-        return 'The password is invalid. Please check your password and try again.';
+        return 'A jelszó érvénytelen. Kérlek, ellenőrizd a jelszót és próbálkozz újra.';
       case 'user-token-revoked':
-        return 'The user\'s token has been revoked. Please sign in again.';
+        return 'A felhasználói token visszavonásra került. Kérlek, jelentkezz be újra.';
       case 'invalid-message-payload':
-        return 'The email template verification message payload is invalid.';
+        return 'Az e-mail sablon ellenőrző üzenet adatainak terjedelme érvénytelen.';
       case 'invalid-sender':
-        return 'The email template sender is invalid. Please verify the sender\'s email.';
+        return 'Az e-mail sablon feladója érvénytelen. Kérlek, ellenőrizd a feladó e-mail címét.';
       case 'invalid-recipient-email':
-        return 'The recipient email address is invalid. Please provide a valid recipient email.';
+        return 'A címzett e-mail cím érvénytelen. Kérlek, adj meg egy érvényes címzett e-mail címet.';
       case 'missing-iframe-start':
-        return 'The email template is missing the iframe start tag.';
+        return 'Az e-mail sablon hiányzik az iframe kezdő tag.';
       case 'missing-iframe-end':
-        return 'The email template is missing the iframe end tag.';
+        return 'Az e-mail sablon hiányzik az iframe befejező tag.';
       case 'missing-iframe-src':
-        return 'The email template is missing the iframe src attribute.';
+        return 'Az e-mail sablon hiányzik az iframe src attribútum.';
       case 'auth-domain-config-required':
-        return 'The authDomain configuration is required for the action code verification link.';
+        return 'Az authDomain konfiguráció szükséges az akció kód ellenőrző linkhez.';
       case 'missing-app-credential':
-        return 'The app credential is missing. Please provide valid app credentials.';
+        return 'Az alkalmazás hitelesítő adat hiányzik. Kérlek, adj meg érvényes alkalmazás hitelesítő adatokat.';
       case 'invalid-app-credential':
-        return 'The app credential is invalid. Please provide a valid app credential.';
+        return 'Az alkalmazás hitelesítő adat érvénytelen. Kérlek, adj meg érvényes alkalmazás hitelesítő adatokat.';
       case 'session-cookie-expired':
-        return 'The Firebase session cookie has expired. Please sign in again.';
+        return 'A Firebase munkamenet cookie lejárt. Kérlek, jelentkezz be újra.';
       case 'uid-already-exists':
-        return 'The provided user ID is already in use by another user.';
+        return 'A megadott felhasználói ID már egy másik felhasználó által használatban van.';
       case 'invalid-cordova-configuration':
-        return 'The provided Cordova configuration is invalid.';
+        return 'A megadott Cordova konfiguráció érvénytelen.';
       case 'app-deleted':
-        return 'This instance of FirebaseApp has been deleted.';
+        return 'Ez a FirebaseApp példány törölve lett.';
       case 'user-disabled':
-        return 'The user account has been disabled.';
+        return 'A felhasználói fiók le van tiltva.';
       case 'user-token-mismatch':
-        return 'The provided user\'s token has a mismatch with the authenticated user\'s user ID.';
+        return 'A megadott felhasználói token nem egyezik az autentikált felhasználó ID-jával.';
       case 'web-storage-unsupported':
-        return 'Web storage is not supported or is disabled.';
+        return 'A web tárolás nem támogatott vagy le van tiltva.';
       case 'invalid-credential':
-        return 'The supplied credential is invalid. Please check the credential and try again.';
+        return 'A megadott hitelesítő adat érvénytelen. Kérlek, ellenőrizd a hitelesítő adatokat és próbálkozz újra.';
       case 'app-not-authorized':
-        return 'The app is not authorized to use Firebase Authentication with the provided API key.';
+        return 'Az alkalmazás nem jogosult a Firebase Authentication használatára a megadott API kulccsal.';
       case 'keychain-error':
-        return 'A keychain error occurred. Please check the keychain and try again.';
+        return 'Keychain hiba történt. Kérlek, ellenőrizd a keychain-t és próbálkozz újra.';
       case 'internal-error':
-        return 'An internal authentication error occurred. Please try again later.';
+        return 'Belső hitelesítési hiba történt. Kérlek, próbáld újra később.';
       case 'INVALID_LOGIN_CREDENTIALS':
-        return 'Invalid login credentials.';
+        return 'Érvénytelen bejelentkezési adatok.';
       default:
-        return 'An unexpected authentication error occurred. Please try again.';
+        return 'Váratlan hitelesítési hiba történt. Kérlek, próbáld újra.';
     }
   }
 }

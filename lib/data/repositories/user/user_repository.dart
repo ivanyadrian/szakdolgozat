@@ -23,7 +23,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Valami nem jó. Kérlek próbáld újra';
+      throw 'Váratlan hiba történt. Kérlek próbáld újra';
     }
   }
 }

@@ -1,4 +1,3 @@
-
 class TValidator {
   /// Empty Text Validation
   static String? validEmptyText(String? fieldName, String? value) {

@@ -21,7 +21,7 @@ class TTexts {
   static const String email = "E-mail";
   static const String password = "Jelszó";
   static const String newPassword = "New Password";
-  static const String phoneNumber = "Telefonszám";
+  static const String phoneNumber = "Telefonszám (+36/06)";
   static const String rememberMe = "Emlékezz rám";
   static const String forgetPassword = "Elfelejtettem a jelszót";
   static const String signIn = "Bejelentkezés";

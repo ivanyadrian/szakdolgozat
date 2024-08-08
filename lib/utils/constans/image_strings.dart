@@ -6,10 +6,10 @@ class TImages {
   static const String googleLogo = "assets/logos/google_logo.png";
 
 
-  static const String onBoardingImage1 = "assets/images/on_boarding_images/fisherman.gif";
-  static const String onBoardingImage2 = "assets/images/on_boarding_images/search.gif";
-  static const String onBoardingImage3 = "assets/images/on_boarding_images/location.gif";
-  static const String onBoardingImage4 = "assets/images/on_boarding_images/calendar.gif";
+  static const String onBoardingImage1 = "assets/images/on_boarding_gifs/fisherman.gif";
+  static const String onBoardingImage2 = "assets/images/on_boarding_gifs/search.gif";
+  static const String onBoardingImage3 = "assets/images/on_boarding_gifs/location.gif";
+  static const String onBoardingImage4 = "assets/images/on_boarding_gifs/calendar.gif";
 
 
   static const String emailSent = "assets/images/signup_verification_images/emailsent.gif";
@@ -60,5 +60,5 @@ class TImages {
   static const String google_pay = "assets/icons/payment_methods/google_pay.png";
   static const String mastercard = "assets/icons/payment_methods/mastercard.png";
 
-
+  static const String loadingAnimation = "assets/images/animations/loading_animation.json";
 }

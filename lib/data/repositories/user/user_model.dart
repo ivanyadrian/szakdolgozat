@@ -42,7 +42,7 @@ class UserModel {
   }
 
   /// static function to create an empty user model
-  static UserModel empty() => UserModel(id: '', firstName: '', lastName: '', username: '', email: '', phoneNumber: '', profilePicture: '');
+  static UserModel empty() => UserModel(id: "", firstName: "", lastName: "", username: "", email: "", phoneNumber: "", profilePicture: "");
 
   /// Convert model to JSON structure for storing data in Firebase
   Map<String, dynamic> toJson() {

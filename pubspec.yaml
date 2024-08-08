@@ -51,10 +51,11 @@ flutter:
 
   assets:
     - assets/logos/
-    - assets/images/on_boarding_images/
-    - assets/images/signup_verification_images/
-    - assets/images/banner_images/
     - assets/counties/
+    - assets/icons/payment_methods/
     - assets/images/card_images/
     - assets/images/profile/
-    - assets/icons/payment_methods/
+    - assets/images/on_boarding_gifs/
+    - assets/images/signup_verification_images/
+    - assets/images/banner_images/
+    - assets/images/animations/
