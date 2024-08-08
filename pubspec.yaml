@@ -1,0 +1,60 @@
+name: szakdolgozat_app
+description: A new Flutter project.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.5 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #Utility packages
+  http: ^1.1.0
+  intl: ^0.18.1
+  logger: ^2.0.1
+  lottie: ^2.7.0
+  url_launcher: ^6.1.12
+  connectivity_plus: ^5.0.1
+  flutter_native_splash: ^2.3.7
+  smooth_page_indicator: ^1.1.0
+
+  # ÁLTALAM HOZZÁADOTT IKONOK
+  iconsax_flutter: ^1.0.0
+  cupertino_icons: ^1.0.2
+
+  # ÁLTALAM HOZZÁADOTT
+  get: ^4.6.5
+  get_storage: ^2.1.1
+
+  # ÁLTALAM HOZZÁADOTT
+  readmore: ^2.2.0
+  carousel_slider: ^4.2.1
+  flutter_rating_bar: 4.0.1
+
+  # FIREBASE
+  firebase_core: ^2.23.0
+  firebase_auth: ^4.14.0 #videó 35
+  cloud_firestore: ^4.13.1 #videó 35
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/logos/
+    - assets/images/on_boarding_images/
+    - assets/images/signup_verification_images/
+    - assets/images/banner_images/
+    - assets/counties/
+    - assets/images/card_images/
+    - assets/images/profile/
+    - assets/icons/payment_methods/
