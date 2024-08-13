@@ -1,12 +1,9 @@
 /// Egyedi kivétel osztály, amely különféle Firebase hitelesítési hibákat kezel.
 class TFirebaseAuthException implements Exception {
-  /// A kivételhez tartozó hibakód.
   final String code;
 
-  /// Konstruktor, amely hibakódot fogad.
   TFirebaseAuthException(this.code);
 
-  /// Az adott hibakódhoz tartozó hibaüzenet lekérése.
   String get message {
     switch (code) {
       case 'email-already-in-use':
@@ -49,12 +46,8 @@ class TFirebaseAuthException implements Exception {
         return 'A műveleti kód hiányzik. Kérlek, adj meg egy érvényes műveleti kódot.';
       case 'user-token-expired':
         return 'A felhasználói token lejárt, és új hitelesítés szükséges. Kérlek, jelentkezz be újra.';
-      case 'user-not-found':
-        return 'Nem található felhasználó a megadott e-mail cím vagy UID alapján.';
       case 'invalid-credential':
         return 'A megadott hitelesítő adat érvénytelen vagy lejárt.';
-      case 'wrong-password':
-        return 'A jelszó érvénytelen. Kérlek, ellenőrizd a jelszót és próbálkozz újra.';
       case 'user-token-revoked':
         return 'A felhasználói token visszavonásra került. Kérlek, jelentkezz be újra.';
       case 'invalid-message-payload':
@@ -83,22 +76,14 @@ class TFirebaseAuthException implements Exception {
         return 'A megadott Cordova konfiguráció érvénytelen.';
       case 'app-deleted':
         return 'Ez a FirebaseApp példány törölve lett.';
-      case 'user-disabled':
-        return 'A felhasználói fiók le van tiltva.';
-      case 'user-token-mismatch':
-        return 'A megadott felhasználói token nem egyezik az autentikált felhasználó ID-jával.';
       case 'web-storage-unsupported':
         return 'A web tárolás nem támogatott vagy le van tiltva.';
-      case 'invalid-credential':
-        return 'A megadott hitelesítő adat érvénytelen. Kérlek, ellenőrizd a hitelesítő adatokat és próbálkozz újra.';
       case 'app-not-authorized':
         return 'Az alkalmazás nem jogosult a Firebase Authentication használatára a megadott API kulccsal.';
       case 'keychain-error':
         return 'Keychain hiba történt. Kérlek, ellenőrizd a keychain-t és próbálkozz újra.';
       case 'internal-error':
         return 'Belső hitelesítési hiba történt. Kérlek, próbáld újra később.';
-      case 'INVALID_LOGIN_CREDENTIALS':
-        return 'Érvénytelen bejelentkezési adatok.';
       default:
         return 'Váratlan hitelesítési hiba történt. Kérlek, próbáld újra.';
     }

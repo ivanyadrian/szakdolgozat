@@ -25,13 +25,14 @@ class TTexts {
   static const String rememberMe = "Emlékezz rám";
   static const String forgetPassword = "Elfelejtettem a jelszót";
   static const String signIn = "Bejelentkezés";
+  static const String signOut = "Kijelentkezés";
   static const String createAccount = "Fiók létrehozás";
   static const String orSignInWith = "vagy jelentkezz be google fiókkal";
   static const String orSignUpWith = "vagy regisztrálj google fiókkal";
   static const String iAgreeTo = "I agree to";
   static const String termsOfUse = "Terms of use";
   static const String verificationCode = "Verification Code";
-  static const String resendEmail = "Újraküldés";
+  static const String resendEmail = "Újra küldés";
   static const String resendEmailIn = "Resend Email In";
   static const String verifycontinue = "Tovább";
   static const String sendLink = "Küldés";

@@ -28,11 +28,8 @@ class SignupController extends GetxController {
   void signup() async {
     try {
 
-
       // Start loading
       TFullScreenLoader.openLoadingDialog('Feldolgozás...', TImages.loadingAnimation);
-
-
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -42,7 +39,6 @@ class SignupController extends GetxController {
         return;
       }
 
-
       // Form Validation
       if(!signupFormKey.currentState!.validate()) {
         // remove Loader
@@ -50,12 +46,8 @@ class SignupController extends GetxController {
         return;
       }
 
-
-
       // Register user in the Firebase Authentication & Save user data in the firebase
       final userCredential = await AuthenticationRepository.instance.registerWithEmailAndPassword(email.text.trim(), password.text.trim());
-
-
 
       // Save Authentication user data in the firebase firestore
       final newUser = UserModel(
@@ -70,28 +62,19 @@ class SignupController extends GetxController {
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newUser);
 
-
-
       // Remove Loader
       TFullScreenLoader.stopLoading();
-
-
 
       // show success message
       TLoaders.successSnackBar(title: 'Nagyszerű', message: 'A fiókodat sikeresen létrehoztad. A folytatáshoz erősítsd meg az email címedet.');
 
-
-
       // move to verify email screen
-      Get.to(() => const VerifyEmailScreen());
-
+      Get.to(() => VerifyEmailScreen(email: email.text.trim()));
 
 
     } catch (e) {
       // Remove Loader
       TFullScreenLoader.stopLoading();
-
-
 
       // show more generic error to the user
       TLoaders.errorSnackBar(title: 'Hiba', message: e.toString());

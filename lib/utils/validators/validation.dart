@@ -9,7 +9,7 @@ class TValidator {
 
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Adj meg egy valós Email-címet.';
+      return 'Az E-mail mező nem lehet üres.';
     }
 
     final emailRegExp = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
