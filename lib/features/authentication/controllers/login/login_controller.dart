@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:szakdolgozat_app/common/widgets/loaders/loaders.dart';
 import 'package:szakdolgozat_app/data/repositories/authentication/authentication_repository.dart';
+import 'package:szakdolgozat_app/features/personalization/controllers/user_controller.dart';
 import 'package:szakdolgozat_app/utils/popups/full_screen_loader.dart';
 
 import '../../../../common/widgets/loaders/network_manager.dart';
@@ -17,6 +18,7 @@ class LoginController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  final userController = Get.put(UserController());
 
 
   @override
@@ -62,7 +64,7 @@ class LoginController extends GetxController {
       }
 
       // Login user using Email & Password Authentication
-      //final userCredentials = await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
+      final userCredentials = await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
 
       // Remove Loader
       TFullScreenLoader.stopLoading();
@@ -70,6 +72,38 @@ class LoginController extends GetxController {
       // Redirect
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
+      TFullScreenLoader.stopLoading();
+      TLoaders.errorSnackBar(title: 'Hiba', message: e.toString());
+    }
+  }
+
+  /// GOOGLE BEJELENTKEZÉS
+  Future<void> googleSignIn() async {
+    try {
+      // Start Loading
+      TFullScreenLoader.openLoadingDialog('Bejelentkezés...', TImages.loadingAnimation);
+
+      // Check Internet Connection
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        // Remove Loader
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+      // Google Authentication
+      final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
+
+      // Save User Record
+      await userController.saveUserRecord(userCredentials);
+
+      // Remove Loader
+      TFullScreenLoader.stopLoading();
+
+      // Redirect
+      AuthenticationRepository.instance.screenRedirect();
+    } catch (e) {
+      // Remove Loader
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Hiba', message: e.toString());
     }
