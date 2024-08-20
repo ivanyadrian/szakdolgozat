@@ -11,7 +11,7 @@ class TTexts {
   static const String onBoardingSubTitle4 = "Foglald le napokkal korábban a szabad helyeket";
 
 
-  static const String homeAppbarTitle = "Népszerű";
+  static const String homeAppbarTitle = "Üdv,";
   static const String homeAppbarSubTitle = "Horgászhelyek!";
 
   //AUTHENTICATION FORM TEXT

@@ -19,8 +19,7 @@ class ForgetPasswordController extends GetxController {
   sendPasswordResetEmail() async {
     try {
       // Start Loader
-      TFullScreenLoader.openLoadingDialog(
-          'Feldolgozás...', TImages.loadingAnimation);
+      TFullScreenLoader.openLoadingDialog('Feldolgozás...', TImages.loadingAnimation);
 
       // Check Internet Connection
       final isConnected = await NetworkManager.instance.isConnected();
@@ -37,15 +36,14 @@ class ForgetPasswordController extends GetxController {
         return;
       }
 
-      await AuthenticationRepository.instance.sendPasswordResetEmail(
-          email.text.trim());
+
+      await AuthenticationRepository.instance.sendPasswordResetEmail(email.text.trim());
 
       // Remove Loader
       TFullScreenLoader.stopLoading();
 
       // Show Success Screen
-      TLoaders.successSnackBar(title: 'Email elküldve',
-          message: 'A jelszó visszaállításához szükséges link elküldve'.tr);
+      TLoaders.successSnackBar(title: 'Email elküldve', message: 'A jelszó visszaállításához szükséges link elküldve'.tr);
 
       // Redirect
       Get.to(() => ResetPasswordScreen(email: email.text.trim()));

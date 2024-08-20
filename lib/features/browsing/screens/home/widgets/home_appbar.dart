@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:szakdolgozat_app/common/styles/shimmer.dart';
+import 'package:szakdolgozat_app/features/personalization/controllers/user_controller.dart';
 import '../../../../../common/widgets/appbar/appbar.dart';
-import '../../../../../common/widgets/products/cart/cart_menu_icon.dart';
 import '../../../../../utils/constans/colors.dart';
 import '../../../../../utils/constans/text_strings.dart';
 
@@ -11,22 +13,35 @@ class THomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
+
     return TAppBar(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(TTexts.homeAppbarTitle, style: Theme.of(context).textTheme.labelMedium!.apply(color: TColors.grey)),
-          Text(TTexts.homeAppbarSubTitle, style: Theme.of(context).textTheme.headlineSmall!.apply(color: TColors.white)),
+          Text(TTexts.homeAppbarTitle,
+              style: Theme.of(context).textTheme.labelMedium!.apply(color: TColors.grey),
+          ),
+
+          Obx(
+            () {
+              if (controller.profileLoading.value) {
+                // Display a shimmer loader while user profile is being loaded
+                return const TShimmerEffect(width: 80, height: 15);
+              } else {
+                return Text(controller.user.value.fullName, style: Theme.of(context).textTheme.headlineSmall!.apply(color: TColors.white),
+                );
+              }
+            },
+          ),
         ],
       ),
 
-
+      /*
       actions: [
         TCartCountericon(onPressed: () {}, iconColor: TColors.white)
       ],
-
-
+      */
     );
   }
 }
-

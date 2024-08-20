@@ -4,6 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:szakdolgozat_app/data/repositories/user/user_repository.dart';
 import 'package:szakdolgozat_app/features/authentication/screens/onboardning/onboarding.dart';
 import 'package:szakdolgozat_app/features/authentication/screens/signup/verify_email.dart';
 import 'package:szakdolgozat_app/navigation_menu.dart';
@@ -18,6 +19,9 @@ class AuthenticationRepository extends GetxController {
 
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
+
+  /// Get Authenticated User Data # 40.videó
+  User? get authUser => _auth.currentUser;
 
   /// meghívás a main.dart-ból az alkalmazás elindulásakor
   @override
@@ -68,6 +72,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
+
   /// [EmailAuthentication] - Register
   Future<UserCredential> registerWithEmailAndPassword(
       String email, String password) async {
@@ -87,6 +92,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
+
   /// [EmailAuthentication] - Mail Verification
   Future<void> sendEmailVerification() async {
     try {
@@ -103,6 +109,7 @@ class AuthenticationRepository extends GetxController {
       throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
     }
   }
+
 
   /// [EmailAuthentication] - Forget Password
   Future<void> sendPasswordResetEmail(String email) async {
@@ -122,6 +129,25 @@ class AuthenticationRepository extends GetxController {
   }
 
   /// [ReAuthenticate] - ReAuthenticate User
+  Future<void> reAuthenticateWithEmailAndPassword(String email, String password) async {
+    try {
+      // Create a credential
+      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
+
+      // ReAuthenticate
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
+    }
+  }
 
 /* ---------------------------- Social sign-in ----------- */
 
@@ -175,4 +201,20 @@ class AuthenticationRepository extends GetxController {
   }
 
   /// DELETE USER - Remove user Auth and Firestore Account
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
+      await _auth.currentUser?.delete();
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
+    }
+  }
 }
