@@ -21,15 +21,15 @@ class TSignUpForm extends StatelessWidget {
         children: [
           Row(
             children: [
-              /// FIRST NAME
+              /// Vezetéknév
               Expanded(
                 child: TextFormField(
-                  controller: controller.firstName,
+                  controller: controller.lastName,
                   validator: (value) =>
                       TValidator.validEmptyText('Vezetéknév', value),
                   expands: false,
                   decoration: const InputDecoration(
-                    labelText: TTexts.firstName,
+                    labelText: TTexts.lastName,
                     prefixIcon: Icon(Iconsax.user),
                   ),
                 ),
@@ -37,15 +37,15 @@ class TSignUpForm extends StatelessWidget {
 
               const SizedBox(width: TSize.spaceBetweenInputFields),
 
-              /// LAST NAME
+              /// Keresztnév
               Expanded(
                 child: TextFormField(
-                  controller: controller.lastName,
+                  controller: controller.firstName,
                   validator: (value) =>
                       TValidator.validEmptyText('Keresztnév', value),
                   expands: false,
                   decoration: const InputDecoration(
-                    labelText: TTexts.lastName,
+                    labelText: TTexts.firstName,
                     prefixIcon: Icon(Iconsax.user),
                   ),
                 ),

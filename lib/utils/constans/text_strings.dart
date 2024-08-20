@@ -15,8 +15,8 @@ class TTexts {
   static const String homeAppbarSubTitle = "Horgászhelyek!";
 
   //AUTHENTICATION FORM TEXT
-  static const String firstName = "Vezetéknév";
-  static const String lastName = "Keresztnév";
+  static const String firstName = "Keresztnév";
+  static const String lastName = "Vezetéknév";
   static const String username = "Felhasználónév";
   static const String email = "E-mail";
   static const String password = "Jelszó";

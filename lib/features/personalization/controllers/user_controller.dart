@@ -21,7 +21,7 @@ class UserController extends GetxController {
   final profileLoading = false.obs;
   Rx<UserModel> user = UserModel.empty().obs;
 
-  final hidePassword = false.obs;
+  final hidePassword = true.obs;
   final imageUploading = false.obs;
   final verifyEmail = TextEditingController();
   final verifyPassword = TextEditingController();
@@ -67,9 +67,8 @@ class UserController extends GetxController {
           // Map Data
           final user = UserModel(
             id: userCredentials.user!.uid,
-            lastName: nameParts[0],
-            firstName:
-                nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+            lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+            firstName: nameParts[0],
             username: username,
             email: userCredentials.user!.email ?? '',
             phoneNumber: userCredentials.user!.phoneNumber ?? '',
@@ -118,8 +117,7 @@ class UserController extends GetxController {
 
       /// First re-authenticate user
       final auth = AuthenticationRepository.instance;
-      final provider =
-          auth.authUser!.providerData.map((e) => e.providerId).first;
+      final provider = auth.authUser!.providerData.map((e) => e.providerId).first;
       if (provider.isNotEmpty) {
         // Re Verify Auth email
         if (provider == 'google.com') {
@@ -182,7 +180,7 @@ class UserController extends GetxController {
         final imageUrl = await userRepository.uploadImages('Users/Images/Profile/', image);
 
         // Update User Image Record
-        Map<String, dynamic> json = {'Profilkép': imageUrl};
+        Map<String, dynamic> json = {'profilePicture': imageUrl};
         await userRepository.updateSingleField(json);
 
         user.value.profilePicture = imageUrl;

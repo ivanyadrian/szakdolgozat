@@ -40,20 +40,21 @@ class ChangeName extends StatelessWidget {
                 children: [
 
                   TextFormField(
-                    controller: controller.firstName,
-                    validator: (value) => TValidator.validEmptyText('Vezetéknév', value),
-                    expands: false,
-                    decoration: const InputDecoration(labelText: TTexts.firstName, prefixIcon: Icon(Iconsax.user),),
-                  ),
-                  const SizedBox(height: TSize.spaceBetweenInputFields),
-
-                  TextFormField(
                     controller: controller.lastName,
-                    validator: (value) => TValidator.validEmptyText('Keresztnév', value),
+                    validator: (value) => TValidator.validEmptyText('Vezetéknév', value),
                     expands: false,
                     decoration: const InputDecoration(
                         labelText: TTexts.lastName,
                         prefixIcon: Icon(Iconsax.user)),
+                  ),
+
+                  const SizedBox(height: TSize.spaceBetweenInputFields),
+
+                  TextFormField(
+                    controller: controller.firstName,
+                    validator: (value) => TValidator.validEmptyText('Keresztnév', value),
+                    expands: false,
+                    decoration: const InputDecoration(labelText: TTexts.firstName, prefixIcon: Icon(Iconsax.user),),
                   ),
                 ],
               ),

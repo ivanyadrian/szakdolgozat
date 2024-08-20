@@ -22,7 +22,7 @@ class UserModel {
   });
 
   /// Helper function to get the full name
-  String get fullName => '$firstName $lastName';
+  String get fullName => '$lastName $firstName ';
 
   /// Helper function to format phone number
   String get formattedPhoneNumber => TFormatter.formatPhoneNumber(phoneNumber);
@@ -36,7 +36,7 @@ class UserModel {
     String firstName = nameParts[0].toLowerCase();
     String lastName = nameParts.length > 1 ? nameParts[1].toLowerCase() : "";
 
-    String camelCaseUsername = "$firstName$lastName"; // Combine first and last name
+    String camelCaseUsername = "$lastName$firstName"; // Combine first and last name
     String usernameWithPrefix = "$camelCaseUsername"; // Add cwt_ prefix
     return usernameWithPrefix;
   }
@@ -47,12 +47,12 @@ class UserModel {
   /// Convert model to JSON structure for storing data in Firebase
   Map<String, dynamic> toJson() {
     return {
-      'Vezetéknév': firstName,
-      'Keresztnév': lastName,
-      'Felhasználónév': username,
-      'Email': email,
-      'Telefonszám': phoneNumber,
-      'Profilkép': profilePicture,
+      'firstName': firstName,
+      'lastName': lastName,
+      'username': username,
+      'email': email,
+      'phoneNumber': phoneNumber,
+      'profilePicture': profilePicture,
     };
   }
 
@@ -62,12 +62,12 @@ class UserModel {
       final data = document.data()!;
       return UserModel(
         id: document.id,
-        firstName: data['Vezetéknév'] ?? '',
-        lastName: data['Keresztnév'] ?? '',
-        username: data['Felhasználónév'] ?? '',
-        email: data['Email'] ?? '',
-        phoneNumber: data['Telefonszám'] ?? '',
-        profilePicture: data['Profilkép'] ?? '',
+        firstName: data['firstName'] ?? '',
+        lastName: data['lastName'] ?? '',
+        username: data['username'] ?? '',
+        email: data['email'] ?? '',
+        phoneNumber: data['phoneNumber'] ?? '',
+        profilePicture: data['profilePicture'] ?? '',
       );
     } else {
       throw Exception('A DocumentSnapshot nem tartalmaz felhasználói adatot');

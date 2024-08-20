@@ -51,18 +51,15 @@ class UpdateNameController extends GetxController {
       }
 
       // Update user's first & last name in the Firebase Firestore
-      Map<String, dynamic> name = {'Keresztnév': firstName.text.trim(), 'Vezetéknév': lastName.text.trim()};
+      Map<String, dynamic> name = {'firstName': firstName.text.trim(), 'lastName': lastName.text.trim()};
       await userRepository.updateSingleField(name);
 
       // Update the Rx User value
       userController.user.value.firstName = firstName.text.trim();
       userController.user.value.lastName = lastName.text.trim();
 
-
-
       // Remove Loader
       TFullScreenLoader.stopLoading();
-
 
       // Show Success screen
       TLoaders.successSnackBar(title: 'Nagyszerű', message: 'Sikeresen módosítottad a neved');
