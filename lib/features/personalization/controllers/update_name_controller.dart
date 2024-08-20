@@ -1,10 +1,8 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:szakdolgozat_app/common/widgets/loaders/loaders.dart';
 import 'package:szakdolgozat_app/data/repositories/user/user_repository.dart';
 import 'package:szakdolgozat_app/features/personalization/controllers/user_controller.dart';
-import 'package:szakdolgozat_app/features/personalization/screens/profile/profile.dart';
 import 'package:szakdolgozat_app/utils/constans/image_strings.dart';
 import 'package:szakdolgozat_app/utils/popups/full_screen_loader.dart';
 
@@ -60,13 +58,16 @@ class UpdateNameController extends GetxController {
       userController.user.value.firstName = firstName.text.trim();
       userController.user.value.lastName = lastName.text.trim();
 
+
+
       // Remove Loader
       TFullScreenLoader.stopLoading();
+
 
       // Show Success screen
       TLoaders.successSnackBar(title: 'Nagyszerű', message: 'Sikeresen módosítottad a neved');
 
-      await Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(const Duration(seconds: 3));
 
       // Move to previous screen
       Get.back();

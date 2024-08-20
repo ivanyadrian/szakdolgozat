@@ -39,8 +39,8 @@ class SettingsScreen extends StatelessWidget {
                           ),
                         ),
 
-                        /// USER PROFILE CARD
-                        const TUserProfileTile(), /// EDIT BUTTON, PROFILE IMAGE ETC.
+                        /// KÉP - NÉV - EMAIL - MÓDOSÍTÓ GOMB SZEGMENS
+                        const TUserProfileTile(),
                         const SizedBox(height: TSize.spaceBetweenSections),
                       ],
                     ),
