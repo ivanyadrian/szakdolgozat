@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:szakdolgozat_app/common/widgets/appbar/appbar.dart';
 import 'package:szakdolgozat_app/features/authentication/controllers/forget_password/forget_password_controller.dart';
-import 'package:szakdolgozat_app/features/authentication/screens/password_operation/reset_password.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 import 'package:szakdolgozat_app/utils/constans/text_strings.dart';
 import 'package:szakdolgozat_app/utils/validators/validation.dart';

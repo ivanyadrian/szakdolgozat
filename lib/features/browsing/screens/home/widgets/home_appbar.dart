@@ -20,7 +20,7 @@ class THomeAppBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(TTexts.homeAppbarTitle,
-              style: Theme.of(context).textTheme.labelMedium!.apply(color: TColors.grey),
+              style: Theme.of(context).textTheme.titleMedium!.apply(color: TColors.grey),
           ),
 
           Obx(
@@ -29,7 +29,7 @@ class THomeAppBar extends StatelessWidget {
                 // Display a shimmer loader while user profile is being loaded
                 return const TShimmerEffect(width: 80, height: 15);
               } else {
-                return Text(controller.user.value.fullName, style: Theme.of(context).textTheme.headlineSmall!.apply(color: TColors.white),
+                return Text(controller.user.value.fullName, style: Theme.of(context).textTheme.headlineMedium!.apply(color: TColors.white),
                 );
               }
             },

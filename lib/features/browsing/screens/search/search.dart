@@ -5,6 +5,7 @@ import 'package:szakdolgozat_app/common/widgets/appbar/tabbar.dart';
 import 'package:szakdolgozat_app/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:szakdolgozat_app/common/widgets/layouts/grid_layout.dart';
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
+import 'package:szakdolgozat_app/features/browsing/controllers/counties_controller.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/brand/all_brands.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/search/widgets/category_tab.dart';
 import 'package:szakdolgozat_app/utils/constans/colors.dart';
@@ -19,8 +20,10 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final counties = CountiesController.instance.featureCounties;
+
     return DefaultTabController(
-      length: 6,
+      length: counties.length,
       child: Scaffold(
         appBar: TAppBar(
           title: Text(
@@ -38,9 +41,7 @@ class SearchScreen extends StatelessWidget {
               return [
                 SliverAppBar(
                     automaticallyImplyLeading: false,
-                    pinned: true,
-
-                    ///appbar nem fog mozogni
+                    pinned: true, ///appbar nem fog mozogni
                     floating: true,
                     backgroundColor: THelperFunctions.isDarkMode(context)
                         ? TColors.black
@@ -77,28 +78,14 @@ class SearchScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    bottom: const TTabBar(
-                      tabs: [
-                        Tab(child: Text('Ponty')),
-                        Tab(child: Text('Csuka')),
-                        Tab(child: Text('Harcsa')),
-                        Tab(child: Text('Kárász')),
-                        Tab(child: Text('Keszeg')),
-                        Tab(child: Text('Süllő')),
-                      ],
-                    )
+                    bottom:TTabBar(
+                      tabs: counties.map((county) => Tab(child: Text(county.name))).toList()
+                    ),
                 ),
               ];
             },
-            body: const TabBarView(
-              children: [
-                  TCategoryTab(),
-                  TCategoryTab(),
-                  TCategoryTab(),
-                  TCategoryTab(),
-                  TCategoryTab(),
-                  TCategoryTab(),
-              ],
+            body: TabBarView(
+              children: counties.map((county) => TCategoryTab(county: county)).toList()
             ),
         ),
       ),

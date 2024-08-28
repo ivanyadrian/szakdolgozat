@@ -61,4 +61,21 @@ class TImages {
   static const String mastercard = "assets/icons/payment_methods/mastercard.png";
 
   static const String loadingAnimation = "assets/images/animations/loading_animation.json";
+
+  static const String methods = "assets/images/fishes_and_methods/methods.png";
+  static const String fishes = "assets/images/fishes_and_methods/fishes.png";
+
+  static const String pike = "assets/images/fishes_and_methods/pike.png";
+  static const String common_carp = "assets/images/fishes_and_methods/common_carp.png";
+  static const String catfish = "assets/images/fishes_and_methods/catfish.png";
+  static const String zander = "assets/images/fishes_and_methods/zander.png";
+  static const String asp = "assets/images/fishes_and_methods/asp.png";
+  static const String grass_carp = "assets/images/fishes_and_methods/grass_carp.png";
+  static const String crucian_carp = "assets/images/fishes_and_methods/crucian_carp.png";
+  static const String silver_carp = "assets/images/fishes_and_methods/silver_carp.png";
+  static const String white_bream = "assets/images/fishes_and_methods/white_bream.png";
+  static const String trout = "assets/images/fishes_and_methods/trout.png";
+  static const String chub = "assets/images/fishes_and_methods/chub.png";
+  static const String barbel = "assets/images/fishes_and_methods/barbel.png";
+  static const String tench = "assets/images/fishes_and_methods/tench.png";
 }

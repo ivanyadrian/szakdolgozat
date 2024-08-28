@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:szakdolgozat_app/common/widgets/images/t_circular_image.dart';
 
 import '../../../utils/constans/colors.dart';
 import '../../../utils/constans/size.dart';
@@ -13,16 +14,17 @@ class TVerticalImageText extends StatelessWidget {
     this.textColor = TColors.white,
     this.backgroundColor,
     this.onTap,
+    this.isNetworkImage = true,
   });
 
   final String image, title;
   final Color textColor;
   final Color? backgroundColor;
+  final bool isNetworkImage;
   final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-
     final dark = THelperFunctions.isDarkMode(context);
 
     return GestureDetector(
@@ -31,17 +33,13 @@ class TVerticalImageText extends StatelessWidget {
         padding: const EdgeInsets.only(right: TSize.spaceBetweenItems),
         child: Column(
           children: [
-            Container(
-              width: 56,
-              height: 56,
-              padding: const EdgeInsets.all(TSize.sm),
-              decoration: BoxDecoration(
-                color: backgroundColor ?? (dark ? TColors.black : TColors.white),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Center(
-                child: Image(image: AssetImage(image), fit: BoxFit.cover, color: dark ? TColors.light : TColors.dark),
-              ),
+            TCircularImage(
+              image: image,
+              fit:  BoxFit.fitWidth,
+              padding: TSize.sm * 1.4,
+              isNetworkImage: isNetworkImage,
+              backgroundColor: backgroundColor,
+              overlayColor: dark ? TColors.light : TColors.dark,
             ),
 
             /// TEXT

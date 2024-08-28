@@ -1,33 +1,29 @@
 import 'package:flutter/material.dart';
 import '../../../utils/constans/size.dart';
 
-class TGridLayout extends StatelessWidget {
-  const TGridLayout({
+class TFishesLayout extends StatelessWidget {
+  const TFishesLayout({
     super.key,
     required this.itemCount,
-    this.mainAxisExtent = 280,
     required this.itemBuilder,
   });
 
   final int itemCount;
-  final double? mainAxisExtent;
   final Widget? Function(BuildContext, int) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
+    return ListView.builder(
       itemCount: itemCount,
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: TSize.gridViewSpacing,
-        crossAxisSpacing: TSize.gridViewSpacing,
-        mainAxisExtent: mainAxisExtent,
-      ),
-      itemBuilder: itemBuilder,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.only(bottom: TSize.gridViewSpacing*2),
+          child: itemBuilder(context, index),
+        );
+      },
     );
   }
 }
-

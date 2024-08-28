@@ -3,7 +3,6 @@ import 'package:szakdolgozat_app/common/widgets/text/product_title_text.dart';
 import 'package:szakdolgozat_app/common/widgets/text/t_brand_title_text_with_verified_icon.dart';
 import 'package:szakdolgozat_app/utils/constans/enums.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
-import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 
 class TProductMetaData extends StatelessWidget {
   const TProductMetaData({super.key});
@@ -11,7 +10,7 @@ class TProductMetaData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final dark = THelperFunctions.isDarkMode(context);
+    //final dark = THelperFunctions.isDarkMode(context);
 
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,

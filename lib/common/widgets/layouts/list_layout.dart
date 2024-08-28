@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../../utils/constans/size.dart';
 
-class TGridLayout extends StatelessWidget {
-  const TGridLayout({
+class TListLayout extends StatelessWidget {
+  const TListLayout({
     super.key,
     required this.itemCount,
-    this.mainAxisExtent = 280,
+    this.mainAxisExtent = 120,
     required this.itemBuilder,
   });
 
@@ -21,7 +21,7 @@ class TGridLayout extends StatelessWidget {
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: 1,
         mainAxisSpacing: TSize.gridViewSpacing,
         crossAxisSpacing: TSize.gridViewSpacing,
         mainAxisExtent: mainAxisExtent,
