@@ -1,4 +1,4 @@
-class FishType {
+class FishTypeModel {
   final String name;
   final String imageUrl;
   final String information;
@@ -6,7 +6,7 @@ class FishType {
   final List<String> season;
   final String feedingType;
 
-  FishType({
+  FishTypeModel({
     required this.name,
     required this.imageUrl,
     required this.information,

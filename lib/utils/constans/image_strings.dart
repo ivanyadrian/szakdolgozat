@@ -78,4 +78,11 @@ class TImages {
   static const String chub = "assets/images/fishes_and_methods/chub.png";
   static const String barbel = "assets/images/fishes_and_methods/barbel.png";
   static const String tench = "assets/images/fishes_and_methods/tench.png";
+
+  static const String bottom_fishing = "assets/images/fishes_and_methods/bottom_fishing.png";
+  static const String feeder_fishing = "assets/images/fishes_and_methods/feeder_fishing.png";
+  static const String float_fishing = "assets/images/fishes_and_methods/float_fishing.png";
+  static const String boilie_fishing = "assets/images/fishes_and_methods/boilie_fishing.png";
+  static const String fly_fishing = "assets/images/fishes_and_methods/fly_fishing.png";
+  static const String spinner_fishing = "assets/images/fishes_and_methods/spinner_fishing.png";
 }

@@ -74,3 +74,4 @@ flutter:
     - assets/images/banner_images/
     - assets/images/animations/
     - assets/images/fishes_and_methods/
+    - assets/json/method.json

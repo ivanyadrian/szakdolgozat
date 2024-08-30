@@ -23,16 +23,18 @@ class TPromoSlider extends StatelessWidget {
     return Column(
       children: [
         CarouselSlider(
-            options: CarouselOptions(
-                viewportFraction: 1,
-                onPageChanged: (index, _) =>
-                    controller.updatePageIndicator(index)),
-            items: banners.map((url) => TRoundedImage(imageUrl: url)).toList(),
+          options: CarouselOptions(
+              viewportFraction: 1,
+              autoPlay: true, // Enable automatic playback
+              autoPlayInterval: Duration(seconds: 3), // Set the interval for automatic playback
+              onPageChanged: (index, _) =>
+                  controller.updatePageIndicator(index)),
+          items: banners.map((url) => TRoundedImage(imageUrl: url)).toList(),
         ),
         const SizedBox(height: TSize.spaceBetweenItems),
         Center(
           child: Obx(
-            () => Row(
+                () => Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 for (int i = 0; i < banners.length; i++)

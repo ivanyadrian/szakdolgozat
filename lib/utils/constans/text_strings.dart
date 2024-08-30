@@ -51,6 +51,7 @@ class TTexts {
   static const String yourAccountCreatedTitle = "Sikeres Megerősítés!";
   static const String yourAccountCreatedSubTitle = "Ezzel a regisztráció sikeresen megtörtént! Most már bejelentkezhetsz.";
 
+  //FISHES
   static const String pikeInfo = "A csuka hosszú, torpedó alakú testtel rendelkezik, amely rendkívül áramvonalas. Feje hosszúkás, és hatalmas, éles fogakkal teli szája van. Testének színe általában zöldes-barna, oldalain pedig szabálytalan, sárgás vagy világosabb foltok találhatóak. Hossza átlagosan 50-100 cm, súlya 2-10 kg közötti, de nagyobb példányok is előfordulhatnak. A csukára többféle módszerrel is lehet horgászni, többek között pergetéssel, műcsalis horgászattal (pl. wobbler, gumihal) vagy élő csalival. A pergetés különösen hatékony, mivel a csuka szeret a gyorsan mozgó, vibráló csalikra rátámadni.";
   static const String pikeLivePlaceInfo = "Édesvízi tavakban, folyókban, holtágakban, mocsarakban és lassú folyású csatornákban él.";
   static const String common_carpInfo = "A ponty teste gömbölyded és oldalról lapított. Feje viszonylag nagy és kerek, szája pedig alsó helyzetű. A ponty színe általában aranybarna vagy zöldessárga, oldalain sötétbarna vagy zöldes foltokkal. Átlagos hossza 30-60 cm, de a nagyobb példányok elérhetik a 100 cm-t is. Súlya 1-10 kg között változik, de az idősebb példányok elérhetik a 20-30 kg-ot is. Elsősorban algákkal, vízi növényekkel, rovarokkal, rákokkal és kisebb állatokkal táplálkozik. Táplálék keresése közben a ponty a vízfenéken keresgél, ezért kifogásának legnépszerűbb horgászati módszerei közé tartozik a fenekezés és a bojlis horgászat. A pontyok kedvelik a különféle csaliként használt kukoricát, földiepret, bojlit, és különféle ízesített pelleteket. Az éjszakai horgászat is gyakori a ponty horgászatában, mivel a pontyok gyakran aktívak a hűvösebb órákban.";
@@ -77,4 +78,73 @@ class TTexts {
   static const String barbelLivePlaceInfo = "tiszta, oxigénben gazdag folyókat, patakokat és nagyobb tavakat. Szereti a gyors folyású vizeket";
   static const String tenchInfo = "A compó teste oldalról lapított, és viszonylag magas, tömzsi. Az úszói kerekdedek, a hátúszó hosszú és egyenes. Színe változó lehet, általában olívazöld, sárgászöld vagy barnás árnyalatú. Az oldala világosabb, és az úszók sötétebb színűek lehetnek, például sötétzöld vagy barnás. Átlagos hossza 30-50 cm, súlya 1-2 kg. A nagyobb példányok elérhetik a 60 cm-t és a 3-4 kg-ot is, de ezek ritkábbak. Vízi növényekkel, algákkal, rovarokkal és egyéb vízi gerinctelenekkel táplálkozik. Táplálék keresése közben gyakran az iszapos, sárgás talajban kutat. A compó horgászatában legnépszerűbb módszerek közé tartozik a fenekezés és a feeder technika. A legjobban működő csalikat a növényi alapú csalik, mint például kukorica, borsó, földieper, valamint különféle bojlik. Az éjszakai horgászat is eredményes lehet, mivel a compó éjszaka is aktívan táplálkozik.";
   static const String tenchLivePlaceInfo = "tiszta, oxigénben gazdag vizeket, például tavakat, holtágakat és mocsarakat. Szereti az iszapos vagy sárgás talajú területeket,";
+
+  //METHODS
+  static const String float_info = "Az úszós horgászat során egy úszót használnak a csali helyzetének és a kapás jelzésének figyelemmel kísérésére. A módszer egyszerű és sokoldalú, mivel a csalit a víz felső rétegében vagy a fenéken elhelyezve használják. Kiváló választás lehet kezdő horgászok számára, és számos halfaj, például keszeg, ponty, és süllő horgászatára alkalmazható.";
+  static const String float_technic = "Az úszót beállítják a kívánt mélységre, majd a csalit az úszó alá helyezik. Az úszó mozgása jelzi a kapást.";
+  static const List<String> float_equipment = [
+    "Horgászbot (úszós bot)",
+    "Úszó (különböző méretekben)",
+    "Horgok (különböző méretekben)",
+    "Súlyok",
+    "Etetőanyag",
+    "Csalik (pl. kukorica, csonti)",
+  ];
+  static const String float_suggestion = "Válassz megfelelő úszót a víz mélysége és a célhal mérete alapján. Figyelj a csali megfelelő beállítására, és használj finom szerelékeket a természetes kapás érdekében.";
+
+  static const String feeder_info = "A feederezés egy speciális fenék horgászat, amely során etetőkosarat és finom, érzékeny botot használnak. Ez a módszer segít a csali pontos elhelyezésében és a kisebb halak, például keszegfélék hatékony horgászatában.";
+  static const String feeder_technic = "Az etetőkosarat a kívánt helyre dobják, és a csali ott marad, míg a bot finom mozgása segít észlelni a kapást.";
+  static const List<String> feeder_equipment = [
+    "Feeder bot",
+    "Feeder orsó",
+    "Etetőkosár",
+    "Finom horgok",
+    "Etetőanyag",
+    "Zsinór (finomabb típus)",
+  ];
+  static const String feeder_suggestion = "Válassz érzékeny botot és megfelelő méretű etetőkosarat az elvárt kapásokhoz. Az etetőanyag használata elősegíti a halak vonzását.";
+
+  static const String boilie_info = "A bojlizás során speciális, keményített csalit, a bojlit használják, amely a vízben tartósan marad. Ez a módszer nagyobb halak, például pontyok horgászatára ideális. Az etetőanyag és a bojli kombinációja hosszú távú horgászatot tesz lehetővé.";
+  static const String boilie_technic = "A bojlit és az etetőanyagot a kívánt helyre helyezik, és a csalit hosszú időn keresztül ott hagyják, hogy vonzza a halakat.";
+  static const List<String> boilie_equipment = [
+    "Bojlis bot",
+    "Bojlis orsó",
+    "Bojlik",
+    "Etetőkosár",
+    "Különböző méretű horgok",
+  ];
+  static const String boilie_suggestion = "Használj változatos bojlikat és etetőanyagokat a legjobb eredmények érdekében. Figyelj a bojli elhelyezésére és a víz állapotára a horgászat előtt.";
+
+  static const String spinning_info = "A pergetés során mesterséges csalit, például műcsalit, használnak, amelyet aktívan mozgathatnak a vízben. Ez a módszer különösen hatékony ragadozó halak, mint a süllő, csuka vagy harcsa horgászatánál. A gyors mozgás és a változó technikák vonzzák a halakat.";
+  static const String spinning_technic = "A műcsalit különböző sebességgel és mozgásmintával húzzuk a vízben, hogy utánozzuk a halak természetes zsákmányát.";
+  static const List<String> spinning_equipment = [
+    "Pergető bot",
+    "Pergető orsó",
+    "Műcsalik (pl. spinner, wobblerek)",
+    "Zsinór (pergető zsinór)",
+    "Előke (előszerelt horgok)",
+  ];
+  static const String spinning_suggestion = "Válassz megfelelő műcsalit a célhalakhoz és a vízhez. Kísérletezz a különböző mozgásmintákkal és sebességekkel a legjobb eredmény elérése érdekében.";
+
+  static const String fly_info = "A legyezés egy speciális horgászmódszer, amely mesterséges legyeket használ, hogy utánozza a rovarokat. Különösen a tiszta, gyors folyású vizekben hatékony, és leginkább pisztrángok és más édesvízi halfajok horgászatánál alkalmazzák.";
+  static const String fly_technic = "A legyezés során a legyeket finom mozdulatokkal dobják be, és a vízben való mozgásukat figyelik, hogy az imitálja a rovarokat.";
+  static const List<String> fly_equipment = [
+    "Legyező bot",
+    "Legyező orsó",
+    "Legyező zsinór",
+    "Mesterséges legyek (számos típus)",
+    "Előke",
+  ];
+  static const String fly_suggestion = "Válaszd ki a megfelelő legyet a víz és a halak alapján. Figyelj a dobások pontosságára és a legyek mozgására a természetes hatás érdekében.";
+
+  static const String bottom_info = "A fenék horgászat során a csalit a vízfenéken helyezik el, ahol a halak könnyebben rátalálhatnak. Ez a módszer hatékony nagyobb halak, például pontyok vagy harcsák horgászatánál. Az etetőanyag és a súlyok használata segíti a csali pontos elhelyezését és a kapások számának növekedését.";
+  static const String bottom_technic = "Az etetőanyagot és a csalit a vízfenékre helyezik. A súlyok biztosítják a stabil helyzetet, és a kapásra a bot figyelése ad jelzést.";
+  static const List<String> bottom_equipment = [
+    "Erős fenekező bot (3-4 méter hosszú)",
+    "Nagy teherbírású orsó",
+    "Nehezék (ólom vagy kosár)",
+    "Erős zsinór (0,25-0,35 mm)",
+    "Nagyobb horog (4-10-es méret)",
+  ];
+  static const String bottom_suggestion = "asználj megfelelő súlyozást a csali stabil elhelyezéséhez. Az etetőanyag segít vonzani a halakat, így ne spórolj vele. Az érzékeny bot segíthet a kapások pontos észlelésében.";
 }

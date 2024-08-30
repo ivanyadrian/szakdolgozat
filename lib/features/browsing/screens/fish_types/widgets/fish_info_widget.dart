@@ -3,13 +3,13 @@ import 'package:readmore/readmore.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 import '../../../../../utils/constans/colors.dart';
 
-class TInfoWidget extends StatelessWidget {
+class TFishInfoWidget extends StatelessWidget {
   final String information;
   final String livePlace;
   final List<String> season;
   final String feedingType;
 
-  TInfoWidget({
+  TFishInfoWidget({
     required this.information,
     required this.livePlace,
     required this.season,

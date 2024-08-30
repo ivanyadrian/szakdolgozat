@@ -9,6 +9,7 @@ import 'package:szakdolgozat_app/utils/constans/image_strings.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../common/widgets/text/section_heading.dart';
+import '../fishing_methods/fishing_methods.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -77,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                           if (index == 0) {
                             return TVerticalView(image: TImages.fishes, text1: 'Fellelhető halfajok Magyarországon', text2: 'Ismertető', text3: 'Halfajták', onPressed: () => Get.to(TFishTypes()));
                           } else {
-                            return TVerticalView(image: TImages.methods, text1: 'Különböző horgászmódszerek', text2: 'Ismertető', text3: 'Módszerek', onPressed: (){});
+                            return TVerticalView(image: TImages.methods, text1: 'Különböző horgászmódszerek', text2: 'Ismertető', text3: 'Módszerek', onPressed: () => Get.to(TFishingMethods()));
                           }
                         },
                       ),

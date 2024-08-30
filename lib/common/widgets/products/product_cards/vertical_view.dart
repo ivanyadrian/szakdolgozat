@@ -29,93 +29,88 @@ class TVerticalView extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
 
-    return Container(
-      padding: const EdgeInsets.all(2),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(TSize.productImageRadius),
-        color: dark ? TColors.darkerGrey : TColors.lightContainer,
-      ),
-      child: Row(
-        children: [
-          /// THUMBNAIL
-          TRoundedContainer(
-            height: 120,
-            padding: const EdgeInsets.all(TSize.sm),
-            backgroundColor: dark ? TColors.dark : TColors.light,
-            child: Stack(
-              children: [
-                SizedBox(
-                  height: 120,
-                  width: 120,
-                  child: TRoundedImage(imageUrl: image, fit: BoxFit.cover),
-                ),
-              ],
-            ),
-          ),
 
-          /// DETAILS
-          Expanded(
-            child: SizedBox(
-              width: 170,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        padding: const EdgeInsets.all(2),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(TSize.productImageRadius),
+          color: dark ? TColors.darkerGrey : TColors.lightContainer,
+        ),
+        child: Stack(
+          children: [
+            /// THUMBNAIL
+            TRoundedContainer(
+              height: 120,
+              padding: const EdgeInsets.all(TSize.sm),
+              backgroundColor: dark ? TColors.dark : TColors.light,
+              child: Stack(
+                children: [
+                  SizedBox(
+                    height: 120,
+                    width: 120,
+                    child: TRoundedImage(imageUrl: image, fit: BoxFit.cover),
+                  ),
+                ],
+              ),
+            ),
+
+            /// DETAILS
+            Positioned(
+              left: 140,
+              right: TSize.iconLg * 1.2,
+              top: 0,
+              bottom: 0,
               child: Padding(
                 padding: const EdgeInsets.only(top: TSize.sm, left: TSize.sm),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TProductTitleText(title: text1, smallSize: true),
-                        SizedBox(height: TSize.spaceBetweenItems / 2),
-                        TBrandTitleWithVerifiedIcon(title: text2),
-                      ],
-                    ),
+                    TProductTitleText(title: text1, smallSize: true),
+                    SizedBox(height: TSize.spaceBetweenItems / 2),
+                    TBrandTitleWithVerifiedIcon(title: text2),
 
                     const Spacer(),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            text3,
-                            style: Theme.of(context).textTheme.titleLarge,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-
-                        /// Button
-                        Container(
-                          decoration: BoxDecoration(
-                            color: dark ? TColors.dark : TColors.grey,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(TSize.cardRadiusMd),
-                              bottomRight: Radius.circular(TSize.productImageRadius),
-                            ),
-                          ),
-                          child: InkWell(
-                            onTap: onPressed,
-                            child: SizedBox(
-                              width: TSize.iconLg * 1.2,
-                              height: TSize.iconLg * 1.2,
-                              child: Center(
-                                child: Icon(
-                                  Iconsax.arrow_right_3_copy,
-                                  color: dark ? TColors.white : TColors.dark,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
+                    Text(
+                      text3,
+                      style: Theme.of(context).textTheme.titleLarge,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ],
                 ),
               ),
             ),
-          )
-        ],
+
+            /// Button
+            Positioned(
+              top: 0,
+              bottom: 0,
+              right: 0,
+              child: Container(
+                width: TSize.iconLg * 1.2,
+                decoration: BoxDecoration(
+                  color: dark ? TColors.dark : TColors.grey,
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(TSize.productImageRadius),
+                    bottomRight: Radius.circular(TSize.productImageRadius),
+                  ),
+                ),
+                child: InkWell(
+                  onTap: onPressed,
+                  child: Center(
+                    child: Icon(
+                      Iconsax.arrow_right_3_copy,
+                      color: dark ? TColors.white : TColors.dark,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

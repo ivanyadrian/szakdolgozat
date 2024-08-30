@@ -3,14 +3,14 @@ import 'package:szakdolgozat_app/common/widgets/custom_shapes/containers/rounded
 import 'package:szakdolgozat_app/features/browsing/screens/fish_types/widgets/fish_info_widget.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 
-import '../../../../common/styles/shadow.dart';
-import '../../../../common/widgets/images/rounded_image.dart';
-import '../../../../utils/constans/colors.dart';
-import '../../../../utils/constans/size.dart';
-import '../../models/fish_type_modell.dart';
+import '../../../../../common/styles/shadow.dart';
+import '../../../../../common/widgets/images/rounded_image.dart';
+import '../../../../../utils/constans/colors.dart';
+import '../../../../../utils/constans/size.dart';
+import '../models/fish_type_modell.dart';
 
 class TFishTypeCards extends StatelessWidget {
-  final FishType fishType;
+  final FishTypeModel fishType;
 
   const TFishTypeCards({
     super.key,
@@ -70,7 +70,7 @@ class TFishTypeCards extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(TSize.md),
               child:
-              TInfoWidget(information: fishType.information, livePlace: fishType.livePlace, season: fishType.season, feedingType: fishType.feedingType,),
+              TFishInfoWidget(information: fishType.information, livePlace: fishType.livePlace, season: fishType.season, feedingType: fishType.feedingType,),
             )
           ],
         ),

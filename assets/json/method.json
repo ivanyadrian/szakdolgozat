@@ -1,0 +1,31 @@
+{
+  "methods": [
+    {
+      "name": "fenekező horgászat",
+      "imageUrl": "assets/images/bottom_rig.png",
+      "information": "A fenekezés lényege, hogy a csali a víz fenekén helyezkedik el, egy nehezék segítségével. A kapást általában a bot végén elhelyezett kapásjelző mutatja.",
+      "technics": "Erős fenekező bot (3-4 méter hosszú); Nagy teherbírású orsó; Nehezék (ólom vagy kosár); Erős zsinór (0,25-0,35 mm); Nagyobb horog (4-10-es méret)",
+      "equipments": [
+        "Erős fenekező bot (3-4 méter hosszú)",
+        "Nagy teherbírású orsó",
+        "Nehezék (ólom vagy kosár)",
+        "Erős zsinór (0,25-0,35 mm)",
+        "Nagyobb horog (4-10-es méret)"
+      ],
+      "tipsAndTricks": "Erős fenekező bot (3-4 méter hosszú); Nagy teherbírású orsó; Nehezék (ólom vagy kosár); Erős zsinór (0,25-0,35 mm); Nagyobb horog (4-10-es méret)"
+    },
+    {
+      "name": "legyező horgászat",
+      "imageUrl": "assets/images/fly_fishing.png",
+      "information": "A legyező horgászat egy olyan módszer, ahol a csalit legyek formájában használják, amelyeket a víz felszínén tartanak.",
+      "technics": "Könnyű, de erős bot Finom orsó Speciális legyező zsinór Különböző legyek",
+      "equipments": [
+        "Könnyű, de erős bot",
+        "Finom orsó",
+        "Speciális legyező zsinór",
+        "Különböző legyek"
+      ],
+      "tipsAndTricks": "Könnyű bot használata Különböző legyek használata a különböző időjárási és vízfeltételekhez Precíz dobások"
+    }
+  ]
+}
