@@ -6,6 +6,7 @@ import 'package:szakdolgozat_app/features/personalization/controllers/user_contr
 import '../../../features/personalization/screens/profile/profile.dart';
 import '../../../utils/constans/colors.dart';
 import '../../../utils/constans/image_strings.dart';
+import '../../styles/shimmer.dart';
 import '../images/t_circular_image.dart';
 
 
@@ -19,7 +20,13 @@ class TUserProfileTile extends StatelessWidget {
     final controller = UserController.instance;
 
     return ListTile(
-      leading: const TCircularImage(image: TImages.profile_picture, width: 50, height: 50, padding: 0,),
+      leading: Obx(() {
+        final networkImage = controller.user.value.profilePicture;
+        final image = networkImage.isNotEmpty ? networkImage : TImages.profile_picture;
+        return controller.imageUploading.value
+            ? const TShimmerEffect(width: 56, height: 56, radius: 56)
+            : TCircularImage(image: image, width: 56, height: 56, padding: 0, isNetworkImage: networkImage.isNotEmpty);
+      }),
       title: Text(controller.user.value.fullName, style: Theme.of(context).textTheme.headlineSmall!.apply(color: TColors.white),),
       subtitle: Text(controller.user.value.email, style: Theme.of(context).textTheme.bodyMedium!.apply(color: TColors.white),),
       trailing: IconButton(onPressed: () => Get.to(const ProfileScreen()),

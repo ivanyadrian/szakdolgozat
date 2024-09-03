@@ -64,7 +64,7 @@ class LoginController extends GetxController {
       }
 
       // Login user using Email & Password Authentication
-      //final userCredentials = await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
+      final userCredentials = await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
 
       // Remove Loader
       TFullScreenLoader.stopLoading();
@@ -73,7 +73,7 @@ class LoginController extends GetxController {
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       TFullScreenLoader.stopLoading();
-      TLoaders.errorSnackBar(title: 'Hiba', message: e.toString());
+      TLoaders.errorSnackBar(title: 'Hiba', message: e.toString(), duration: 2);
     }
   }
 
@@ -105,7 +105,7 @@ class LoginController extends GetxController {
     } catch (e) {
       // Remove Loader
       TFullScreenLoader.stopLoading();
-      TLoaders.errorSnackBar(title: 'Hiba', message: e.toString());
+      TLoaders.errorSnackBar(title: 'Hiba', message: e.toString(), duration: 2);
     }
   }
 }

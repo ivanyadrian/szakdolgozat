@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:szakdolgozat_app/common/styles/shimmer.dart';
@@ -6,11 +7,14 @@ import 'package:szakdolgozat_app/common/widgets/appbar/appbar.dart';
 import 'package:szakdolgozat_app/common/widgets/images/t_circular_image.dart';
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
 import 'package:szakdolgozat_app/features/personalization/controllers/user_controller.dart';
+import 'package:szakdolgozat_app/features/personalization/screens/change_personal_datas/change_username.dart';
 import 'package:szakdolgozat_app/features/personalization/screens/profile/widgets/profile_menu.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 
+import '../../../../common/widgets/loaders/loaders.dart';
 import '../../../../utils/constans/image_strings.dart';
 import '../change_personal_Datas/change_name.dart';
+import '../change_personal_datas/change_phone_number.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -60,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: TSize.spaceBetweenItems * 2),
 
               TProfileMenu(title: 'Név', value: controller.user.value.fullName, onPressed: () => Get.to(() => const ChangeName())),
-              TProfileMenu(title: 'Felhasználónév', value: controller.user.value.username, onPressed: () {}),
+              TProfileMenu(title: 'Felhasználónév', value: controller.user.value.username, onPressed: () => Get.to(() => const ChangeUserName())),
 
               const SizedBox(height: TSize.spaceBetweenItems * 4),
               const Divider(),
@@ -70,11 +74,14 @@ class ProfileScreen extends StatelessWidget {
               const TSectionHeading(title: 'Felhasználó személyes információi', showActionButton: false),
               const SizedBox(height: TSize.spaceBetweenItems * 2),
 
-              TProfileMenu(title: 'Felhasználó ID', value: controller.user.value.id, icon: Iconsax.copy_copy, onPressed: () {}),
-              TProfileMenu(title: 'E-mail', value: controller.user.value.email, onPressed: () {}),
-              TProfileMenu(title: 'Telefonszám', value: controller.user.value.phoneNumber, onPressed: () {}),
-              TProfileMenu(title: 'Nem', value: 'felhasználó neme', onPressed: () {}),
-              TProfileMenu(title: 'Születési dátum', value: 'felhasználó születési dátuma', onPressed: () {}),
+              TProfileMenu(title: 'Felhasználó ID', value: controller.user.value.id, icon: Iconsax.copy_copy, onPressed: () {
+                Clipboard.setData(ClipboardData(text: controller.user.value.id));
+                TLoaders.successSnackBar(title: 'Nagyszerű', message: 'Az ID sikeresen másolva', duration: 2);
+                },
+              ),
+              TProfileMenu(title: 'E-mail', value: controller.user.value.email, icon: null),
+              TProfileMenu(title: 'Telefonszám', value: controller.user.value.phoneNumber, onPressed: () => Get.to(() => const ChangePhoneNumber())),
+
               const Divider(),
               const SizedBox(height: TSize.spaceBetweenItems * 4),
 

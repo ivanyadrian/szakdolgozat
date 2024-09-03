@@ -13,13 +13,14 @@ class TFormatter {
 */
 
   static String formatPhoneNumber(String phoneNumber) {
-    if (phoneNumber.length == 10) {
-      return '(${phoneNumber.substring(0, 3)}) ${phoneNumber.substring(3, 6)} ${phoneNumber.substring(6)}';
-    } else if (phoneNumber.length == 11) {
-      return '(${phoneNumber.substring(0, 4)}) ${phoneNumber.substring(4, 7)} ${phoneNumber.substring(7)}';
+    if (phoneNumber.length == 11) {
+      return '${phoneNumber.substring(0, 2)} ${phoneNumber.substring(2, 4)} ${phoneNumber.substring(4, 7)} ${phoneNumber.substring(7)}';
+    } else if (phoneNumber.length == 12) {
+      return '${phoneNumber.substring(0, 3)} ${phoneNumber.substring(3, 5)} ${phoneNumber.substring(5, 8)} ${phoneNumber.substring(8)}';
     }
     return phoneNumber;
   }
+
 
 /*
   static String internationalFormatPhoneNumber(String phoneNumber) {

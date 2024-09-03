@@ -7,13 +7,13 @@ class TProfileMenu extends StatelessWidget {
   const TProfileMenu({
     super.key,
     this.icon = Iconsax.arrow_right_3_copy,
-    required this.onPressed,
+    this.onPressed,
     required this.title,
     required this.value,
   });
 
-  final IconData icon;
-  final VoidCallback onPressed;
+  final IconData? icon;
+  final VoidCallback? onPressed;
   final String title, value;
 
   @override

@@ -163,6 +163,9 @@ class UserController extends GetxController {
       await AuthenticationRepository.instance.deleteAccount();
       TFullScreenLoader.stopLoading();
       Get.offAll(() => const LoginScreen());
+
+      TLoaders.successSnackBar(title: 'Nagyszerű', message: 'A fiókod törlése sikeresen megtörtént', duration: 3);
+
     } catch (e) {
       TFullScreenLoader.stopLoading();
       TLoaders.warningSnackBar(title: 'Hiba', message: e.toString());
@@ -186,7 +189,7 @@ class UserController extends GetxController {
         user.value.profilePicture = imageUrl;
         user.refresh();
 
-        TLoaders.successSnackBar(title: 'Nagyszerű', message: 'A profilképed sikeresen módosításra került');
+        TLoaders.successSnackBar(title: 'Nagyszerű', message: 'A profilképed sikeresen módosításra került', duration: 2);
       }
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Hiba', message: 'Valami hiba történt: $e');

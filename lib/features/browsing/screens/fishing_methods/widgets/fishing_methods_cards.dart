@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:szakdolgozat_app/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:szakdolgozat_app/features/browsing/screens/fishing_methods/fishing_methods.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/fishing_methods/models/fishing_methods_models.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/fishing_methods/widgets/method_info_widget.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';

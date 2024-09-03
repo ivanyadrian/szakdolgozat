@@ -56,7 +56,7 @@ class SignupController extends GetxController {
         lastName: lastName.text.trim(),
         username: username.text.trim(),
         email: email.text.trim(),
-        phoneNumber: phoneNumber.text.trim(),
+        phoneNumber: phoneNumber.text.trim().replaceAll(' ', ''),
         profilePicture: '',
       );
       final userRepository = Get.put(UserRepository());
@@ -66,7 +66,7 @@ class SignupController extends GetxController {
       TFullScreenLoader.stopLoading();
 
       // show success message
-      TLoaders.successSnackBar(title: 'Nagyszerű', message: 'A fiókodat sikeresen létrehoztad. A folytatáshoz erősítsd meg az email címedet.');
+      TLoaders.successSnackBar(title: 'Nagyszerű', message: 'A fiókodat sikeresen létrehoztad. A folytatáshoz erősítsd meg az email címedet.', duration: 4);
 
       // move to verify email screen
       Get.to(() => VerifyEmailScreen(email: email.text.trim()));
@@ -77,7 +77,7 @@ class SignupController extends GetxController {
       TFullScreenLoader.stopLoading();
 
       // show more generic error to the user
-      TLoaders.errorSnackBar(title: 'Hiba', message: e.toString());
+      TLoaders.errorSnackBar(title: 'Hiba', message: e.toString(), duration: 2);
     }
   }
 }

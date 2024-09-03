@@ -15,7 +15,7 @@ class TOrderListItems extends StatelessWidget {
 
     return ListView.separated(
       shrinkWrap: true,
-      itemCount: 10,
+      itemCount: 1,
       separatorBuilder: (_, __) => const SizedBox(height: TSize.spaceBetweenItems),
       itemBuilder: (_, index) => TRoundedContainer(
         showBorder: true,
@@ -27,7 +27,7 @@ class TOrderListItems extends StatelessWidget {
             Row(
               children: [
                 /// 1 ICON
-                const Icon(Iconsax.ship),
+                const Icon(Iconsax.location),
                 const SizedBox(width: TSize.spaceBetweenItems / 2),
 
                 /// 2 STATUS
@@ -37,10 +37,10 @@ class TOrderListItems extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                          'Folyamatban',
+                          'Helyszín',
                           style: Theme.of(context).textTheme.bodyLarge!.apply(color: TColors.primaryColor, fontWeightDelta: 1),
                       ),
-                      Text('2024.01.03', style: Theme.of(context).textTheme.headlineSmall),
+                      Text('Tokaj Kovács-tó', style: Theme.of(context).textTheme.headlineSmall),
                     ],
                   ),
                 ),
@@ -57,7 +57,7 @@ class TOrderListItems extends StatelessWidget {
                   child: Row(
                     children: [
                       /// 1 ICON
-                      const Icon(Iconsax.tag),
+                      const Icon(Iconsax.timer_start),
                       const SizedBox(width: TSize.spaceBetweenItems / 2),
 
                       /// 2 STATUS
@@ -66,8 +66,8 @@ class TOrderListItems extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Rendelés', style: Theme.of(context).textTheme.labelMedium),
-                            Text('#53223', style: Theme.of(context).textTheme.titleMedium),
+                            Text('Fogallás kezdete', style: Theme.of(context).textTheme.labelMedium),
+                            Text('2024.01.03', style: Theme.of(context).textTheme.titleMedium),
                           ],
                         ),
                       ),
@@ -79,7 +79,7 @@ class TOrderListItems extends StatelessWidget {
                   child: Row(
                     children: [
                       /// 1 ICON
-                      const Icon(Iconsax.calendar),
+                      const Icon(Iconsax.timer_pause),
                       const SizedBox(width: TSize.spaceBetweenItems / 2),
 
                       /// 2 STATUS
@@ -88,7 +88,7 @@ class TOrderListItems extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Várható szállítás', style: Theme.of(context).textTheme.labelMedium),
+                            Text('Foglalás vége', style: Theme.of(context).textTheme.labelMedium),
                             Text('2024.01.07', style: Theme.of(context).textTheme.titleMedium),
                           ],
                         ),

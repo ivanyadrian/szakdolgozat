@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:szakdolgozat_app/common/widgets/loaders/loaders.dart';
@@ -8,29 +9,27 @@ import 'package:szakdolgozat_app/utils/popups/full_screen_loader.dart';
 
 import '../../../common/widgets/loaders/network_manager.dart';
 
-class UpdateNameController extends GetxController {
-  static UpdateNameController get instance => Get.find();
+class UpdateUserNameController extends GetxController {
+  static UpdateUserNameController get instance => Get.find();
 
-  final firstName = TextEditingController();
-  final lastName = TextEditingController();
+  final username = TextEditingController();
   final userController = UserController.instance;
   final userRepository = Get.put(UserRepository());
-  GlobalKey<FormState> updateNameFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> updateUserNameFormKey = GlobalKey<FormState>();
 
   /// init user data when Name Screen appears
   @override
   void onInit() {
-    initializeName();
+    initializeUsernames();
     super.onInit();
   }
 
   /// Fetch user record
-  Future<void> initializeName() async {
-    firstName.text = userController.user.value.firstName;
-    lastName.text = userController.user.value.lastName;
+  Future<void> initializeUsernames() async {
+    username.text = userController.user.value.username;
   }
 
-  Future<void> updateName() async {
+  Future<void> updateUserName() async {
     try {
       // Start Loading
       TFullScreenLoader.openLoadingDialog('Fiókhoz tartozó adatok frissítése...', TImages.loadingAnimation);
@@ -44,25 +43,28 @@ class UpdateNameController extends GetxController {
       }
 
       // Form Validation
-      if(!updateNameFormKey.currentState!.validate()) {
+      if(!updateUserNameFormKey.currentState!.validate()) {
         // remove Loader
         TFullScreenLoader.stopLoading();
         return;
       }
 
-      // Update user's first & last name in the Firebase Firestore
-      Map<String, dynamic> name = {'firstName': firstName.text.trim(), 'lastName': lastName.text.trim()};
-      await userRepository.updateSingleField(name);
+      // Firestore document reference
+      final userDocRef = FirebaseFirestore.instance.collection('Users').doc(userController.user.value.id);
+
+      // Update the phone number in Firestore
+      await userDocRef.update({
+        'username': username.text.trim(),
+      });
 
       // Update the Rx User value
-      userController.user.value.firstName = firstName.text.trim();
-      userController.user.value.lastName = lastName.text.trim();
+      userController.user.value.username = username.text.trim();
 
       // Remove Loader
       TFullScreenLoader.stopLoading();
 
       // Show Success screen
-      TLoaders.successSnackBar(title: 'Nagyszerű', message: 'Sikeresen módosítottad a neved', duration: 2);
+      TLoaders.successSnackBar(title: 'Nagyszerű', message: 'Sikeresen módosítottad a felhasználóneved', duration: 2);
 
       await Future.delayed(const Duration(seconds: 2));
 
