@@ -47,7 +47,7 @@ class TValidator {
 
   static String? validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
-      return 'A telefonszám mező nem lehet üres';
+      return 'Adj meg egy telefonszámot';
     }
 
     final phoneRegExp = RegExp(r'^(?:\+36|06)?\s?(\d{1,2})\s?\d{3}\s?\d{4}$');
@@ -59,4 +59,34 @@ class TValidator {
 
     return null;
   }
+
+  static String? validateNumber(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Add meg a horgászállások számát';
+    }
+
+    final numericRegExp = RegExp(r'^[0-9]+$');
+
+    if (!numericRegExp.hasMatch(value)) {
+      return 'Csak számok engedélyezettek.';
+    }
+
+    return null;
+  }
+
+  static String? validateGpsCoordinate(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Add meg a hely GPS koordinátáját';
+    }
+
+    final gpsRegExp = RegExp(r'^-?([1-8]?\d(\.\d+)?|90(\.0+)?),\s?-?(1[0-7]\d(\.\d+)?|180(\.0+)?|([1-9]?\d(\.\d+)?))$');
+
+
+    if (!gpsRegExp.hasMatch(value)) {
+      return 'Nem helyes a GPS koordináta formátuma.';
+    }
+
+    return null;
+  }
+
 }

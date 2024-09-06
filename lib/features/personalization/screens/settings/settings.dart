@@ -7,6 +7,7 @@ import 'package:szakdolgozat_app/common/widgets/list_tiles/settings_menu_tile.da
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
 import 'package:szakdolgozat_app/data/repositories/authentication/authentication_repository.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/order/order.dart';
+import 'package:szakdolgozat_app/features/browsing/screens/upload_new_element/upload_new_element.dart';
 import 'package:szakdolgozat_app/features/personalization/screens/address/address.dart';
 import 'package:szakdolgozat_app/utils/constans/colors.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
@@ -51,6 +52,7 @@ class SettingsScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(TSize.defaultSpace),
                     child: Column(
                       children: [
+                        /*
                         const TSectionHeading(title: 'Fiók beállítás', showActionButton: false),
                         const SizedBox(height: TSize.spaceBetweenItems),
 
@@ -59,6 +61,15 @@ class SettingsScreen extends StatelessWidget {
                           title: 'Címek',
                           subTitle: 'Címek hozzáadása, meglévő címek kezelése',
                           onTap: () => Get.to(() => const UserAddressScreen()),
+                        ),
+                        const SizedBox(height: TSize.spaceBetweenItems),
+                       */
+
+                        TSettingsMenuTitle(
+                          icon: Icons.add,
+                          title: 'Hozzáadás',
+                          subTitle: 'Új hely felvétele',
+                          onTap: () => Get.to(() => const AddNewElement()),
                         ),
                         const SizedBox(height: TSize.spaceBetweenItems),
 
