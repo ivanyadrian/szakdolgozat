@@ -1,30 +1,36 @@
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:szakdolgozat_app/common/widgets/loaders/loaders.dart';
+import 'package:szakdolgozat_app/common/widgets/loaders/network_manager.dart';
+import 'package:szakdolgozat_app/features/personalization/controllers/user_controller.dart';
 import 'package:szakdolgozat_app/utils/constans/image_strings.dart';
 import 'package:szakdolgozat_app/utils/popups/full_screen_loader.dart';
-import '../../../../common/widgets/loaders/network_manager.dart';
-import '../../personalization/controllers/user_controller.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import '../../../data/repositories/fishing_spots/fishing_spot_repository.dart';
+import '../screens/upload_new_element/model/fishing_spot_model.dart';
 
 class FishingSpotController extends GetxController {
   static FishingSpotController get instance => Get.find();
-
-  final userController = UserController.instance;
 
   final placeName = TextEditingController();
   final waterType = TextEditingController();
   final county = TextEditingController();
   final gpsCoordinates = TextEditingController();
   final numberOfSpots = TextEditingController();
+  final userController = UserController.instance;
+  final fishingSpotRepository = Get.put(FishingSpotRepository());
   final GlobalKey<FormState> fishingSpotFormKey = GlobalKey<FormState>();
 
   final ImagePicker _picker = ImagePicker();
   final RxList<XFile> selectedImages = <XFile>[].obs;
 
+  /// init fishing spot data when screen appears
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  /// Pick images from the gallery
   Future<void> pickImages() async {
     final List<XFile>? images = await _picker.pickMultiImage();
     if (images != null) {
@@ -32,79 +38,69 @@ class FishingSpotController extends GetxController {
     }
   }
 
-  Future<List<String>> uploadImages(String spotId) async {
-    final storage = FirebaseStorage.instance;
-    final List<String> downloadUrls = [];
-
-    final uploadTasks = selectedImages.map((image) async {
-      final file = File(image.path);
-      final ref = storage.ref().child('Fishing_spots/$spotId/${image.name}');
-      final uploadTask = await ref.putFile(file);
-
-      // Get the download URL after uploading
-      final downloadUrl = await uploadTask.ref.getDownloadURL();
-      downloadUrls.add(downloadUrl);
-    }).toList();
-
-    await Future.wait(uploadTasks);
-    return downloadUrls; // Return the list of download URLs
-  }
-
+  /// Save fishing spot data to Firestore
   Future<void> saveFishingSpot() async {
     try {
-      TFullScreenLoader.openLoadingDialog('Feldolgozás...', TImages.loadingAnimation);
+      // Start Loading
+      TFullScreenLoader.openLoadingDialog('Horgászhely mentése folyamatban...', TImages.loadingAnimation);
 
+      // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
+        // Remove Loader
         TFullScreenLoader.stopLoading();
         return;
       }
 
+      // Form Validation
       if (!fishingSpotFormKey.currentState!.validate()) {
+        // Remove Loader
         TFullScreenLoader.stopLoading();
         return;
       }
 
       if (selectedImages.isEmpty) {
         TFullScreenLoader.stopLoading();
-        TLoaders.errorSnackBar(title: 'Hiba', message: 'Válassz ki legalább egy képet', duration: 2);
+        TLoaders.warningSnackBar(title: 'Hiba', message: 'Válassz ki legalább egy képet', duration: 2);
         return;
       }
 
-      final countyName = county.text.trim();
-      final placeNameText = placeName.text.trim();
-      final waterTypeText = waterType.text.trim();
-      final gpsCoordinatesText = gpsCoordinates.text.trim();
-      final numberOfSpotsInt = int.parse(numberOfSpots.text.trim());
 
-      final countyDocRef = FirebaseFirestore.instance.collection('Fishing_spots').doc(countyName);
-      final fishingSpotRef = countyDocRef.collection('spots').doc();
-      final spotId = fishingSpotRef.id;
+      // Collect spot data
+      final fishingSpot = FishingSpotModel(
+        id: '',
+        placeName: placeName.text.trim(),
+        waterType: waterType.text.trim(),
+        gpsCoordinates: gpsCoordinates.text.trim(),
+        numberOfSpots: int.parse(numberOfSpots.text.trim()),
+        uploadedBy: userController.user.value.username,
+        imageUrls: [],
+      );
 
-      await fishingSpotRef.set({
-        'placeName': placeNameText,
-        'waterType': waterTypeText,
-        'gpsCoordinates': gpsCoordinatesText,
-        'numberOfSpots': numberOfSpotsInt,
-        'uploadedBy': userController.user.value.username,
-      });
+      // Save fishing spot to Firestore
+      final spotId = await fishingSpotRepository.createFishingSpot(fishingSpot, county.text.trim());
 
-      // Upload images and get the URLs
-      final imageUrls = await uploadImages(spotId);
+      // Upload images
+      final imageUrls = await fishingSpotRepository.uploadImages(spotId, selectedImages);
 
-      // Add image URLs to the document in Firestore
-      await fishingSpotRef.update({
-        'images': imageUrls, // Add the list of image URLs to the document
-      });
+      // Update Firestore with image URLs
+      await fishingSpotRepository.updateFishingSpotImages(spotId, county.text.trim(), imageUrls);
 
+      // Remove Loader
       TFullScreenLoader.stopLoading();
-      TLoaders.successSnackBar(title: 'Nagyszerű', message: 'A horgászhely sikeresen feltöltve', duration: 4);
+
+      // Show Success message
+      TLoaders.successSnackBar(title: 'Nagyszerű', message: 'Sikeresen feltöltötted a horgászhelyet!', duration: 2);
+
+      await Future.delayed(const Duration(seconds: 2));
+
+      // Navigate back
+      Get.back();
 
     } catch (e) {
+      // Remove Loader and show error
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Hiba', message: e.toString(), duration: 2);
     }
   }
 }
-
-
