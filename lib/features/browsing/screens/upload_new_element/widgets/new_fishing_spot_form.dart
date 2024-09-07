@@ -23,7 +23,7 @@ class TNewFishingSpotForm extends StatelessWidget {
             validator: (value) => TValidator.validEmptyText('Hely neve', value),
             decoration: const InputDecoration(
               labelText: 'Hely neve',
-              prefixIcon: Icon(Iconsax.building),
+              prefixIcon: Icon(Icons.drive_file_rename_outline),
             ),
           ),
 
@@ -38,6 +38,18 @@ class TNewFishingSpotForm extends StatelessWidget {
                 : controller.waterType.text,
             onChanged: (value) => controller.waterType.text = value!,
             prefixIcon: const Icon(Icons.water),
+          ),
+
+          const SizedBox(height: TSize.spaceBetweenInputFields),
+
+          /// Település neve
+          TextFormField(
+            controller: controller.settlementName,
+            validator: (value) => TValidator.validEmptyText('Település', value),
+            decoration: const InputDecoration(
+              labelText: 'Település neve',
+              prefixIcon: Icon(Iconsax.building_3),
+            ),
           ),
 
           const SizedBox(height: TSize.spaceBetweenInputFields),
@@ -69,7 +81,7 @@ class TNewFishingSpotForm extends StatelessWidget {
             value:
                 controller.county.text.isEmpty ? null : controller.county.text,
             onChanged: (value) => controller.county.text = value!,
-            prefixIcon: const Icon(Icons.map),
+            prefixIcon: const Icon(Iconsax.map),
           ),
 
           const SizedBox(height: TSize.spaceBetweenInputFields),

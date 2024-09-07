@@ -4,6 +4,7 @@ class FishingSpotModel {
   final String id;
   String placeName;
   String waterType;
+  String settlementName;
   String gpsCoordinates;
   int numberOfSpots;
   String uploadedBy;
@@ -13,6 +14,7 @@ class FishingSpotModel {
     required this.id,
     required this.placeName,
     required this.waterType,
+    required this.settlementName,
     required this.gpsCoordinates,
     required this.numberOfSpots,
     required this.uploadedBy,
@@ -41,6 +43,7 @@ class FishingSpotModel {
       id: document.id,
       placeName: data['placeName'] ?? '',
       waterType: data['waterType'] ?? '',
+      settlementName: data['settlementName'] ?? '',
       gpsCoordinates: data['gpsCoordinates'] ?? '',
       numberOfSpots: data['numberOfSpots'] ?? 0,
       uploadedBy: data['uploadedBy'] ?? '',

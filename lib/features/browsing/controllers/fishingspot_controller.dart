@@ -14,6 +14,7 @@ class FishingSpotController extends GetxController {
 
   final placeName = TextEditingController();
   final waterType = TextEditingController();
+  final settlementName = TextEditingController();
   final county = TextEditingController();
   final gpsCoordinates = TextEditingController();
   final numberOfSpots = TextEditingController();
@@ -65,22 +66,22 @@ class FishingSpotController extends GetxController {
         return;
       }
 
-
       // Collect spot data
       final fishingSpot = FishingSpotModel(
         id: '',
         placeName: placeName.text.trim(),
         waterType: waterType.text.trim(),
+        settlementName: settlementName.text.trim(),
         gpsCoordinates: gpsCoordinates.text.trim(),
         numberOfSpots: int.parse(numberOfSpots.text.trim()),
         uploadedBy: userController.user.value.username,
         imageUrls: [],
       );
 
-      // Save fishing spot to Firestore
+      // Save fishing spot to Firestore with the county name
       final spotId = await fishingSpotRepository.createFishingSpot(fishingSpot, county.text.trim());
 
-      // Upload images
+      // Upload images and get their URLs
       final imageUrls = await fishingSpotRepository.uploadImages(spotId, selectedImages);
 
       // Update Firestore with image URLs

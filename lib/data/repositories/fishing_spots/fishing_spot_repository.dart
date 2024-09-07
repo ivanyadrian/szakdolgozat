@@ -18,9 +18,16 @@ class FishingSpotRepository extends GetxController {
   /// Function to create a new fishing spot record
   Future<String> createFishingSpot(FishingSpotModel spot, String countyName) async {
     try {
-      final countyDocRef = _db.collection('Fishing_spots').doc(countyName);
+      // Get the reference to the specific county document
+      final countyDocRef = _db.collection('Counties').doc(countyName);
+
+      // Create a new document in the 'spots' subcollection
       final fishingSpotRef = countyDocRef.collection('spots').doc();
+
+      // Set the spot data in Firestore
       await fishingSpotRef.set(spot.toJson());
+
+      // Return the generated spot ID
       return fishingSpotRef.id;
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
@@ -58,9 +65,12 @@ class FishingSpotRepository extends GetxController {
   /// Function to update the fishing spot's image URLs in Firestore
   Future<void> updateFishingSpotImages(String spotId, String countyName, List<String> imageUrls) async {
     try {
-      final countyDocRef = _db.collection('Fishing_spots').doc(countyName);
+      // Get the reference to the specific county and fishing spot document
+      final countyDocRef = _db.collection('Counties').doc(countyName);
       final fishingSpotRef = countyDocRef.collection('spots').doc(spotId);
-      await fishingSpotRef.update({'images': imageUrls});
+
+      // Update the fishing spot with the new image URLs
+      await fishingSpotRef.update({'imageUrls': imageUrls});
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {
