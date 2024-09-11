@@ -4,6 +4,7 @@ import 'package:szakdolgozat_app/common/widgets/layouts/list_layout.dart';
 import 'package:szakdolgozat_app/common/widgets/products/product_cards/vertical_view.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/fish_types/fish_types.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/home/widgets/home_appbar.dart';
+import 'package:szakdolgozat_app/features/browsing/screens/home/widgets/home_counties.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/home/widgets/promo_slider.dart';
 import 'package:szakdolgozat_app/utils/constans/image_strings.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
@@ -39,6 +40,7 @@ class HomeScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           /// HEADING
+
                           /*
                           TSectionHeading(
                               title: 'Vármegyék szerint',
@@ -46,9 +48,11 @@ class HomeScreen extends StatelessWidget {
                               textColor: Colors.white),
                           SizedBox(height: TSize.spaceBetweenItems),
 
+
                           /// CATEGORIES
-                          THomeCategories(),
-                          */
+                          THomeCounties(),
+                           */
+
                         ],
                       ),
                     ),

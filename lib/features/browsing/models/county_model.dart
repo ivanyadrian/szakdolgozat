@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class CountiesModel {
+class CountyModel {
   String id;
   String name;
   String image;
   String parentId;
   bool isFeatured;
 
-  CountiesModel({
+  CountyModel({
     required this.id,
     required this.name,
     required this.image,
@@ -16,7 +16,7 @@ class CountiesModel {
 });
 
   /// Empty Helper Function
-  static CountiesModel empty() => CountiesModel(id: '', name: '', image: '', isFeatured: false);
+  static CountyModel empty() => CountyModel(id: '', name: '', image: '', isFeatured: false);
 
   /// Convert model to Json structure so that you can store data in Firebase
   Map<String, dynamic> toJson() {
@@ -29,19 +29,20 @@ class CountiesModel {
   }
 
   /// Map Json oriented document snapshot from firebase to UserModel
-  factory CountiesModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+  factory CountyModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final data = document.data()!;
 
       // Map JSON Record to the Model
-      return CountiesModel(
+      return CountyModel(
         id: document.id,
-        name: data['Name' ?? ''],
-        image: data['Image' ?? ''],
+        name: data['Name'] ?? '',
+        image: data['Image'] ?? '',
+        parentId: data['ParentId'] ?? '',
         isFeatured: data['IsFeatured'] ?? false,
       );
     } else {
-      return CountiesModel.empty();
+      return CountyModel.empty();
     }
   }
 }

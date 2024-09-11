@@ -1,16 +1,15 @@
 import 'package:get/get.dart';
 import 'package:szakdolgozat_app/common/widgets/loaders/loaders.dart';
-import 'package:szakdolgozat_app/features/personalization/models/counties_model.dart';
+import '../../../data/repositories/counties/county_repository.dart';
+import '../models/county_model.dart';
 
-import '../../../data/repositories/counties/counties_repository.dart';
-
-class CountiesController extends GetxController {
-  static CountiesController get instance => Get.find();
+class CountyController extends GetxController {
+  static CountyController get instance => Get.find();
 
   final isLoading = false.obs;
-  final _countiesRepository = Get.put(CountiesRepository());
-  RxList<CountiesModel> allCounties = <CountiesModel>[].obs;
-  RxList<CountiesModel> featureCounties = <CountiesModel>[].obs;
+  final _countyRepository = Get.put(CountyRepository());
+  RxList<CountyModel> allCounties = <CountyModel>[].obs;
+  RxList<CountyModel> featureCounties = <CountyModel>[].obs;
 
   @override
   void onInit() {
@@ -25,13 +24,13 @@ class CountiesController extends GetxController {
       isLoading.value = true;
 
       // fetch counties from data source (Firestore, API, etc.)
-      final counties = await _countiesRepository.getAllCounties();
+      final counties = await _countyRepository.getAllCounties();
 
       // update the counties list
       allCounties.assignAll(counties);
 
       // filter featured counties
-      featureCounties.assignAll(allCounties.where((counties) => counties.isFeatured && counties.parentId.isEmpty).take(8).toList());
+      featureCounties.assignAll(allCounties.where((county) => county.isFeatured && county.parentId.isEmpty).take(8).toList());
 
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Hiba', message: e.toString());

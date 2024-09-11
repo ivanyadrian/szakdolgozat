@@ -1,27 +1,24 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:szakdolgozat_app/features/personalization/models/counties_model.dart';
-
+import '../../../features/browsing/models/county_model.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 import '../../services/firebase_storage_service.dart';
 
 
-class CountiesRepository extends GetxController {
-  static CountiesRepository get instance => Get.find();
+class CountyRepository extends GetxController {
+  static CountyRepository get instance => Get.find();
 
   /// Variables
   final _db = FirebaseFirestore.instance;
 
   /// Get all counties
-  Future<List<CountiesModel>> getAllCounties() async {
+  Future<List<CountyModel>> getAllCounties() async {
     try {
       final snapshot = await _db.collection('Counties').get();
-      final list = snapshot.docs.map((document) => CountiesModel.fromSnapshot(document)).toList();
+      final list = snapshot.docs.map((document) => CountyModel.fromSnapshot(document)).toList();
       return list;
-
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on PlatformException catch (e) {
@@ -33,8 +30,9 @@ class CountiesRepository extends GetxController {
 
   /// Get Sub
 
+
   /// upload Counties to the Cloud Firebase
-  Future<void> uploadDummyData(List<CountiesModel> counties) async {
+  Future<void> uploadDummyData(List<CountyModel> counties) async {
     try {
       // Upload all the counties along with their Image
       final storage = Get.put(TFirebaseStorageService());

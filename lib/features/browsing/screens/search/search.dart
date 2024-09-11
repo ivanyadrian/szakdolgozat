@@ -5,7 +5,7 @@ import 'package:szakdolgozat_app/common/widgets/appbar/tabbar.dart';
 import 'package:szakdolgozat_app/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:szakdolgozat_app/common/widgets/layouts/grid_layout.dart';
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
-import 'package:szakdolgozat_app/features/browsing/controllers/counties_controller.dart';
+import 'package:szakdolgozat_app/features/browsing/controllers/county_controller.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/brand/all_brands.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/search/widgets/category_tab.dart';
 import 'package:szakdolgozat_app/utils/constans/colors.dart';
@@ -20,7 +20,7 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final counties = CountiesController.instance.featureCounties;
+    final counties = CountyController.instance.featureCounties;
 
     return DefaultTabController(
       length: counties.length,
