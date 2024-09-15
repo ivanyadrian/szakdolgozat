@@ -15,6 +15,7 @@ import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 
 import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
 import '../../../../utils/constans/text_strings.dart';
+import 'empty.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -78,6 +79,12 @@ class SettingsScreen extends StatelessWidget {
                             title: 'Foglalásom',
                             subTitle: 'Foglalás részletei',
                             onTap: () => Get.to(() => const OrderScreen())),
+
+                        TSettingsMenuTitle(
+                            icon: Icons.warning,
+                            title: 'Tesztelésre',
+                            subTitle: 'firebase adatok tesztelésének cáljából',
+                            onTap: () => Get.to(() => const EmptyScreen())),
 
                         const SizedBox(height: TSize.spaceBetweenItems * 4),
                         const TSectionHeading(title: 'Alkalmazás beállításai', showActionButton: false),
