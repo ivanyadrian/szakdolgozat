@@ -15,7 +15,7 @@ class FishingSpotController extends GetxController {
   final placeName = TextEditingController();
   final waterType = TextEditingController();
   final settlementName = TextEditingController();
-  final county = TextEditingController();
+  final county = TextEditingController(); // Megye neve
   final gpsCoordinates = TextEditingController();
   final numberOfSpots = TextEditingController();
   final userController = UserController.instance;
@@ -25,13 +25,35 @@ class FishingSpotController extends GetxController {
   final ImagePicker _picker = ImagePicker();
   final RxList<XFile> selectedImages = <XFile>[].obs;
 
-  /// init fishing spot data when screen appears
+  final RxList<String> counties = <String>[].obs; // Megyék listája
+
   @override
   void onInit() {
     super.onInit();
+    _loadCounties();
   }
 
-  /// Pick images from the gallery
+  Future<void> _loadCounties() async {
+    try {
+      final fetchedCounties = await fishingSpotRepository.getAllCounties();
+      counties.addAll(fetchedCounties);
+    } catch (e) {
+      // Handle errors if needed
+      TLoaders.errorSnackBar(title: 'Hiba', message: 'Valami hiba történt a megyék lekérése során', duration: 2);
+    }
+  }
+
+  // Call this method to refresh the counties list
+  Future<void> updateCountiesList() async {
+    try {
+      final fetchedCounties = await fishingSpotRepository.getAllCounties();
+      counties.value = fetchedCounties;
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Hiba', message: 'Valami hiba történt a megyék frissítése során', duration: 2);
+      ;
+    }
+  }
+
   Future<void> pickImages() async {
     final List<XFile>? images = await _picker.pickMultiImage();
     if (images != null) {
@@ -39,26 +61,23 @@ class FishingSpotController extends GetxController {
     }
   }
 
-  /// Save fishing spot data to Firestore
   Future<void> saveFishingSpot() async {
     try {
-      // Start Loading
       TFullScreenLoader.openLoadingDialog('Horgászhely mentése folyamatban...', TImages.loadingAnimation);
 
-      // Check Internet Connectivity
+      // Check network connection
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
-        // Remove Loader
         TFullScreenLoader.stopLoading();
         return;
       }
 
-      // Form Validation
+      // Form validate
       if (!fishingSpotFormKey.currentState!.validate()) {
-        // Remove Loader
         TFullScreenLoader.stopLoading();
         return;
       }
+
 
       if (selectedImages.isEmpty) {
         TFullScreenLoader.stopLoading();
@@ -66,7 +85,6 @@ class FishingSpotController extends GetxController {
         return;
       }
 
-      // Collect spot data
       final fishingSpot = FishingSpotModel(
         id: '',
         placeName: placeName.text.trim(),
@@ -76,30 +94,23 @@ class FishingSpotController extends GetxController {
         numberOfSpots: int.parse(numberOfSpots.text.trim()),
         uploadedBy: userController.user.value.username,
         imageUrls: [],
+        countyId: county.text.trim(),
       );
 
-      // Save fishing spot to Firestore with the county name
-      final spotId = await fishingSpotRepository.createFishingSpot(fishingSpot, county.text.trim());
-
-      // Upload images and get their URLs
+      final spotId = await fishingSpotRepository.createFishingSpot(fishingSpot);
       final imageUrls = await fishingSpotRepository.uploadImages(spotId, selectedImages);
+      await fishingSpotRepository.updateFishingSpotImages(spotId, imageUrls);
 
-      // Update Firestore with image URLs
-      await fishingSpotRepository.updateFishingSpotImages(spotId, county.text.trim(), imageUrls);
+      // Refresh the counties list
+      await instance.updateCountiesList();
 
-      // Remove Loader
       TFullScreenLoader.stopLoading();
-
-      // Show Success message
       TLoaders.successSnackBar(title: 'Nagyszerű', message: 'Sikeresen feltöltötted a horgászhelyet!', duration: 2);
 
       await Future.delayed(const Duration(seconds: 2));
-
-      // Navigate back
       Get.back();
 
     } catch (e) {
-      // Remove Loader and show error
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Hiba', message: e.toString(), duration: 2);
     }

@@ -9,6 +9,7 @@ class FishingSpotModel {
   int numberOfSpots;
   String uploadedBy;
   List<String> imageUrls;
+  String countyId; // Új mező a megyéhez való hivatkozáshoz
 
   FishingSpotModel({
     required this.id,
@@ -19,24 +20,39 @@ class FishingSpotModel {
     required this.numberOfSpots,
     required this.uploadedBy,
     required this.imageUrls,
+    required this.countyId, // Megye ID-ja
   });
 
-  /// Helper function to format GPS coordinates, if needed
-  String get formattedGpsCoordinates => gpsCoordinates;
+  /// copyWith metódus a countyId frissítéséhez
+  FishingSpotModel copyWith({
+    String? countyId,
+  }) {
+    return FishingSpotModel(
+      id: this.id,
+      placeName: this.placeName,
+      waterType: this.waterType,
+      settlementName: this.settlementName,
+      gpsCoordinates: this.gpsCoordinates,
+      numberOfSpots: this.numberOfSpots,
+      uploadedBy: this.uploadedBy,
+      imageUrls: this.imageUrls,
+      countyId: countyId ?? this.countyId,
+    );
+  }
 
-  /// Convert model to JSON structure for storing data in Firebase
   Map<String, dynamic> toJson() {
     return {
       'placeName': placeName,
       'waterType': waterType,
+      'settlementName': settlementName,
       'gpsCoordinates': gpsCoordinates,
       'numberOfSpots': numberOfSpots,
       'uploadedBy': uploadedBy,
-      'images': imageUrls,
+      'imageUrls': imageUrls,
+      'countyId': countyId, // Megye ID-ja
     };
   }
 
-  /// Factory method to create a FishingSpotModel from a Firebase document snapshot
   factory FishingSpotModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
     return FishingSpotModel(
@@ -47,7 +63,9 @@ class FishingSpotModel {
       gpsCoordinates: data['gpsCoordinates'] ?? '',
       numberOfSpots: data['numberOfSpots'] ?? 0,
       uploadedBy: data['uploadedBy'] ?? '',
-      imageUrls: List<String>.from(data['images'] ?? []),
+      imageUrls: List<String>.from(data['imageUrls'] ?? []),
+      countyId: data['countyId'] ?? '', // Megye ID-ja
     );
   }
 }
+

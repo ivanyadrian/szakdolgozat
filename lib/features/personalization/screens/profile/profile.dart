@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
-import 'package:szakdolgozat_app/common/styles/shimmer.dart';
+import 'package:szakdolgozat_app/common/widgets/shimmers/shimmer.dart';
 import 'package:szakdolgozat_app/common/widgets/appbar/appbar.dart';
 import 'package:szakdolgozat_app/common/widgets/images/t_circular_image.dart';
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';

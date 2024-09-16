@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:szakdolgozat_app/common/styles/counties_shimmer.dart';
+import 'package:szakdolgozat_app/common/widgets/shimmers/counties_shimmer.dart';
 import 'package:szakdolgozat_app/features/browsing/controllers/county_controller.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/sub_category/sub_categories.dart';
 

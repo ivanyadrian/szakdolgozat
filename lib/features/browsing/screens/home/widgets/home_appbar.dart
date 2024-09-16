@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:szakdolgozat_app/common/styles/shimmer.dart';
+import 'package:szakdolgozat_app/common/widgets/shimmers/shimmer.dart';
 import 'package:szakdolgozat_app/features/personalization/controllers/user_controller.dart';
 import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../utils/constans/colors.dart';

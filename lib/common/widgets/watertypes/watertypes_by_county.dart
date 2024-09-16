@@ -9,19 +9,20 @@ import '../images/t_circular_image.dart';
 import '../text/t_brand_title_text_with_verified_icon.dart';
 
 
-class TBrandCard extends StatelessWidget {
-  const TBrandCard({
+class TWaterTypesByCounty extends StatelessWidget {
+  const TWaterTypesByCounty({
     super.key,
     required this.showBorder,
     this.onTab,
+    required this.title,
   });
 
   final bool showBorder;
   final void Function()? onTab;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-
     final dark = THelperFunctions.isDarkMode(context);
 
     return GestureDetector(
@@ -32,8 +33,7 @@ class TBrandCard extends StatelessWidget {
         backgroundColor: Colors.transparent,
         child: Row(
           children: [
-
-            /// ICON
+            // ICON
             Flexible(
               child: TCircularImage(
                 isNetworkImage: false,
@@ -44,19 +44,15 @@ class TBrandCard extends StatelessWidget {
             ),
             const SizedBox(width: TSize.spaceBetweenItems / 2),
 
-            /// TEXT
+            // TEXT
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TBrandTitleWithVerifiedIcon(
-                      title: 'Borsod-Abaúj-Zemplén',
-                      brandTextSizes: TextSizes.large),
-                  Text(
-                    'helyek száma: 47',
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.labelMedium,
+                  TBrandTitleWithVerifiedIcon(
+                    title: title,
+                    brandTextSizes: TextSizes.large,
                   ),
                 ],
               ),

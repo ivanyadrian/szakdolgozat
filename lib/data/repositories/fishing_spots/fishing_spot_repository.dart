@@ -1,13 +1,16 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../features/browsing/screens/upload_new_element/model/fishing_spot_model.dart';
+import '../../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/format_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
+
 
 /// Repository class for fishing spot-related operations
 class FishingSpotRepository extends GetxController {
@@ -15,20 +18,22 @@ class FishingSpotRepository extends GetxController {
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  /// Function to create a new fishing spot record
-  Future<String> createFishingSpot(FishingSpotModel spot, String countyName) async {
+  /// Új horgászhely létrehozása a 'FishingSpots' kollekcióban
+  Future<String> createFishingSpot(FishingSpotModel spot) async {
     try {
-      // Get the reference to the specific county document
-      final countyDocRef = _db.collection('Counties').doc(countyName);
+      // Ellenőrizzük, hogy a megye létezik-e
+      final countyId = await _checkOrCreateCounty(spot.countyId);
 
-      // Create a new document in the 'spots' subcollection
-      final fishingSpotRef = countyDocRef.collection('spots').doc();
+      // Frissítjük a spot objektumot a countyId-val
+      spot = spot.copyWith(countyId: countyId);
 
-      // Set the spot data in Firestore
+      // FishingSpot hozzáadása a 'FishingSpots' kollekcióhoz
+      final fishingSpotRef = _db.collection('FishingSpots').doc();
       await fishingSpotRef.set(spot.toJson());
-
-      // Return the generated spot ID
       return fishingSpotRef.id;
+
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {
@@ -36,11 +41,43 @@ class FishingSpotRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Váratlan hiba történt. Kérlek próbáld újra';
+      throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
     }
   }
 
-  /// Function to upload images and return their download URLs
+  /// Megyék ellenőrzése, vagy új megye létrehozása
+  Future<String> _checkOrCreateCounty(String countyName) async {
+    try {
+      // Lekérjük a megyét a Counties kollekcióból
+      final countyQuery = await _db.collection('Counties')
+          .where('name', isEqualTo: countyName)
+          .limit(1)
+          .get();
+
+      // Ha létezik a megye, visszaadjuk annak ID-ját
+      if (countyQuery.docs.isNotEmpty) {
+        return countyQuery.docs.first.id;
+      }
+
+      // Ha nem létezik, létrehozzuk a megyét
+      final countyRef = _db.collection('Counties').doc(); // Új dokumentum a Counties kollekcióban
+      await countyRef.set({'name': countyName});
+      return countyRef.id; // Visszaadjuk az új megye ID-ját
+
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
+    }
+  }
+
+  /// Képek feltöltése és URL-ek mentése
   Future<List<String>> uploadImages(String spotId, List<XFile> images) async {
     try {
       final List<String> imageUrls = [];
@@ -51,6 +88,9 @@ class FishingSpotRepository extends GetxController {
         imageUrls.add(downloadUrl);
       }
       return imageUrls;
+
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {
@@ -58,19 +98,18 @@ class FishingSpotRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Váratlan hiba történt. Kérlek próbáld újra';
+      throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
     }
   }
 
-  /// Function to update the fishing spot's image URLs in Firestore
-  Future<void> updateFishingSpotImages(String spotId, String countyName, List<String> imageUrls) async {
+  /// Horgászhely frissítése a képek URL-jeivel
+  Future<void> updateFishingSpotImages(String spotId, List<String> imageUrls) async {
     try {
-      // Get the reference to the specific county and fishing spot document
-      final countyDocRef = _db.collection('Counties').doc(countyName);
-      final fishingSpotRef = countyDocRef.collection('spots').doc(spotId);
-
-      // Update the fishing spot with the new image URLs
+      final fishingSpotRef = _db.collection('FishingSpots').doc(spotId);
       await fishingSpotRef.update({'imageUrls': imageUrls});
+
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {
@@ -78,7 +117,26 @@ class FishingSpotRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Váratlan hiba történt. Kérlek próbáld újra';
+      throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
+    }
+  }
+
+  /// Megyék lekérése
+  Future<List<String>> getAllCounties() async {
+    try {
+      final snapshot = await _db.collection('Counties').get();
+      return snapshot.docs.map((doc) => doc['name'] as String).toList();
+
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
     }
   }
 }

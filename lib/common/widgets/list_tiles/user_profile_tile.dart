@@ -6,7 +6,7 @@ import 'package:szakdolgozat_app/features/personalization/controllers/user_contr
 import '../../../features/personalization/screens/profile/profile.dart';
 import '../../../utils/constans/colors.dart';
 import '../../../utils/constans/image_strings.dart';
-import '../../styles/shimmer.dart';
+import '../shimmers/shimmer.dart';
 import '../images/t_circular_image.dart';
 
 
