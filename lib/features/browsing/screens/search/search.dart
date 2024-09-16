@@ -5,6 +5,7 @@ import 'package:szakdolgozat_app/common/widgets/appbar/tabbar.dart';
 import 'package:szakdolgozat_app/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:szakdolgozat_app/common/widgets/layouts/grid_layout.dart';
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
+import 'package:szakdolgozat_app/common/widgets/watertypes/watertypes_by_county.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/brand/all_brands.dart';
 import 'package:szakdolgozat_app/utils/constans/colors.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
@@ -101,8 +102,18 @@ class SearchScreen extends StatelessWidget {
             },
             body: TabBarView(
               children: sortedCounties.map((county) {
-                return Center(
-                  child: Text('Content for $county'),
+                return Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: TGridLayout(
+                    itemCount: 4,
+                    mainAxisExtent: 80,
+                    itemBuilder: (_, index) {
+                      return TWaterTypesByCounty(
+                        showBorder: true,
+                        onTab: () => Get.to(() => const BrandProducts()),
+                      );
+                    },
+                  ),
                 );
               }).toList(),
             ),

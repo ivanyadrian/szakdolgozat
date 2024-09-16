@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
-import '../../../utils/constans/colors.dart';
 import '../../../utils/constans/enums.dart';
-import '../../../utils/constans/image_strings.dart';
 import '../../../utils/constans/size.dart';
 import '../custom_shapes/containers/rounded_container.dart';
-import '../images/t_circular_image.dart';
 import '../text/t_brand_title_text_with_verified_icon.dart';
 
 
@@ -14,15 +11,14 @@ class TWaterTypesByCounty extends StatelessWidget {
     super.key,
     required this.showBorder,
     this.onTab,
-    required this.title,
   });
 
   final bool showBorder;
   final void Function()? onTab;
-  final String title;
 
   @override
   Widget build(BuildContext context) {
+
     final dark = THelperFunctions.isDarkMode(context);
 
     return GestureDetector(
@@ -33,7 +29,9 @@ class TWaterTypesByCounty extends StatelessWidget {
         backgroundColor: Colors.transparent,
         child: Row(
           children: [
-            // ICON
+
+            /*
+            /// ICON
             Flexible(
               child: TCircularImage(
                 isNetworkImage: false,
@@ -44,17 +42,25 @@ class TWaterTypesByCounty extends StatelessWidget {
             ),
             const SizedBox(width: TSize.spaceBetweenItems / 2),
 
-            // TEXT
+             */
+
+            /// TEXT
             Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TBrandTitleWithVerifiedIcon(
-                    title: title,
-                    brandTextSizes: TextSizes.large,
-                  ),
-                ],
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const TBrandTitleWithVerifiedIcon(
+                        title: 'Tó',
+                        brandTextSizes: TextSizes.large),
+                    Text(
+                      'helyek száma: 47',
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
