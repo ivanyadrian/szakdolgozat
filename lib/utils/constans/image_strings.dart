@@ -2,6 +2,7 @@ class TImages {
   static const String darkLogo = "assets/logos/logo_dark.png";
   static const String lightLogo = "assets/logos/logo_light.png";
 
+  static const String placeholder = "assets/images/placeholderimage.png";
 
   static const String googleLogo = "assets/logos/google_logo.png";
 
@@ -85,4 +86,10 @@ class TImages {
   static const String boilie_fishing = "assets/images/fishes_and_methods/boilie_fishing.png";
   static const String fly_fishing = "assets/images/fishes_and_methods/fly_fishing.png";
   static const String spinner_fishing = "assets/images/fishes_and_methods/spinner_fishing.png";
+
+  static const String lake = "assets/icons/watertypes/lake.png";
+  static const String river = "assets/icons/watertypes/river.png";
+  static const String swamp = "assets/icons/watertypes/swamp.png";
+  static const String canal = "assets/icons/watertypes/canal.png";
+  static const String brook = "assets/icons/watertypes/brook.png";
 }

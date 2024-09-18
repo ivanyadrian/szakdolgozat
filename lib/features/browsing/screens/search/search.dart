@@ -4,14 +4,15 @@ import 'package:szakdolgozat_app/common/widgets/appbar/appbar.dart';
 import 'package:szakdolgozat_app/common/widgets/appbar/tabbar.dart';
 import 'package:szakdolgozat_app/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:szakdolgozat_app/common/widgets/layouts/grid_layout.dart';
+import 'package:szakdolgozat_app/common/widgets/shimmers/shimmer.dart';
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
-import 'package:szakdolgozat_app/common/widgets/watertypes/watertypes_by_county.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/brand/all_brands.dart';
 import 'package:szakdolgozat_app/utils/constans/colors.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 
 import '../../../../common/widgets/brand/brand_card.dart';
+import '../../../../common/widgets/watertypes/watertypes_by_county.dart';
 import '../../controllers/fishingspot_controller.dart';
 import '../brand/brand_products.dart';
 
@@ -20,7 +21,6 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Access the FishingSpotController
     final FishingSpotController controller = Get.put(FishingSpotController());
 
     return Obx(() {
@@ -36,7 +36,6 @@ class SearchScreen extends StatelessWidget {
         );
       }
 
-      // Sort counties alphabetically
       final sortedCounties = List<String>.from(controller.counties)..sort();
 
       return DefaultTabController(
@@ -53,7 +52,7 @@ class SearchScreen extends StatelessWidget {
               return [
                 SliverAppBar(
                   automaticallyImplyLeading: false,
-                  pinned: true, // appbar nem fog mozogni
+                  pinned: true,
                   floating: true,
                   backgroundColor: THelperFunctions.isDarkMode(context)
                       ? TColors.black
@@ -102,18 +101,43 @@ class SearchScreen extends StatelessWidget {
             },
             body: TabBarView(
               children: sortedCounties.map((county) {
-                return Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: TGridLayout(
-                    itemCount: 4,
-                    mainAxisExtent: 80,
-                    itemBuilder: (_, index) {
-                      return TWaterTypesByCounty(
-                        showBorder: true,
-                        onTab: () => Get.to(() => const BrandProducts()),
-                      );
-                    },
-                  ),
+                return FutureBuilder<void>(
+                  future: controller.loadFishingSpotsByCounty(county),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: TShimmerEffect(width: double.infinity, height: double.infinity));
+                    }
+
+                    if (snapshot.hasError) {
+                      return Center(child: Text('Hiba történt: ${snapshot.error}'));
+                    }
+
+                    final waterTypeCounts = controller.countyWaterTypeData[county] ?? {};
+
+                    if (waterTypeCounts.isEmpty) {
+                      return const Center(child: Text('Nincs elérhető adat.'));
+                    }
+
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 25, left: 32, right: 32),
+                      child: ListView(
+                        children: waterTypeCounts.entries.map((entry) {
+                          final waterType = entry.key;
+                          final count = entry.value;
+
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TWaterTypesByCounty(
+                              showBorder: true,
+                              waterType: waterType,
+                              count: count,
+                              onTab: () => Get.to(() => const BrandProducts()),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    );
+                  },
                 );
               }).toList(),
             ),
@@ -123,6 +147,9 @@ class SearchScreen extends StatelessWidget {
     });
   }
 }
+
+
+
 
 
 

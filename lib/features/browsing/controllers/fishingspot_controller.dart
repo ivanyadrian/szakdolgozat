@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,11 +27,48 @@ class FishingSpotController extends GetxController {
   final RxList<XFile> selectedImages = <XFile>[].obs;
 
   final RxList<String> counties = <String>[].obs; // Megyék listája
+  final RxMap<String, Map<String, int>> countyWaterTypeData = <String, Map<String, int>>{}.obs;
 
   @override
   void onInit() {
     super.onInit();
     _loadCounties();
+  }
+
+  Future<void> loadFishingSpotsByCounty(String countyName) async {
+    try {
+      // Lekérjük a megye ID-ját a megye neve alapján
+      final countyQuery = await FirebaseFirestore.instance
+          .collection('Counties')
+          .where('name', isEqualTo: countyName)
+          .limit(1)
+          .get();
+
+      if (countyQuery.docs.isEmpty) {
+        throw Exception('County not found');
+      }
+
+      final countyId = countyQuery.docs.first.id;
+
+      final spotsSnapshot = await FirebaseFirestore.instance
+          .collection('FishingSpots')
+          .where('countyId', isEqualTo: countyId)
+          .get();
+
+      final Map<String, int> waterTypeCounts = {};
+
+      for (var doc in spotsSnapshot.docs) {
+        final spot = doc.data();
+        final waterType = spot['waterType'] as String;
+
+        waterTypeCounts[waterType] = (waterTypeCounts[waterType] ?? 0) + 1;
+      }
+
+      countyWaterTypeData[countyName] = waterTypeCounts;
+    } catch (e) {
+      // Handle errors appropriately
+      throw Exception('Failed to load fishing spots for county: $e');
+    }
   }
 
   Future<void> _loadCounties() async {
