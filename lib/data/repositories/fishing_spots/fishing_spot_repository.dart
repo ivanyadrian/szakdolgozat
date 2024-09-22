@@ -139,4 +139,27 @@ class FishingSpotRepository extends GetxController {
       throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
     }
   }
+
+  /// Megye neve lekérése az ID alapján
+  Future<String> getCountyNameById(String countyId) async {
+    try {
+      final countyDoc = await _db.collection('Counties').doc(countyId).get();
+
+      if (countyDoc.exists) {
+        return countyDoc.data()?['name'] ?? 'Unknown';
+      } else {
+        return 'Unknown';
+      }
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
+    }
+  }
 }

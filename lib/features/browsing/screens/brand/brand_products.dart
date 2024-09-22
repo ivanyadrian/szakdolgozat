@@ -10,7 +10,7 @@ class BrandProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: TAppBar(title: Text('Borsod-Abaúj-Zemplén'), showBackArrow: true),
+      appBar: TAppBar(title: Text('Countyname'), showBackArrow: true),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(TSize.defaultSpace),

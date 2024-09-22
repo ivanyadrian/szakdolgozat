@@ -4,7 +4,6 @@ import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:readmore/readmore.dart';
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/details/widgets/bottom_add_to_card_widget.dart';
-import 'package:szakdolgozat_app/features/browsing/screens/details/widgets/product_Attributes.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/details/widgets/product_detail_image_slider.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/details/widgets/product_meta_data.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/details/widgets/rating_share_widget.dart';
@@ -37,19 +36,22 @@ class ProductDetailScreen extends StatelessWidget {
                     /// -Price, Title, Stack, & Share
                     const TProductMetaData(),
 
+                    /*
                     /// ATTRIBUTES ITT VANNAK AZ OPCIÓK: A, B, C, D ...
                     const TProductAttributes(),
                     const SizedBox(height: TSize.spaceBetweenSections),
 
+
                     /// BOOKING BUTTON
                     SizedBox(width: double.infinity, child: ElevatedButton(onPressed: (){}, child: const Text('Ugrás az időpontokhoz'))),
                     const SizedBox(height: TSize.spaceBetweenSections),
+                    */
 
                     /// Description
                     const TSectionHeading(title: 'Leírás', showActionButton: false),
                     const SizedBox(height: TSize.spaceBetweenSections),
                     const ReadMoreText(
-                      'Egy egy almafa kettő két asddddddddddddddasddddddddddddddddddddddddddddddddddkativa három hátom kiskacsa egy kettő három négy négy póniló',
+                      'countyName', //DINAMIKUSAN KAPJA MEG
                       trimLines: 2,
                       trimMode: TrimMode.Line,
                       trimCollapsedText: '  Több',

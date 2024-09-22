@@ -33,7 +33,7 @@ class TCategoryTab extends StatelessWidget {
               TSectionHeading(title: 'Esetleg tetszhet', onPressed: () {}),
               const SizedBox(height: TSize.spaceBetweenItems),
 
-              TGridLayout(itemCount: 4, itemBuilder: (_, index) => const TProductCardVertical()),
+              TGridLayout(itemCount: 4, itemBuilder: (_, index) => const Column()),
               const SizedBox(height: TSize.spaceBetweenSections),
 
             ],

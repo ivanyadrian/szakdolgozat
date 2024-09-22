@@ -1,88 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:szakdolgozat_app/common/widgets/appbar/appbar.dart';
+
+import '../../../browsing/screens/upload_new_element/model/fishing_spot_model.dart';
+import '../fishing_spot_detailes_screen.dart';
 
 
 class EmptyScreen extends StatelessWidget {
   const EmptyScreen({super.key});
 
-  Future<Map<String, Map<String, int>>> _fetchFishingSpots() async {
+  Future<List<FishingSpotModel>> _fetchFishingSpots() async {
     try {
-      final db = FirebaseFirestore.instance;
+      final snapshot = await FirebaseFirestore.instance
+          .collection('FishingSpots')
+          .get();
 
-      // Fetch all fishing spots and counties
-      final spotsSnapshot = await db.collection('FishingSpots').get();
-      final countiesSnapshot = await db.collection('Counties').get();
-
-      // Map county IDs to names
-      final countiesMap = {
-        for (var doc in countiesSnapshot.docs) doc.id: doc.data()['name'] as String
-      };
-
-      final Map<String, Map<String, int>> result = {};
-
-      for (var doc in spotsSnapshot.docs) {
-        final spot = doc.data();
-        final countyId = spot['countyId'] as String;
-        final waterType = spot['waterType'] as String;
-        final countyName = countiesMap[countyId] ?? 'Ismeretlen Megye';
-
-        if (!result.containsKey(countyName)) {
-          result[countyName] = {};
-        }
-
-        final waterTypeCount = result[countyName]!.putIfAbsent(waterType, () => 0);
-        result[countyName]![waterType] = waterTypeCount + 1;
-      }
-
-      return result;
+      return snapshot.docs.map((doc) => FishingSpotModel.fromSnapshot(doc)).toList();
     } catch (e) {
-      // Log or handle the error appropriately
-      throw Exception('Failed to fetch fishing spots: $e');
+      throw Exception('Failed to load fishing spots: $e');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TAppBar(showBackArrow: true, title: Text('Tesztelés')),
-
-      body: FutureBuilder<Map<String, Map<String, int>>>(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text('Tesztelés'),
+      ),
+      body: FutureBuilder<List<FishingSpotModel>>(
         future: _fetchFishingSpots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (snapshot.hasError) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
             return Center(child: Text('Hiba történt: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('Nincsenek horgászhelyek'));
+          } else {
+            final fishingSpots = snapshot.data!;
+            return ListView.builder(
+              itemCount: fishingSpots.length,
+              itemBuilder: (context, index) {
+                final spot = fishingSpots[index];
+                return ListTile(
+                  leading: spot.imageUrls.isNotEmpty
+                      ? Image.network(spot.imageUrls.first, width: 50, height: 50, fit: BoxFit.cover)
+                      : Icon(Icons.photo, size: 50),
+                  title: Text(spot.placeName),
+                  subtitle: Text('Víztípus: ${spot.waterType}, Megye: ${spot.countyId}'),
+                  trailing: Icon(Icons.arrow_forward),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => FishingSpotDetailScreen(fishingSpot: spot),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
           }
-
-          final data = snapshot.data ?? {};
-
-          if (data.isEmpty) {
-            return const Center(child: Text('Nincs elérhető adat.'));
-          }
-
-          return ListView(
-            children: data.entries.map((countyEntry) {
-              final countyName = countyEntry.key;
-              final waterTypes = countyEntry.value;
-
-              return ExpansionTile(
-                title: Text('Megye: $countyName'),
-                children: waterTypes.entries.map((waterTypeEntry) {
-                  final waterType = waterTypeEntry.key;
-                  final count = waterTypeEntry.value;
-
-                  return ListTile(
-                    title: Text('Víz típus: $waterType'),
-                    trailing: Text(count.toString()),
-                  );
-                }).toList(),
-              );
-            }).toList(),
-          );
         },
       ),
     );
