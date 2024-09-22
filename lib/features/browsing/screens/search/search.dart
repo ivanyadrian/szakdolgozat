@@ -78,16 +78,20 @@ class SearchScreen extends StatelessWidget {
                           onPressed: () => Get.to(() => const AllBrandsScreen()),
                         ),
                         const SizedBox(height: TSize.spaceBetweenItems / 1.5),
+
                         TGridLayout(
-                          itemCount: 4,
+                          itemCount: 4, // a counties list méretének megfelelően
                           mainAxisExtent: 80,
                           itemBuilder: (_, index) {
+                            final county = sortedCounties[index]; // Minden elemhez hozzárendelünk egy megyét
+
                             return TBrandCard(
                               showBorder: true,
-                              onTab: () => Get.to(() => const BrandProducts()),
+                              onTab: () => Get.to(() => BrandProducts(countyName: county)), // A megfelelő county név átadása
                             );
                           },
                         ),
+
                       ],
                     ),
                   ),
@@ -131,7 +135,7 @@ class SearchScreen extends StatelessWidget {
                               showBorder: true,
                               waterType: waterType,
                               count: count,
-                              onTab: () => Get.to(() => const BrandProducts()),
+                              onTab: () => Get.to(() => BrandProducts(countyName: county)),
                             ),
                           );
                         }).toList(),

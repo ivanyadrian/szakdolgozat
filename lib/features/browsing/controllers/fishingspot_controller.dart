@@ -45,7 +45,7 @@ class FishingSpotController extends GetxController {
           .get();
 
       if (countyQuery.docs.isEmpty) {
-        throw Exception('County not found');
+        throw Exception('Megye nem található');
       }
 
       final countyId = countyQuery.docs.first.id;
@@ -67,7 +67,7 @@ class FishingSpotController extends GetxController {
       countyWaterTypeData[countyName] = waterTypeCounts;
     } catch (e) {
       // Handle errors appropriately
-      throw Exception('Failed to load fishing spots for county: $e');
+      throw Exception('Nem sikerült betölteni a helyeket a megyék alapján: $e');
     }
   }
 
@@ -151,6 +151,21 @@ class FishingSpotController extends GetxController {
     } catch (e) {
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Hiba', message: e.toString(), duration: 2);
+    }
+  }
+
+  // Ezt a metódust kell kiegészíteni, hogy szűrje a horgászhelyeket megye és víztípus alapján
+  Future<List<FishingSpotModel>> loadFishingSpotsByCountyAndWaterType(String county, String waterType) async {
+    try {
+      final snapshot = await FirebaseFirestore.instance
+          .collection('FishingSpots')
+          .where('county', isEqualTo: county) // Szűrés megyére
+          .where('waterType', isEqualTo: waterType) // Szűrés víztípusra
+          .get();
+
+      return snapshot.docs.map((doc) => FishingSpotModel.fromSnapshot(doc)).toList();
+    } catch (e) {
+      throw Exception('Nem sikerült betölteni a horgászhelyeket: $e');
     }
   }
 }
