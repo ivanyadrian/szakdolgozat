@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:szakdolgozat_app/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:szakdolgozat_app/features/browsing/screens/details/details.dart';
 import 'package:szakdolgozat_app/features/personalization/screens/fishing_spot_detailes_screen.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 import '../../../../features/browsing/screens/upload_new_element/model/fishing_spot_model.dart';
@@ -88,7 +87,7 @@ class TProductCardVertical extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        TProductTitleText(title: placeName, smallSize: true),
+                        Flexible(child: TProductTitleText(title: placeName, smallSize: true, maxLines: 1)),
                       ],
                     ),
                   ),
@@ -110,7 +109,7 @@ class TProductCardVertical extends StatelessWidget {
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(left: TSize.sm),
-                    child: Text(settlementName, style: Theme.of(context).textTheme.titleLarge, maxLines: 2, overflow: TextOverflow.ellipsis),
+                    child: Text(settlementName, style: Theme.of(context).textTheme.titleLarge, maxLines: 1, overflow: TextOverflow.ellipsis),
                   ),
                 ),
                 Container(
