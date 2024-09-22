@@ -87,7 +87,7 @@ class SearchScreen extends StatelessWidget {
 
                             return TBrandCard(
                               showBorder: true,
-                              onTab: () => Get.to(() => BrandProducts(countyName: county)), // A megfelelő county név átadása
+                              onTab: () => Get.to(() => BrandProducts(countyName: county, waterType: 'asd',)), // A megfelelő county név átadása
                             );
                           },
                         ),
@@ -135,8 +135,11 @@ class SearchScreen extends StatelessWidget {
                               showBorder: true,
                               waterType: waterType,
                               count: count,
-                              onTab: () => Get.to(() => BrandProducts(countyName: county)),
-                            ),
+                              onTab: () => Get.to(() => BrandProducts(
+                                countyName: county,
+                                waterType: waterType, // Víztípus átadása
+                              )),
+                            )
                           );
                         }).toList(),
                       ),

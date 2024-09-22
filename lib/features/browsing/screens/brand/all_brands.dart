@@ -27,7 +27,7 @@ class AllBrandsScreen extends StatelessWidget {
               TGridLayout(
                 itemCount: 10,
                 mainAxisExtent: 80,
-                itemBuilder: (context, index) => TBrandCard(showBorder: true, onTab: () => Get.to(() => const BrandProducts(countyName: 'asd',)),
+                itemBuilder: (context, index) => TBrandCard(showBorder: true, onTab: () => Get.to(() => const BrandProducts(countyName: 'asd', waterType: 'asd',)),
                 ),
               ),
             ],

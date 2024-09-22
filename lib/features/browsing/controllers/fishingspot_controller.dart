@@ -154,18 +154,31 @@ class FishingSpotController extends GetxController {
     }
   }
 
-  // Ezt a metódust kell kiegészíteni, hogy szűrje a horgászhelyeket megye és víztípus alapján
-  Future<List<FishingSpotModel>> loadFishingSpotsByCountyAndWaterType(String county, String waterType) async {
+  Future<List<FishingSpotModel>> getFishingSpotsByCountyAndWaterType(String countyName, String waterType) async {
     try {
-      final snapshot = await FirebaseFirestore.instance
-          .collection('FishingSpots')
-          .where('county', isEqualTo: county) // Szűrés megyére
-          .where('waterType', isEqualTo: waterType) // Szűrés víztípusra
+      // Megye ID lekérése
+      final countyQuery = await FirebaseFirestore.instance
+          .collection('Counties')
+          .where('name', isEqualTo: countyName)
+          .limit(1)
           .get();
 
-      return snapshot.docs.map((doc) => FishingSpotModel.fromSnapshot(doc)).toList();
+      if (countyQuery.docs.isEmpty) {
+        throw Exception('Megye nem található');
+      }
+
+      final countyId = countyQuery.docs.first.id;
+
+      // Horgászhelyek lekérdezése, szűrés megye és víztípus alapján
+      final spotsSnapshot = await FirebaseFirestore.instance
+          .collection('FishingSpots')
+          .where('countyId', isEqualTo: countyId)
+          .where('waterType', isEqualTo: waterType)
+          .get();
+
+      return spotsSnapshot.docs.map((doc) => FishingSpotModel.fromSnapshot(doc)).toList();
     } catch (e) {
-      throw Exception('Nem sikerült betölteni a horgászhelyeket: $e');
+      throw Exception('Hiba a helyek lekérésekor: $e');
     }
   }
 }
