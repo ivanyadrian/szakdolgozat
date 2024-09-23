@@ -6,6 +6,14 @@ import '../../../utils/constans/colors.dart';
 import '../../../utils/constans/size.dart';
 import '../../../utils/helpers/helper_functions.dart';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:szakdolgozat_app/common/widgets/shimmers/shimmer.dart';
+
+import '../../../utils/constans/colors.dart';
+import '../../../utils/constans/size.dart';
+import '../../../utils/helpers/helper_functions.dart';
+
 class TCircularImage extends StatelessWidget {
   const TCircularImage({
     super.key,
@@ -23,7 +31,7 @@ class TCircularImage extends StatelessWidget {
   final String image;
   final bool isNetworkImage;
   final Color? overlayColor;
-  final Color? backgroundColor;
+  final Color? backgroundColor; // Módosítás: háttérszín
   final double width, height, padding;
 
   @override
@@ -33,13 +41,13 @@ class TCircularImage extends StatelessWidget {
       height: height,
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-        // if image background color is null then switch it to light and dark mode color design
-        color: THelperFunctions.isDarkMode(context)
-            ? TColors.black
-            : TColors.white,
+        color:
+            backgroundColor ?? // Ha nincs háttérszín, használd az alapértelmezett színt
+                (THelperFunctions.isDarkMode(context)
+                    ? TColors.black
+                    : TColors.white),
         borderRadius: BorderRadius.circular(100),
       ),
-
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
         child: Center(
@@ -48,7 +56,8 @@ class TCircularImage extends StatelessWidget {
                   fit: fit,
                   color: overlayColor,
                   imageUrl: image,
-                  progressIndicatorBuilder: (context, url, downloadProgress) => const TShimmerEffect(width: 80, height: 80, radius: 80),
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      const TShimmerEffect(width: 80, height: 80, radius: 80),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 )
               : Image(

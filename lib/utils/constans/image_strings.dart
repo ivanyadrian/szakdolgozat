@@ -25,7 +25,7 @@ class TImages {
   static const String bacs_kiskun = "assets/counties/bacs-kiskun.png";
   static const String baranya = "assets/counties/baranya.png";
   static const String bekes = "assets/counties/bekes.png";
-  static const String borsod_abauj_zemplen = "assets/counties/borsod-abaúj-zemplén.png";
+  static const String borsod_abauj_zemplen = "assets/counties/borsod-abauj-zemplen.png";
   static const String csongrad = "assets/counties/csongrad.png";
   static const String fejer = "assets/counties/fejer.png";
   static const String gyor_moson_sopron = "assets/counties/gyor-moson-sopron.png";

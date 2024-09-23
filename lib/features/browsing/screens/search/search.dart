@@ -7,12 +7,15 @@ import 'package:szakdolgozat_app/common/widgets/layouts/grid_layout.dart';
 import 'package:szakdolgozat_app/common/widgets/shimmers/shimmer.dart';
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/brand/all_brands.dart';
+import 'package:szakdolgozat_app/features/browsing/screens/brand/all_spots_by_county.dart';
 import 'package:szakdolgozat_app/utils/constans/colors.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 
 import '../../../../common/widgets/brand/brand_card.dart';
+import '../../../../common/widgets/text/t_brand_title_text_with_verified_icon.dart';
 import '../../../../common/widgets/watertypes/watertypes_by_county.dart';
+import '../../../../utils/constans/enums.dart';
 import '../../controllers/fishingspot_controller.dart';
 import '../brand/brand_products.dart';
 
@@ -80,14 +83,27 @@ class SearchScreen extends StatelessWidget {
                         const SizedBox(height: TSize.spaceBetweenItems / 1.5),
 
                         TGridLayout(
-                          itemCount: 4, // a counties list méretének megfelelően
+                          itemCount: 4,  // Dinamikusan a megyék száma alapján
                           mainAxisExtent: 80,
                           itemBuilder: (_, index) {
-                            final county = sortedCounties[index]; // Minden elemhez hozzárendelünk egy megyét
+                            final county = sortedCounties[index];  // A megyéket soroljuk
 
-                            return TBrandCard(
-                              showBorder: true,
-                              onTab: () => Get.to(() => BrandProducts(countyName: county, waterType: 'asd',)), // A megfelelő county név átadása
+                            return FutureBuilder<int>(
+                              future: controller.getFishingSpotCountByCounty(county),  // Helyek számának lekérése
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return const Center(child: TShimmerEffect(width: double.infinity, height: double.infinity));
+                                }
+
+                                final spotCount = snapshot.data ?? 0;  // Ha nincs adat, akkor 0
+
+                                return TBrandCard(
+                                  showBorder: true,
+                                  countyName: county,  // A megye neve
+                                  spotCount: spotCount,  // A helyek száma
+                                  onTab: () => Get.to(() => CountyFishingSpotsScreen(countyName: county)),  // A megfelelő megye átadása
+                                );
+                              },
                             );
                           },
                         ),

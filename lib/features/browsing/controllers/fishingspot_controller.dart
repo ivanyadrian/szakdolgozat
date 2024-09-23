@@ -181,4 +181,57 @@ class FishingSpotController extends GetxController {
       throw Exception('Hiba a helyek lekérésekor: $e');
     }
   }
+
+  // Dynamically load fishing spots for a specific county
+  Future<List<FishingSpotModel>> getFishingSpotsByCounty(String countyName) async {
+    try {
+      // Megye ID lekérése
+      final countyQuery = await FirebaseFirestore.instance
+          .collection('Counties')
+          .where('name', isEqualTo: countyName)
+          .limit(1)
+          .get();
+
+      if (countyQuery.docs.isEmpty) {
+        throw Exception('Megye nem található');
+      }
+
+      final countyId = countyQuery.docs.first.id;
+
+      // Horgászhelyek lekérdezése, megye alapján
+      final spotsSnapshot = await FirebaseFirestore.instance
+          .collection('FishingSpots')
+          .where('countyId', isEqualTo: countyId)
+          .get();
+
+      return spotsSnapshot.docs.map((doc) => FishingSpotModel.fromSnapshot(doc)).toList();
+    } catch (e) {
+      throw Exception('Hiba a helyek lekérésekor: $e');
+    }
+  }
+
+  Future<int> getFishingSpotCountByCounty(String countyName) async {
+    try {
+      final countyQuery = await FirebaseFirestore.instance
+          .collection('Counties')
+          .where('name', isEqualTo: countyName)
+          .limit(1)
+          .get();
+
+      if (countyQuery.docs.isEmpty) {
+        throw Exception('Megye nem található');
+      }
+
+      final countyId = countyQuery.docs.first.id;
+
+      final spotsSnapshot = await FirebaseFirestore.instance
+          .collection('FishingSpots')
+          .where('countyId', isEqualTo: countyId)
+          .get();
+
+      return spotsSnapshot.docs.length; // Horgászhelyek száma
+    } catch (e) {
+      throw Exception('Hiba történt a helyek lekérésekor: $e');
+    }
+  }
 }
