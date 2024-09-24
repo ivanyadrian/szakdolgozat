@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:szakdolgozat_app/common/widgets/layouts/grid_layout.dart';
 import 'package:szakdolgozat_app/common/widgets/products/product_cards/product_card_vertical.dart';
@@ -24,6 +25,7 @@ class TCategoryTab extends StatelessWidget {
           child: Column(
             children: [
 
+
               /// --BRANDS
               const TBrandShowcase(images: [TImages.somogy, TImages.gyor_moson_sopron, TImages.budapest]),
               const TBrandShowcase(images: [TImages.somogy, TImages.gyor_moson_sopron, TImages.budapest]),
@@ -43,3 +45,5 @@ class TCategoryTab extends StatelessWidget {
     );
   }
 }
+
+ */
