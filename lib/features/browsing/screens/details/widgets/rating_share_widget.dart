@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:szakdolgozat_app/common/widgets/text/product_title_text.dart';
+import 'package:szakdolgozat_app/common/widgets/text/t_brand_title_text_with_verified_icon.dart';
+import 'package:szakdolgozat_app/utils/constans/enums.dart';
 
 import '../../../../../utils/constans/size.dart';
 
@@ -14,6 +17,19 @@ class TRatingAndShare extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        Row(
+          children: [
+            Text(
+              'Cica-tó',
+              style: TextStyle(
+                fontSize: 24.0,
+                fontFamily: 'YourFontFamily',
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          ],
+        ),
+
         /// Rating
         Row(
           children: [
@@ -27,11 +43,9 @@ class TRatingAndShare extends StatelessWidget {
                 ],
               ),
             ),
+            /// Share Button
+            IconButton(onPressed: () {}, icon: const Icon(Icons.share, size: TSize.iconMd),),
           ],
-        ),
-
-        /// Share Button
-        IconButton(onPressed: () {}, icon: const Icon(Icons.share, size: TSize.iconMd),
         ),
       ],
     );

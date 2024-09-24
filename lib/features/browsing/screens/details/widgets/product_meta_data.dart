@@ -15,55 +15,16 @@ class TProductMetaData extends StatelessWidget {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        /*
-        /// PRICE & SALE PRICE
-        Row(
-          children: [
-            /// SALE TAG
-            TRoundedContainer(
-              radius: TSize.sm,
-              backgroundColor: TColors.secondaryColor.withOpacity(0.8),
-              padding: const EdgeInsets.symmetric(horizontal: TSize.sm, vertical: TSize.xs),
-              child: Text('25%', style: Theme.of(context).textTheme.labelLarge!.apply(color: TColors.black),
-              ),
-            ),
-            const SizedBox(width: TSize.spaceBetweenItems),
-
-            /// PRICE
-            Text('\$250', style: Theme.of(context).textTheme.titleSmall!.apply(decoration: TextDecoration.lineThrough),),
-            const SizedBox(width: TSize.spaceBetweenItems),
-            const TProductPriceText(price: '175', isLarge: true),
-          ],
-        ),
-        const SizedBox(height: TSize.spaceBetweenItems * 1.5),
-         */
-
-
-        /// TITLE
 
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            TBrandTitleWithVerifiedIcon(title: 'Tokaj Kovács-tó', brandTextSizes: TextSizes.medium),
-            TProductTitleText(title: 'Borsod-Abaúj-Zemplén'),
+            TBrandTitleWithVerifiedIcon(title: 'Tokaj', brandTextSizes: TextSizes.small),
+            TBrandTitleWithVerifiedIcon(title: 'Borsod-Abaúj-Zemplén', brandTextSizes: TextSizes.small),
 
           ],
         ),
         SizedBox(height: TSize.spaceBetweenItems),
-
-
-        /// BRAND
-
-        /// STACK STATUS
-        /*
-        Row(
-          children: [
-            const TProductTitleText(title: 'Státusz: '),
-            const SizedBox(width: TSize.spaceBetweenItems),
-            Text('Van szabad időpont a héten', style: Theme.of(context).textTheme.titleMedium),
-          ],
-        ),
-        */
       ],
     );
   }

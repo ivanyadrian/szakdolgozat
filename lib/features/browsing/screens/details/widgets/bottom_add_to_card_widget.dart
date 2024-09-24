@@ -4,8 +4,8 @@ import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 
 import '../../../../../utils/constans/size.dart';
 
-class TBottomAddToCart extends StatelessWidget {
-  const TBottomAddToCart({super.key});
+class TOpenMapButton extends StatelessWidget {
+  const TOpenMapButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,45 +20,22 @@ class TBottomAddToCart extends StatelessWidget {
           topRight: Radius.circular(TSize.cardRadiusLg),
         ),
       ),
-
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Az elemek a széleken helyezkednek el
         children: [
-          /*
-          Row(
-            children: [
-
-              const TCircularIcon(icon: Iconsax.map_1_copy,
-              backgroundColor: TColors.darkerGrey,
-              width: 40,
-              height: 40,
-              color: TColors.white,
-              ),
-              const SizedBox(width: TSize.spaceBetweenItems),
-
-              Text('Lokáció', style: Theme.of(context).textTheme.titleMedium),
-              const SizedBox(width: TSize.spaceBetweenItems),
-
-              const TCircularIcon(icon: Iconsax.add_copy,
-                backgroundColor: TColors.black,
-                width: 40,
-                height: 40,
-                color: TColors.white,
-              ),
-            ],
-          ),
-          */
-
+          const Text('12.736, 31.123'), // Az íz szöveg
           ElevatedButton(
-              onPressed: (){},
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(TSize.md),
-                backgroundColor: TColors.black,
-                side: const BorderSide(color: TColors.black),
-              ),
-              child: const Text('Térkép megnyitása'))
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.all(TSize.md),
+              backgroundColor: TColors.black,
+              side: const BorderSide(color: TColors.black),
+            ),
+            child: const Text('Térkép megnyitása'),
+          ),
         ],
       ),
     );
   }
 }
+
