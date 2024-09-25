@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:readmore/readmore.dart';
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/details/widgets/bottom_add_to_card_widget.dart';
@@ -11,10 +9,12 @@ import 'package:szakdolgozat_app/utils/constans/colors.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 
-import '../product_reviews/product_reviews.dart';
+import '../upload_new_element/model/fishing_spot_model.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({super.key});
+  final FishingSpotModel fishingSpot; // Add the fishing spot data
+
+  const ProductDetailScreen({required this.fishingSpot, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             /// kiválasztott helyre koppintás utáni képek
-            const TProductImageSlider(),
+            TProductImageSlider(imageUrls: fishingSpot.imageUrls), // Pass the image URLs
 
             /// Product Details
             Padding(
@@ -37,76 +37,47 @@ class ProductDetailScreen extends StatelessWidget {
               child: Column(
                 children: [
                   /// - rating & share ICON / BUTTON
-                  const TRatingAndShare(),
+                  TRatingAndShare(placeName: fishingSpot.placeName), // Pass the place name
                   const Divider(),
 
                   /// -Price, Title, Stack, & Share
-                  const TProductMetaData(),
+                  TProductMetaData(
+                    settlementName: fishingSpot.settlementName,
+                    countyName: fishingSpot.countyName,
+                  ), // Pass settlement and county data
 
                   const SizedBox(height: TSize.spaceBetweenSections),
-                  /// Típus Box
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(TSize.md),
-                    decoration: BoxDecoration(
-                        color: dark? TColors.black : TColors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: dark? TColors.darkerGrey : TColors.grey, width: 2)
 
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Típusa: ',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold, // Make it bold
-                          ),
-                        ),
-                        Text('Tó'),
-                      ],
-                    ),
+                  /// Típus Box
+                  _buildInfoBox(
+                    context: context,
+                    title: 'Típusa',
+                    value: fishingSpot.waterType, // Pass the water type
                   ),
 
                   const SizedBox(height: TSize.spaceBetweenItems),
 
                   /// Horgászatra kijelölt helyek száma Box
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(TSize.md),
-                    decoration: BoxDecoration(
-                        color: dark? TColors.black : TColors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: dark? TColors.darkerGrey : TColors.grey, width: 2)
-
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Horgászatra kijelölt helyek száma:',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold, // Make it bold
-                          ),
-                        ),
-                        Text('17 db'),
-                      ],
-                    ),
+                  _buildInfoBox(
+                    context: context,
+                    title: 'Horgászatra kijelölt helyek száma',
+                    value: fishingSpot.numberOfSpots.toString(), // Pass the number of spots
                   ),
 
                   const SizedBox(height: TSize.spaceBetweenItems),
-
 
                   /// Leírás Box
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(TSize.defaultSpace),
                     decoration: BoxDecoration(
-                      color: dark? TColors.black : TColors.white,
+                      color: dark ? TColors.black : TColors.white,
                       borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: dark? TColors.darkerGrey : TColors.grey, width: 2)
+                      border: Border.all(
+                        color: dark ? TColors.darkerGrey : TColors.grey,
+                        width: 2,
+                      ),
                     ),
-
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -115,32 +86,20 @@ class ProductDetailScreen extends StatelessWidget {
                           showActionButton: false,
                         ),
                         const SizedBox(height: TSize.spaceBetweenItems),
-
-                        const ReadMoreText(
-                          'aslfjaijsdbldsklbksdébs-éblsádbásdoiwufioewifjweioweiuiwejwnvklewjoivéhwrubhfbJKHABHALBHFDHBFDHBDAKJBKJBLB',
+                        ReadMoreText(
+                          fishingSpot.description, // Pass the description
                           trimLines: 2,
                           trimMode: TrimMode.Line,
                           trimCollapsedText: '  Több',
                           trimExpandedText: '  Kevesebb',
-                          moreStyle: TextStyle(
+                          moreStyle: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.w800),
-                          lessStyle: TextStyle(
+                          lessStyle: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.w800),
                         ),
                       ],
                     ),
                   ),
-
-                  /*
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const TSectionHeading(title: 'Vélemények (375)', showActionButton: false),
-                      IconButton(icon: const Icon(Iconsax.arrow_right_3_copy, size: 18), onPressed: () => Get.to(() => const ProductReviewsScreen())),
-                    ],
-                  ),
-                  const SizedBox(height: TSize.spaceBetweenSections),
-                  */
                 ],
               ),
             ),
@@ -149,5 +108,37 @@ class ProductDetailScreen extends StatelessWidget {
       ),
     );
   }
+
+  /// Helper method to reduce repetition for info boxes
+  Widget _buildInfoBox({
+    required BuildContext context,
+    required String title,
+    required String value,
+  }) {
+    final dark = THelperFunctions.isDarkMode(context);
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(TSize.md),
+      decoration: BoxDecoration(
+        color: dark ? TColors.black : TColors.white,
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(
+          color: dark ? TColors.darkerGrey : TColors.grey,
+          width: 2,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            '$title: ',
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(value),
+        ],
+      ),
+    );
+  }
 }
+
 

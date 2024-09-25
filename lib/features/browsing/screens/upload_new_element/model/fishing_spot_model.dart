@@ -9,7 +9,9 @@ class FishingSpotModel {
   int numberOfSpots;
   String uploadedBy;
   List<String> imageUrls;
-  String countyId; // Új mező a megyéhez való hivatkozáshoz
+  String countyId; // Megye ID-ja
+  String countyName; // Megye neve
+  String description; // Új mező a leíráshoz
 
   FishingSpotModel({
     required this.id,
@@ -21,11 +23,15 @@ class FishingSpotModel {
     required this.uploadedBy,
     required this.imageUrls,
     required this.countyId, // Megye ID-ja
+    required this.countyName, // Megye neve
+    required this.description, // Megye ID-ja
   });
 
-  /// copyWith metódus a countyId frissítéséhez
+  // Update the copyWith method to include countyName
   FishingSpotModel copyWith({
     String? countyId,
+    String? countyName,
+    String? description,
   }) {
     return FishingSpotModel(
       id: this.id,
@@ -37,6 +43,8 @@ class FishingSpotModel {
       uploadedBy: this.uploadedBy,
       imageUrls: this.imageUrls,
       countyId: countyId ?? this.countyId,
+      countyName: countyName ?? this.countyName, // Update countyName
+      description: description ?? this.description, // Update description
     );
   }
 
@@ -49,7 +57,9 @@ class FishingSpotModel {
       'numberOfSpots': numberOfSpots,
       'uploadedBy': uploadedBy,
       'imageUrls': imageUrls,
-      'countyId': countyId, // Megye ID-ja
+      'countyId': countyId,
+      'countyName': countyName, // Add countyName to JSON
+      'description': description, // Add description to JSON
     };
   }
 
@@ -64,8 +74,11 @@ class FishingSpotModel {
       numberOfSpots: data['numberOfSpots'] ?? 0,
       uploadedBy: data['uploadedBy'] ?? '',
       imageUrls: List<String>.from(data['imageUrls'] ?? []),
-      countyId: data['countyId'] ?? '', // Megye ID-ja
+      countyId: data['countyId'] ?? '',
+      countyName: data['countyName'] ?? '', // Get countyName from data
+      description: data['description'] ?? 'Nincs megadva leírás', // Add description from data
     );
   }
 }
+
 

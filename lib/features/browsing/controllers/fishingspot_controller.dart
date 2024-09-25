@@ -19,6 +19,7 @@ class FishingSpotController extends GetxController {
   final county = TextEditingController(); // Megye neve
   final gpsCoordinates = TextEditingController();
   final numberOfSpots = TextEditingController();
+  final description =  TextEditingController();
   final userController = UserController.instance;
   final fishingSpotRepository = Get.put(FishingSpotRepository());
   final GlobalKey<FormState> fishingSpotFormKey = GlobalKey<FormState>();
@@ -116,12 +117,14 @@ class FishingSpotController extends GetxController {
         return;
       }
 
-
       if (selectedImages.isEmpty) {
         TFullScreenLoader.stopLoading();
         TLoaders.warningSnackBar(title: 'Hiba', message: 'Válassz ki legalább egy képet', duration: 2);
         return;
       }
+
+      // Fetch county name
+      final countyName = await fishingSpotRepository.getCountyNameById(county.text.trim());
 
       final fishingSpot = FishingSpotModel(
         id: '',
@@ -133,6 +136,8 @@ class FishingSpotController extends GetxController {
         uploadedBy: userController.user.value.username,
         imageUrls: [],
         countyId: county.text.trim(),
+        description: description.text.trim(), // Add description here
+        countyName: countyName, // Add county name here
       );
 
       final spotId = await fishingSpotRepository.createFishingSpot(fishingSpot);

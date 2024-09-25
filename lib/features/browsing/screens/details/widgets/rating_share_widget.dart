@@ -8,9 +8,9 @@ import '../../../../../utils/constans/size.dart';
 
 
 class TRatingAndShare extends StatelessWidget {
-  const TRatingAndShare({
-    super.key,
-  });
+  final String placeName; // Add placeName as a parameter
+
+  const TRatingAndShare({required this.placeName, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +20,14 @@ class TRatingAndShare extends StatelessWidget {
         Row(
           children: [
             Text(
-              'Cica-tó',
-              style: TextStyle(
+              placeName, // Use the placeName here
+              style: const TextStyle(
                 fontSize: 24.0,
-                fontFamily: 'YourFontFamily',
                 fontWeight: FontWeight.bold,
               ),
-            )
+            ),
           ],
         ),
-
         /// Rating
         Row(
           children: [
@@ -38,13 +36,17 @@ class TRatingAndShare extends StatelessWidget {
             Text.rich(
               TextSpan(
                 children: [
-                  TextSpan(text: '5.0', style: Theme.of(context).textTheme.bodyLarge),
+                  TextSpan(
+                      text: '5.0', style: Theme.of(context).textTheme.bodyLarge),
                   const TextSpan(text: ' (375)'),
                 ],
               ),
             ),
             /// Share Button
-            IconButton(onPressed: () {}, icon: const Icon(Icons.share, size: TSize.iconMd),),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.share, size: TSize.iconMd),
+            ),
           ],
         ),
       ],

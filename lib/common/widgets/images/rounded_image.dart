@@ -54,7 +54,7 @@ class TRoundedImage extends StatelessWidget {
                       radius: applyImageRadius ? borderRadius : 0,
                     );
                   } else if (snapshot.hasError) {
-                    return Center(child: Text('Error loading image'));
+                    return Center(child: Text('Hiba a kép betöltése közben'));
                   } else {
                     return ClipRRect(
                       borderRadius: applyImageRadius

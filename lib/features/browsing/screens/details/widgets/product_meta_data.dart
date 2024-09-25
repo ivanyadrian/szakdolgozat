@@ -5,26 +5,34 @@ import 'package:szakdolgozat_app/utils/constans/enums.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 
 class TProductMetaData extends StatelessWidget {
-  const TProductMetaData({super.key});
+  final String settlementName;
+  final String countyName;
+
+  const TProductMetaData({
+    required this.settlementName,
+    required this.countyName,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-
-    //final dark = THelperFunctions.isDarkMode(context);
-
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            TBrandTitleWithVerifiedIcon(title: 'Tokaj', brandTextSizes: TextSizes.small),
-            TBrandTitleWithVerifiedIcon(title: 'Borsod-Abaúj-Zemplén', brandTextSizes: TextSizes.small),
-
+            TBrandTitleWithVerifiedIcon(
+              title: settlementName, // Use settlementName here
+              brandTextSizes: TextSizes.small,
+            ),
+            TBrandTitleWithVerifiedIcon(
+              title: countyName, // Use countyName here
+              brandTextSizes: TextSizes.small,
+            ),
           ],
         ),
-        SizedBox(height: TSize.spaceBetweenItems),
+        const SizedBox(height: TSize.spaceBetweenItems),
       ],
     );
   }

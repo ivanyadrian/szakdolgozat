@@ -46,7 +46,7 @@ class CountyFishingSpotsScreen extends StatelessWidget {
                     imageUrl: spot.imageUrls.isNotEmpty ? spot.imageUrls.first : '',
                     placeName: spot.placeName,
                     waterType: spot.waterType,
-                    countyName: countyName,
+                    countyName: spot.countyName, // Használjuk a FishingSpotModel-ból
                     settlementName: spot.settlementName,
                     fishingSpot: spot, // A horgászhely objektuma
                   );

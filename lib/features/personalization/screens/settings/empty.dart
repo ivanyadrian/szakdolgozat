@@ -11,7 +11,7 @@ class EmptyScreen extends StatelessWidget {
     return Scaffold(
       appBar: TAppBar(title: Text('Tesztelés'), showBackArrow: true),
       body: Center(
-        child: ProductDetailScreen(),
+        child: Container(),
       ),
     );
   }

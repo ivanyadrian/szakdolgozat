@@ -112,6 +112,20 @@ class TNewFishingSpotForm extends StatelessWidget {
 
           const SizedBox(height: TSize.spaceBetweenInputFields * 2),
 
+          /// Leírás (Description)
+          TextFormField(
+            controller: controller.description, // Add a TextEditingController for the description
+            //validator: (value) => TValidator.validEmptyText('Leírás', value),
+            maxLines: 4, // Set max lines to make the field taller
+            decoration: const InputDecoration(
+              labelText: 'Leírás',
+              prefixIcon: Icon(Icons.description),
+              border: OutlineInputBorder(), // Optional: Add a border for better visibility
+            ),
+          ),
+
+          const SizedBox(height: TSize.spaceBetweenInputFields * 2),
+
           // Image picker
           Obx(() {
             final images = controller.selectedImages;

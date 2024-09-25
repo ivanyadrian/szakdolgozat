@@ -32,9 +32,14 @@ class FishingSpotDetailScreen extends StatelessWidget {
             SizedBox(height: 16),
             Text('Place Name: ${fishingSpot.placeName}', style: Theme.of(context).textTheme.headlineMedium),
             Text('Water Type: ${fishingSpot.waterType}', style: Theme.of(context).textTheme.bodyMedium),
-            Text('County: ${fishingSpot.countyId}', style: Theme.of(context).textTheme.bodyMedium),
+            Text('County: ${fishingSpot.countyName}', style: Theme.of(context).textTheme.bodyMedium),
             Text('Settlement Name: ${fishingSpot.settlementName}', style: Theme.of(context).textTheme.bodyMedium),
             Text('Uploaded By: ${fishingSpot.uploadedBy}', style: Theme.of(context).textTheme.bodyMedium),
+            Text('GPS Coordinate: ${fishingSpot.gpsCoordinates}', style: Theme.of(context).textTheme.bodyMedium),
+            Text('Number of spots: ${fishingSpot.numberOfSpots}', style: Theme.of(context).textTheme.bodyMedium),
+            Text('Description: ${fishingSpot.description}', style: Theme.of(context).textTheme.bodyMedium),
+
+
             SizedBox(height: 16),
             // Additional details can be added here
           ],

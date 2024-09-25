@@ -23,9 +23,10 @@ class FishingSpotRepository extends GetxController {
     try {
       // Ellenőrizzük, hogy a megye létezik-e
       final countyId = await _checkOrCreateCounty(spot.countyId);
+      final countyName = spot.countyId; // Feltételezzük, hogy a megye neve itt van
 
-      // Frissítjük a spot objektumot a countyId-val
-      spot = spot.copyWith(countyId: countyId);
+      // Frissítjük a spot objektumot a countyId-val és a countyName-nel
+      spot = spot.copyWith(countyId: countyId, countyName: countyName);
 
       // FishingSpot hozzáadása a 'FishingSpots' kollekcióhoz
       final fishingSpotRef = _db.collection('FishingSpots').doc();

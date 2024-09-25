@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:szakdolgozat_app/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:szakdolgozat_app/features/personalization/screens/fishing_spot_detailes_screen.dart';
+import 'package:szakdolgozat_app/features/browsing/screens/details/details.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 import '../../../../features/browsing/screens/upload_new_element/model/fishing_spot_model.dart';
 import '../../../../utils/constans/colors.dart';
@@ -36,7 +36,7 @@ class TProductCardVertical extends StatelessWidget {
     final dark = THelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: () => Get.to(() => FishingSpotDetailScreen(fishingSpot: fishingSpot)),
+      onTap: () => Get.to(() => ProductDetailScreen(fishingSpot: fishingSpot)),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(2),
