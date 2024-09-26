@@ -17,7 +17,7 @@ import '../../../utils/helpers/helper_functions.dart';
 class TCircularImage extends StatelessWidget {
   const TCircularImage({
     super.key,
-    this.fit = BoxFit.cover,
+    this.fit = BoxFit.cover, // Alapértelmezett értéknek a BoxFit.cover-t javaslom
     required this.image,
     this.isNetworkImage = false,
     this.overlayColor,
@@ -31,7 +31,7 @@ class TCircularImage extends StatelessWidget {
   final String image;
   final bool isNetworkImage;
   final Color? overlayColor;
-  final Color? backgroundColor; // Módosítás: háttérszín
+  final Color? backgroundColor;
   final double width, height, padding;
 
   @override
@@ -41,32 +41,34 @@ class TCircularImage extends StatelessWidget {
       height: height,
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-        color:
-            backgroundColor ?? // Ha nincs háttérszín, használd az alapértelmezett színt
-                (THelperFunctions.isDarkMode(context)
-                    ? TColors.black
-                    : TColors.white),
+        color: backgroundColor ??
+            (THelperFunctions.isDarkMode(context)
+                ? TColors.black
+                : TColors.white),
         borderRadius: BorderRadius.circular(100),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
-        child: Center(
-          child: isNetworkImage
-              ? CachedNetworkImage(
-                  fit: fit,
-                  color: overlayColor,
-                  imageUrl: image,
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      const TShimmerEffect(width: 80, height: 80, radius: 80),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                )
-              : Image(
-                  fit: fit,
-                  image: AssetImage(image),
-                  color: overlayColor,
-                ),
+        child: isNetworkImage
+            ? CachedNetworkImage(
+          width: double.infinity, // A kép kitöltse a rendelkezésre álló szélességet
+          height: double.infinity, // A kép kitöltse a rendelkezésre álló magasságot
+          fit: fit, // Biztosítsd, hogy a kép kitöltse a helyet
+          color: overlayColor,
+          imageUrl: image,
+          progressIndicatorBuilder: (context, url, downloadProgress) =>
+          const TShimmerEffect(width: 80, height: 80, radius: 80),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+        )
+            : Image.asset(
+          image,
+          width: double.infinity,
+          height: double.infinity,
+          fit: fit,
+          color: overlayColor,
         ),
       ),
     );
   }
 }
+

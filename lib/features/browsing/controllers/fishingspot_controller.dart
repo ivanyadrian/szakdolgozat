@@ -133,7 +133,7 @@ class FishingSpotController extends GetxController {
         settlementName: settlementName.text.trim(),
         gpsCoordinates: gpsCoordinates.text.trim(),
         numberOfSpots: int.parse(numberOfSpots.text.trim()),
-        uploadedBy: userController.user.value.username,
+        uploadedBy: userController.user.value.id,
         imageUrls: [],
         countyId: county.text.trim(),
         description: description.text.trim(), // Add description here

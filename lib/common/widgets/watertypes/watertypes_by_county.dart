@@ -56,10 +56,12 @@ class TWaterTypesByCounty extends StatelessWidget {
 
             /// IMAGE
             SizedBox( // Meghatározott méretű hely a képnek
-              width: 50.0, // Állítsd be a kívánt szélességet
+              width: 50, // Állítsd be a kívánt szélességet
               child: TCircularImage(
                 isNetworkImage: false,
                 image: _getWaterTypeImage(waterType),
+                width: 50,
+                height: 50,
               ),
             ),
             const SizedBox(width: TSize.spaceBetweenItems),

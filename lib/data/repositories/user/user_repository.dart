@@ -15,6 +15,7 @@ import '../../../utils/exceptions/platform_exceptions.dart';
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
 
+
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   /// Function to save user data to Firestore
@@ -49,6 +50,22 @@ class UserRepository extends GetxController {
       throw TPlatformException(e.code).message;
     } catch (e) {
       throw 'Váratlan hiba történt. Kérlek próbáld újra';
+    }
+  }
+
+  // Új metódus a felhasználói adatok lekéréséhez ID alapján
+  Future<UserModel> getUserById(String userId) async {
+
+    try {
+      final userDoc = await _db.collection('Users').doc(userId).get();
+
+      if (userDoc.exists) {
+        return UserModel.fromSnapshot(userDoc);
+      } else {
+        throw Exception('Felhasználó nem található');
+      }
+    } catch (e) {
+      throw Exception('Hiba történt a felhasználói adatok lekérésekor: $e');
     }
   }
 
