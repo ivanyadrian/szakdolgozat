@@ -43,16 +43,6 @@ class UserDetailBottomSheet extends StatelessWidget {
           );
         }
 
-        // Handle potential errors
-        if (snapshot.hasError) {
-          return Center(child: Text('Hiba történt: ${snapshot.error}'));
-        }
-
-        // If no data, display a message
-        if (!snapshot.hasData || snapshot.data == null) {
-          return const Center(child: Text('Felhasználó nem található.'));
-        }
-
         final user = snapshot.data!;
 
         return Padding(
@@ -77,7 +67,7 @@ class UserDetailBottomSheet extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 TProfileMenu(
-                  title: 'Név',
+                  title: 'Felhasználónév',
                   value: user.username,
                   icon: null,
                 ),

@@ -8,6 +8,7 @@ import 'package:szakdolgozat_app/features/browsing/screens/details/widgets/ratin
 import 'package:szakdolgozat_app/utils/constans/colors.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
+import '../../../../common/widgets/text/t_brand_title_text_with_verified_icon.dart';
 import '../../../../data/repositories/user/user_model.dart';
 import '../../../../data/repositories/user/user_repository.dart';
 import '../../userbottomsheret.dart';
@@ -23,7 +24,7 @@ class ProductDetailScreen extends StatelessWidget {
     final dark = THelperFunctions.isDarkMode(context);
 
     return Scaffold(
-      bottomNavigationBar: const TOpenMapButton(),
+      bottomNavigationBar: TOpenMapButton(gpsCoordinates: fishingSpot.gpsCoordinates),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -66,15 +67,15 @@ class ProductDetailScreen extends StatelessWidget {
 
                   const SizedBox(height: TSize.spaceBetweenItems),
                   const Divider(),
-                  FutureBuilder<UserModel>(
+                  FutureBuilder<UserModel?>(
                     future: UserRepository().getUserById(fishingSpot.uploadedBy),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const CircularProgressIndicator();
                       } else if (snapshot.hasError) {
-                        return Text('Hiba történt: ${snapshot.error}');
-                      } else if (!snapshot.hasData) {
-                        return const Text('Felhasználó nem található.');
+                        return const TBrandTitleWithVerifiedIcon(title: 'A feltöltő adatai többé már nem elérhetőek.');
+                      } else if (snapshot.data == null) {
+                        return const Text('Felhasználó nem található.'); // Felhasználó nem található üzenet
                       }
 
                       final user = snapshot.data!;
@@ -88,7 +89,7 @@ class ProductDetailScreen extends StatelessWidget {
                               _showUserDetailBottomSheet(context, user.id);
                             },
                             child: Text(
-                              user.username, // Felhasználó neve
+                              user.username,
                               style: TextStyle(
                                 color: TColors.lightGreen,
                                 fontWeight: FontWeight.bold,

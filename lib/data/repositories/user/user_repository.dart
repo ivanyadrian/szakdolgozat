@@ -53,21 +53,21 @@ class UserRepository extends GetxController {
     }
   }
 
-  // Új metódus a felhasználói adatok lekéréséhez ID alapján
   Future<UserModel> getUserById(String userId) async {
-
     try {
       final userDoc = await _db.collection('Users').doc(userId).get();
 
       if (userDoc.exists) {
         return UserModel.fromSnapshot(userDoc);
       } else {
-        throw Exception('Felhasználó nem található');
+        throw Exception('Felhasználó nem található'); // Kivételt dobunk, ha a felhasználó nem található
       }
     } catch (e) {
       throw Exception('Hiba történt a felhasználói adatok lekérésekor: $e');
     }
   }
+
+
 
   /// Function to update user data in Firestore
   Future<void> updateUserDetails(UserModel updateUser) async {
