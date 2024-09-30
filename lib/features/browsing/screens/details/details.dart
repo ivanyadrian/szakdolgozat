@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:readmore/readmore.dart';
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/details/widgets/bottom_add_to_card_widget.dart';
@@ -89,16 +90,26 @@ class ProductDetailScreen extends StatelessWidget {
                             onTap: () {
                               _showUserDetailBottomSheet(context, user.id);
                             },
-                            child: Text(
-                              user.username,
-                              style: TextStyle(
-                                color: TColors.lightGreen,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  user.username,
+                                  style: TextStyle(
+                                    color: TColors.lightGreen,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const Icon(
+                                  Iconsax.arrow_right_2, // Right-pointing arrow icon
+                                  color: TColors.lightGreen,
+                                  size: 17,// Match the color with username if desired
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       );
+
                     },
                   ),
                 ],
