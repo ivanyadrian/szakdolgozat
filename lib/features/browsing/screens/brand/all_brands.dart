@@ -5,7 +5,6 @@ import 'package:szakdolgozat_app/common/widgets/brand/brand_card.dart';
 import 'package:szakdolgozat_app/common/widgets/layouts/grid_layout.dart';
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/brand/all_spots_by_county.dart';
-import 'package:szakdolgozat_app/features/browsing/screens/brand/brand_products.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 
 import '../../../../common/widgets/shimmers/shimmer.dart';

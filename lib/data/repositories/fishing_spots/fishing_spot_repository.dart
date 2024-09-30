@@ -163,4 +163,19 @@ class FishingSpotRepository extends GetxController {
       throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
     }
   }
+
+  Future<List<FishingSpotModel>> getFavouriteProducts(List<String> productIds) async {
+    try {
+      final snapshot = await _db.collection('FishingSpots').where(
+          FieldPath.documentId, whereIn: productIds).get();
+      return snapshot.docs.map((querySnapshot) =>
+          FishingSpotModel.fromSnapshot(querySnapshot)).toList();
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Váratlan hiba történt. Kérlek próbáld meg újra';
+    }
+  }
 }

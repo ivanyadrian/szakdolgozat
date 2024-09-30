@@ -8,7 +8,6 @@ import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
 import 'package:szakdolgozat_app/data/repositories/authentication/authentication_repository.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/order/order.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/upload_new_element/upload_new_element.dart';
-import 'package:szakdolgozat_app/features/personalization/screens/address/address.dart';
 import 'package:szakdolgozat_app/utils/constans/colors.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';

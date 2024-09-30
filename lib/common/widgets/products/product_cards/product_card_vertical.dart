@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:szakdolgozat_app/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:szakdolgozat_app/common/widgets/products/favourite/favourite_icon.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/details/details.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 import '../../../../features/browsing/screens/upload_new_element/model/fishing_spot_model.dart';
 import '../../../../utils/constans/colors.dart';
 import '../../../../utils/constans/size.dart';
 import '../../../styles/shadow.dart';
-import '../../icons/t_circular_icon.dart';
 import '../../images/rounded_image.dart';
 import '../../text/product_title_text.dart';
 import '../../text/t_brand_title_text_with_verified_icon.dart';
@@ -69,7 +69,7 @@ class TProductCardVertical extends StatelessWidget {
                   Positioned(
                     top: 3,
                     right: 3,
-                    child: TCircularIcon(icon: Iconsax.heart, color: Colors.red, height: 40, width: 40),
+                    child: TFavouriteIcon(productId: fishingSpot.id),
                   ),
                 ],
               ),
@@ -87,7 +87,13 @@ class TProductCardVertical extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Flexible(child: TProductTitleText(title: placeName, smallSize: true, maxLines: 1)),
+                        Flexible(
+                          child: TProductTitleText(
+                            title: placeName,
+                            smallSize: true,
+                            maxLines: 1,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -109,7 +115,12 @@ class TProductCardVertical extends StatelessWidget {
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(left: TSize.sm),
-                    child: Text(settlementName, style: Theme.of(context).textTheme.titleLarge, maxLines: 1, overflow: TextOverflow.ellipsis),
+                    child: Text(
+                      settlementName,
+                      style: Theme.of(context).textTheme.titleLarge,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
                 Container(
@@ -123,7 +134,12 @@ class TProductCardVertical extends StatelessWidget {
                   child: SizedBox(
                     width: TSize.iconLg * 1.2,
                     height: TSize.iconLg * 1.2,
-                    child: Center(child: Icon(Iconsax.arrow_right_3_copy, color: dark ? TColors.white : TColors.dark)),
+                    child: Center(
+                      child: Icon(
+                        Iconsax.arrow_right_3_copy,
+                        color: dark ? TColors.white : TColors.dark,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -134,5 +150,6 @@ class TProductCardVertical extends StatelessWidget {
     );
   }
 }
+
 
 

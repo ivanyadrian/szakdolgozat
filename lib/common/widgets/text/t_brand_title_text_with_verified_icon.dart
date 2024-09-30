@@ -29,17 +29,17 @@ class TBrandTitleWithVerifiedIcon extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Flexible(
-            child: TBrandTitleText(
-              title: title,
-              color: textColor,
-              maxLines: maxLines,
-              textAlign: textAlign,
-              brandTextSize: brandTextSizes,
-            ),
+          child: TBrandTitleText(
+            title: title,
+            color: textColor,
+            maxLines: maxLines,
+            textAlign: textAlign,
+            brandTextSize: brandTextSizes,
+          ),
         ),
         const SizedBox(width: TSize.xs),
-
-        //const Icon(Iconsax.verify, color: TColors.primaryColor, size: TSize.iconXs),
+        // You can uncomment this if you want to display the icon
+        // const Icon(Iconsax.verify, color: TColors.primaryColor, size: TSize.iconXs),
       ],
     );
   }

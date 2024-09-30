@@ -8,6 +8,7 @@ import 'package:szakdolgozat_app/data/repositories/user/user_repository.dart';
 import 'package:szakdolgozat_app/features/authentication/screens/onboardning/onboarding.dart';
 import 'package:szakdolgozat_app/features/authentication/screens/signup/verify_email.dart';
 import 'package:szakdolgozat_app/navigation_menu.dart';
+import 'package:szakdolgozat_app/utils/local_storage/storage_utility.dart';
 import '../../../features/authentication/screens/login/login.dart';
 import '../../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
@@ -35,9 +36,16 @@ class AuthenticationRepository extends GetxController {
     final user = _auth.currentUser;
 
     if (user != null) {
+      // if the user is logged in
       if (user.emailVerified) {
+
+        // initialize user specific storage
+        await TLocalStorage.init(user.uid); //az init saját fájl
+
+        // if the user is email is verified, navigate to the main Navigation menu
         Get.offAll(() => const NavigationMenu());
       } else {
+        // if the user's email is not verified, navigate to the verifyemailscreen
         Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
       }
     } else {

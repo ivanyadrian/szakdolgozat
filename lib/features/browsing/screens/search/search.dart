@@ -11,11 +11,8 @@ import 'package:szakdolgozat_app/features/browsing/screens/brand/all_spots_by_co
 import 'package:szakdolgozat_app/utils/constans/colors.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
-
 import '../../../../common/widgets/brand/brand_card.dart';
-import '../../../../common/widgets/text/t_brand_title_text_with_verified_icon.dart';
 import '../../../../common/widgets/watertypes/watertypes_by_county.dart';
-import '../../../../utils/constans/enums.dart';
 import '../../controllers/fishingspot_controller.dart';
 import '../brand/brand_products.dart';
 

@@ -1,11 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
-import 'package:szakdolgozat_app/common/widgets/text/product_title_text.dart';
-import 'package:szakdolgozat_app/common/widgets/text/t_brand_title_text_with_verified_icon.dart';
-import 'package:szakdolgozat_app/utils/constans/enums.dart';
-
-import '../../../../../utils/constans/size.dart';
-
 
 class TRatingAndShare extends StatelessWidget {
   final String placeName; // Add placeName as a parameter
@@ -14,43 +7,49 @@ class TRatingAndShare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Text(
-              placeName, // Use the placeName here
+    return Container( // Provide a container with bounded width
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Use a Flexible or Expanded widget properly
+          Expanded(
+            child: Text(
+              placeName,
+              maxLines: 1, // Limit to 1 line
+              overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
               style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-          ],
-        ),
-        /// Rating
-        Row(
-          children: [
-            const Icon(Iconsax.star, color: Colors.amber, size: 24),
-            const SizedBox(width: TSize.spaceBetweenItems / 2),
-            Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                      text: '5.0', style: Theme.of(context).textTheme.bodyLarge),
-                  const TextSpan(text: ' (375)'),
-                ],
+          ),
+          const SizedBox(width: 16.0), // Adjust spacing if needed
+          // Rating
+          Row(
+            children: [
+              const Icon(Icons.star, color: Colors.amber, size: 24),
+              const SizedBox(width: 8.0), // Adjust the size for spacing
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                        text: '5.0', style: Theme.of(context).textTheme.bodyLarge),
+                    const TextSpan(text: ' (375)'),
+                  ],
+                ),
               ),
-            ),
-            /// Share Button
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.share, size: TSize.iconMd),
-            ),
-          ],
-        ),
-      ],
+              // Share Button
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.share, size: 24), // Adjust size as needed
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
+
+
 

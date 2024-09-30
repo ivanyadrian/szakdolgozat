@@ -28,7 +28,8 @@ class ProductDetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TProductImageSlider(imageUrls: fishingSpot.imageUrls),
+
+            TProductImageSlider(imageUrls: fishingSpot.imageUrls, productId: fishingSpot.id), // Pass the product ID here),
 
             Padding(
               padding: const EdgeInsets.only(

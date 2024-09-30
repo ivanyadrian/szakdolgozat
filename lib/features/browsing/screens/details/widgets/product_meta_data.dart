@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:szakdolgozat_app/common/widgets/text/product_title_text.dart';
 import 'package:szakdolgozat_app/common/widgets/text/t_brand_title_text_with_verified_icon.dart';
 import 'package:szakdolgozat_app/utils/constans/enums.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
@@ -22,13 +21,21 @@ class TProductMetaData extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            TBrandTitleWithVerifiedIcon(
-              title: settlementName, // Use settlementName here
-              brandTextSizes: TextSizes.small,
+            // Use Flexible to allow truncation
+            Flexible(
+              child: TBrandTitleWithVerifiedIcon(
+                title: settlementName,
+                brandTextSizes: TextSizes.small,
+                maxLines: 1,
+              ),
             ),
-            TBrandTitleWithVerifiedIcon(
-              title: countyName, // Use countyName here
-              brandTextSizes: TextSizes.small,
+            const SizedBox(width: 8.0), // Adjust the spacing if needed
+            Flexible(
+              child: TBrandTitleWithVerifiedIcon(
+                title: countyName,
+                brandTextSizes: TextSizes.small,
+                maxLines: 1,
+              ),
             ),
           ],
         ),

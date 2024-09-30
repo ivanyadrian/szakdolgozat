@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:szakdolgozat_app/utils/constans/image_strings.dart';
 
 class CountyImageProvider {

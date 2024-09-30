@@ -4,7 +4,6 @@ import 'package:szakdolgozat_app/common/widgets/layouts/list_layout.dart';
 import 'package:szakdolgozat_app/common/widgets/products/product_cards/vertical_view.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/fish_types/fish_types.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/home/widgets/home_appbar.dart';
-import 'package:szakdolgozat_app/features/browsing/screens/home/widgets/home_counties.dart';
 import 'package:szakdolgozat_app/features/browsing/screens/home/widgets/promo_slider.dart';
 import 'package:szakdolgozat_app/utils/constans/image_strings.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
@@ -25,7 +24,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     /// APPBAR
-                    THomeAppBar(),
+                    THomeAppBar(), /// usercontroller
                     SizedBox(height: TSize.spaceBetweenSections),
 
                     /// SEARCHBAR
@@ -67,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       /// BANNER SLIDER
-                      const TPromoSlider(banners: [TImages.banner_1, TImages.banner_2, TImages.banner_3]),
+                      const TPromoSlider(banners: [TImages.banner_1, TImages.banner_2, TImages.banner_3]), /// homecontroller
                       const SizedBox(height: TSize.spaceBetweenSections),
 
 

@@ -5,7 +5,9 @@ import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 import '../../../../../utils/constans/size.dart';
 
 class TOpenMapButton extends StatelessWidget {
-  const TOpenMapButton({super.key});
+  final String gpsCoordinates; // Add this parameter
+
+  const TOpenMapButton({required this.gpsCoordinates, super.key}); // Ensure it's required
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,11 @@ class TOpenMapButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween, // Az elemek a széleken helyezkednek el
         children: [
-          const Text('12.736, 31.123'), // Az íz szöveg
+          Expanded(child: Text(gpsCoordinates)), // Display the passed GPS coordinates
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              // Logic to open the map with the provided coordinates
+            },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(TSize.md),
               backgroundColor: TColors.black,

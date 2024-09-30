@@ -11,7 +11,7 @@ class TLoaders {
     ScaffoldMessenger.of(Get.context!).showSnackBar(
       SnackBar(
         elevation: 0,
-        duration: const Duration(seconds: 5),
+        duration: const Duration(seconds: 2),
         backgroundColor: Colors.transparent,
         content: Container(
           padding: const EdgeInsets.all(12),

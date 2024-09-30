@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:szakdolgozat_app/common/widgets/products/favourite/favourite_icon.dart';
 import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/custom_shapes/edges/curved_edges_widget.dart';
-import '../../../../../common/widgets/icons/t_circular_icon.dart';
 import '../../../../../common/widgets/images/rounded_image.dart';
 import '../../../../../utils/constans/colors.dart';
 import '../../../../../utils/constans/size.dart';
@@ -11,9 +10,11 @@ import '../../../../../utils/constans/size.dart';
 
 class TProductImageSlider extends StatefulWidget {
   final List<String> imageUrls; // Accept list of image URLs
+  final String productId; // Add productId to pass the unique ID
 
   const TProductImageSlider({
     required this.imageUrls, // Pass the image URLs
+    required this.productId, // Pass the unique ID
     super.key,
   });
 
@@ -97,10 +98,10 @@ class _TProductImageSliderState extends State<TProductImageSlider> {
             ),
 
             /// APPBAR
-            const TAppBar(
+            TAppBar(
               showBackArrow: true,
               actions: [
-                TCircularIcon(icon: Iconsax.heart, color: Colors.red),
+                TFavouriteIcon(productId: widget.productId), // Pass the productId here
               ],
             ),
           ],

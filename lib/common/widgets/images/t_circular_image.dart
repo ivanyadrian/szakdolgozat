@@ -1,18 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:szakdolgozat_app/common/widgets/shimmers/shimmer.dart';
-
 import '../../../utils/constans/colors.dart';
 import '../../../utils/constans/size.dart';
 import '../../../utils/helpers/helper_functions.dart';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:szakdolgozat_app/common/widgets/shimmers/shimmer.dart';
-
-import '../../../utils/constans/colors.dart';
-import '../../../utils/constans/size.dart';
-import '../../../utils/helpers/helper_functions.dart';
 
 class TCircularImage extends StatelessWidget {
   const TCircularImage({

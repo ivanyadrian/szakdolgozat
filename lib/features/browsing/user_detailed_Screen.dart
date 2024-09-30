@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:szakdolgozat_app/common/widgets/appbar/appbar.dart';
 import 'package:szakdolgozat_app/common/widgets/images/t_circular_image.dart';
-import 'package:szakdolgozat_app/utils/constans/enums.dart';
 import 'package:szakdolgozat_app/utils/constans/image_strings.dart';
 
 import '../../common/widgets/loaders/loaders.dart';
