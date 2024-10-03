@@ -38,9 +38,9 @@ class MapScreen extends StatelessWidget {
                 point: center,
                 child: Container( // Használjuk a child paramétert
                   child: Icon(
-                    Icons.location_on,
+                    Icons.circle,
                     color: Colors.red,
-                    size: 40.0,
+                    size: 20,
                   ),
                 ),
               ),
