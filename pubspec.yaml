@@ -23,6 +23,10 @@ dependencies:
   shimmer: ^3.0.0
   image_picker: ^1.1.2 # videó 41
 
+  #map
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+
 
   # ÁLTALAM HOZZÁADOTT IKONOK
   iconsax_flutter: ^1.0.0

@@ -4,10 +4,19 @@ import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 
 import '../../../../../utils/constans/size.dart';
 
-class TOpenMapButton extends StatelessWidget {
-  final String gpsCoordinates; // Add this parameter
+import 'package:flutter/material.dart';
+import 'package:szakdolgozat_app/common/widgets/loaders/loaders.dart';
+import 'package:szakdolgozat_app/utils/constans/colors.dart';
+import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
+import '../../../../../utils/constans/size.dart';
+import 'package:flutter/services.dart';
 
-  const TOpenMapButton({required this.gpsCoordinates, super.key}); // Ensure it's required
+import '../../../map_screen.dart'; // Import for clipboard functionality
+
+class TOpenMapButton extends StatelessWidget {
+  final String gpsCoordinates;
+
+  const TOpenMapButton({required this.gpsCoordinates, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +32,47 @@ class TOpenMapButton extends StatelessWidget {
         ),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Az elemek a széleken helyezkednek el
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(child: Text(gpsCoordinates)), // Display the passed GPS coordinates
+
+          // Smaller button to copy GPS coordinates
           ElevatedButton(
             onPressed: () {
-              // Logic to open the map with the provided coordinates
+              // Logic to copy the coordinates to the clipboard
+              Clipboard.setData(ClipboardData(text: gpsCoordinates)).then((_) {
+                // Optionally show a snackbar or a toast message to confirm copy
+                ScaffoldMessenger.of(context).showSnackBar(
+                  TLoaders.customToast(message: 'A GPS koordináták sikeresen kimásolva'),
+                );
+              });
+            },
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: TSize.sm, horizontal: TSize.defaultSpace),
+              backgroundColor: dark ? TColors.black : TColors.lightGrey, // Lighter background for distinction
+              side: const BorderSide(color: TColors.black),
+            ),
+            child: SizedBox(
+              width: 80, // Limit width to encourage line break
+              child: Text(
+                'Koordináta másolása',
+                textAlign: TextAlign.center, // Center the text
+                maxLines: 2, // Allow two lines
+                softWrap: true, // Enable soft wrapping
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+            ),
+          ),
+
+
+          // Button to open the map
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MapScreen(gpsCoordinates: gpsCoordinates),
+                ),
+              );
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(TSize.md),
@@ -42,4 +86,5 @@ class TOpenMapButton extends StatelessWidget {
     );
   }
 }
+
 
