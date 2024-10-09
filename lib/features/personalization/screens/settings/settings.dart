@@ -52,47 +52,41 @@ class SettingsScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(TSize.defaultSpace),
                     child: Column(
                       children: [
-                        /*
-                        const TSectionHeading(title: 'Fiók beállítás', showActionButton: false),
-                        const SizedBox(height: TSize.spaceBetweenItems),
 
                         TSettingsMenuTitle(
-                          icon: Iconsax.calendar,
-                          title: 'Címek',
-                          subTitle: 'Címek hozzáadása, meglévő címek kezelése',
-                          onTap: () => Get.to(() => const UserAddressScreen()),
-                        ),
-                        const SizedBox(height: TSize.spaceBetweenItems),
-                       */
-
-                        TSettingsMenuTitle(
-                          icon: Icons.add,
+                          icon: Icons.upload,
                           title: 'Hozzáadás',
-                          subTitle: 'Új hely felvétele',
+                          subTitle:
+                          'Itt adhatsz hozzá új horgászhelyet. A szükséges adatok megadását követően a feltöltött hely megjelenik a "Keresés" képernyőn.',
                           onTap: () => Get.to(() => const AddNewElement()),
                         ),
                         const SizedBox(height: TSize.spaceBetweenItems),
+                        const Divider(),
+
 
                         TSettingsMenuTitle(
-                            icon: Iconsax.calendar,
-                            title: 'Foglalásom',
-                            subTitle: 'Foglalás részletei',
-                            onTap: () => Get.to(() => const OrderScreen())),
+                          icon: Iconsax.cup,
+                          title: 'Büszkeség',
+                          subTitle:
+                          'Ha büszke vagy a kifogott halra, töltsd fel ide és a kép megjelenhet a főképernyőn.',
+                          onTap: () => Get.to(() => EmptyScreen()),
+                        ),
+                        const SizedBox(height: TSize.spaceBetweenSections),
 
                         TSettingsMenuTitle(
                             icon: Icons.warning,
                             title: 'Tesztelésre',
                             subTitle: 'firebase adatok tesztelésének cáljából',
-                            onTap: () => Get.to(() => const EmptyScreen())),
+                            onTap: () => Get.to(() => EmptyScreen())),
 
                         const SizedBox(height: TSize.spaceBetweenItems * 4),
                         const TSectionHeading(title: 'Alkalmazás beállításai', showActionButton: false),
                         const SizedBox(height: TSize.spaceBetweenItems),
 
                         TSettingsMenuTitle(
-                          icon: Iconsax.location,
-                          title: 'Helymeghatározás',
-                          subTitle: 'A helymeghatározás engedélyezése',
+                          icon: Icons.sunny,
+                          title: 'Téma megváltoztatása',
+                          subTitle: 'Itt tudsz váltani a sötét/világos téma között',
                           trailing: Switch(value: true, onChanged: (value) {}),
                         ),
                       ],

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:szakdolgozat_app/common/widgets/loaders/loaders.dart';
 import 'package:szakdolgozat_app/data/repositories/fishing_spots/fishing_spot_repository.dart';

@@ -11,10 +11,7 @@ import '../../../../../utils/constans/size.dart';
 class TPromoSlider extends StatelessWidget {
   const TPromoSlider({
     super.key,
-    required this.banners,
   });
-
-  final List<String> banners;
 
   @override
   Widget build(BuildContext context) {
@@ -22,33 +19,56 @@ class TPromoSlider extends StatelessWidget {
 
     return Column(
       children: [
-        CarouselSlider(
-          options: CarouselOptions(
-              viewportFraction: 1,
-              autoPlay: true, // Enable automatic playback
-              autoPlayInterval: Duration(seconds: 3), // Set the interval for automatic playback
-              onPageChanged: (index, _) =>
-                  controller.updatePageIndicator(index)),
-          items: banners.map((url) => TRoundedImage(imageUrl: url)).toList(),
-        ),
+        Obx(() {
+          if (controller.isLoading.value) {
+            // Show a loading indicator while fetching data
+            return Center(child: CircularProgressIndicator());
+          } else if (controller.banners.isEmpty) {
+            return Center(child: Text('Nincsenek elérhető képek'));
+          } else {
+            return CarouselSlider(
+              options: CarouselOptions(
+                viewportFraction: 1,
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 3),
+                onPageChanged: (index, _) =>
+                    controller.updatePageIndicator(index),
+              ),
+              items: controller.banners
+                  .map(
+                    (url) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      // állítsd be a kívánt vízszintes paddingot
+                      child: TRoundedImage(
+                        imageUrl: url,
+                        isNetworkImage: true,
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            );
+          }
+        }),
         const SizedBox(height: TSize.spaceBetweenItems),
         Center(
-          child: Obx(
-                () => Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (int i = 0; i < banners.length; i++)
-                  TCircularContainer(
-                    width: 20,
-                    height: 4,
-                    margin: const EdgeInsets.only(right: 10),
-                    backgroundColor: controller.carousalCurrentIndex.value == i
-                        ? TColors.lightGreen
-                        : TColors.grey,
-                  ),
-              ],
-            ),
-          ),
+          child: Obx(() => Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (int i = 0; i < controller.banners.length; i++)
+                    TCircularContainer(
+                      width: 20,
+                      height: 4,
+                      margin: const EdgeInsets.only(right: 10),
+                      backgroundColor:
+                          controller.carousalCurrentIndex.value == i
+                              ? TColors.lightGreen
+                              : TColors.grey,
+                    ),
+                ],
+              )),
         ),
       ],
     );

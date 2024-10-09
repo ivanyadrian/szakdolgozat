@@ -21,18 +21,19 @@ class TLocalStorage {
       _instance = TLocalStorage._internal();
       try {
         print('Initializing GetStorage with bucket name: $bucketName');
-        await GetStorage.init(bucketName);
-        _instance!._storage = GetStorage(bucketName);
+        await GetStorage.init(bucketName);  // Initialize GetStorage here
+        _instance!._storage = GetStorage();  // Make sure to initialize _storage properly
         _instance!._bucketName = bucketName; // Store the bucket name
-        print('GetStorage has been initialized successfully.');
+        print('A GetStorage sikeresen inicializálva lett');
       } catch (e) {
-        print('Error during TLocalStorage initialization: $e');
+        print('Hiba a GetStorage inicializálása közben: $e');
         rethrow; // Consider logging or handling the error appropriately
       }
     } else {
-      print('GetStorage is already initialized with bucket name: ${_instance!._bucketName}');
+      print('GetStorage már inicializálva van a következővel: ${_instance!._bucketName}');
     }
   }
+
 
   /// Save data to local storage
   Future<void> saveData<T>(String key, T value) async {

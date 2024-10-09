@@ -1,20 +1,19 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-// Define a new widget for a rounded image
 class TRoundedImageInList extends StatelessWidget {
   final File imageFile;
-  final double width;
-  final double height;
-  final double borderRadius;
+  final double width; // Width of the image
+  final double height; // Height of the image
+  final double borderRadius; // Border radius of the image
 
   // Constructor to accept the image file, dimensions, and border radius
   const TRoundedImageInList({
     Key? key,
     required this.imageFile,
-    this.width = 100,
-    this.height = 100,
-    this.borderRadius = 10,
+    this.width = 100, // Default width
+    this.height = 100, // Default height
+    this.borderRadius = 10, // Default border radius
   }) : super(key: key);
 
   @override
@@ -23,8 +22,8 @@ class TRoundedImageInList extends StatelessWidget {
       borderRadius: BorderRadius.circular(borderRadius),
       child: Image.file(
         imageFile,
-        width: width,
-        height: height,
+        width: width, // Use the provided or default width
+        height: height, // Use the provided or default height
         fit: BoxFit.cover,
       ),
     );
