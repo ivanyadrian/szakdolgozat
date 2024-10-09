@@ -73,21 +73,17 @@ class SettingsScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: TSize.spaceBetweenSections),
 
-                        TSettingsMenuTitle(
-                            icon: Icons.warning,
-                            title: 'Tesztelésre',
-                            subTitle: 'firebase adatok tesztelésének cáljából',
-                            onTap: () => Get.to(() => EmptyScreen())),
 
                         const SizedBox(height: TSize.spaceBetweenItems * 4),
                         const TSectionHeading(title: 'Alkalmazás beállításai', showActionButton: false),
                         const SizedBox(height: TSize.spaceBetweenItems),
 
                         TSettingsMenuTitle(
-                          icon: Icons.sunny,
-                          title: 'Téma megváltoztatása',
-                          subTitle: 'Itt tudsz váltani a sötét/világos téma között',
-                          trailing: Switch(value: true, onChanged: (value) {}),
+                          icon: Icons.notifications,
+                          title: 'Értesítések',
+                          subTitle: 'Kapj értesítést a fontos eseményekről.',
+                          trailing: Switch(value: true, onChanged: (value) {
+                          }),
                         ),
                       ],
                     ),
