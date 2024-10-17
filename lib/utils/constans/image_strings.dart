@@ -92,4 +92,5 @@ class TImages {
   static const String swamp = "assets/icons/watertypes/swamp.png";
   static const String canal = "assets/icons/watertypes/canal.png";
   static const String brook = "assets/icons/watertypes/brook.png";
+  static const String reservoir = "assets/icons/watertypes/reservoir.png";
 }

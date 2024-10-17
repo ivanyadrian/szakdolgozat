@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:szakdolgozat_app/common/widgets/appbar/appbar.dart';
+import 'package:szakdolgozat_app/common/widgets/loaders/loaders.dart';
 import 'package:szakdolgozat_app/features/authentication/controllers/forget_password/forget_password_controller.dart';
 import 'package:szakdolgozat_app/utils/constans/size.dart';
 import 'package:szakdolgozat_app/utils/constans/text_strings.dart';
@@ -21,12 +22,11 @@ class ForgetPassword extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-                child: Text(TTexts.forgetPasswordTitle,
-                    style: Theme.of(context).textTheme.headlineMedium)),
+                child: Text(TTexts.forgetPasswordTitle, style: Theme.of(context).textTheme.headlineMedium)),
             const SizedBox(height: TSize.spaceBetweenItems),
+
             Center(
-                child: Text(TTexts.forgetPasswordSubTitle,
-                    style: Theme.of(context).textTheme.labelMedium)),
+                child: Text(TTexts.forgetPasswordSubTitle, style: Theme.of(context).textTheme.labelMedium)),
             const SizedBox(height: TSize.spaceBetweenSections * 2),
 
             Form(

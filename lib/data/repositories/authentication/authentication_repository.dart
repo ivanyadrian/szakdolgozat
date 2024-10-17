@@ -21,6 +21,7 @@ class AuthenticationRepository extends GetxController {
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
 
+
   /// Get Authenticated User Data # 40.videó
   User? get authUser => _auth.currentUser;
 
@@ -29,6 +30,7 @@ class AuthenticationRepository extends GetxController {
   void onReady() {
     FlutterNativeSplash.remove();
     screenRedirect();
+    FirebaseAuth.instance.setLanguageCode('hu');
   }
 
   /// Function a releváns screenhez

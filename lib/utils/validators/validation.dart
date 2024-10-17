@@ -83,7 +83,7 @@ class TValidator {
 
 
     if (!gpsRegExp.hasMatch(value)) {
-      return 'Nem helyes a GPS koordináta formátuma.';
+      return 'Nem helyes a GPS koordináta formátuma. (Helyes formátum pl.: 00.000000, 00.000000)';
     }
 
     return null;

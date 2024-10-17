@@ -65,15 +65,17 @@ class SearchScreen extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
                         const SizedBox(height: TSize.spaceBetweenItems),
+                        /*
                         const TSearchContainer(
                           text: 'Kezd el begépelni a hely nevét',
                           showBorder: true,
                           showBackground: false,
                           padding: EdgeInsets.zero,
                         ),
+                        */
                         const SizedBox(height: TSize.spaceBetweenSections),
                         TSectionHeading(
-                          title: 'Elérhető helyek',
+                          title: 'Helyek vármegyékként',
                           showActionButton: true,
                           onPressed: () => Get.to(() => const AllBrandsScreen()),
                         ),

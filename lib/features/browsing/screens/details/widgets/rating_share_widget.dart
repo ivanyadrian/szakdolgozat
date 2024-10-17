@@ -15,7 +15,7 @@ class TRatingAndShare extends StatelessWidget {
           Expanded(
             child: Text(
               placeName,
-              maxLines: 1, // Limit to 1 line
+              maxLines: 2, // Limit to 1 line
               overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
               style: const TextStyle(
                 fontSize: 24.0,
@@ -25,6 +25,7 @@ class TRatingAndShare extends StatelessWidget {
           ),
           const SizedBox(width: 16.0), // Adjust spacing if needed
           // Rating
+          /*
           Row(
             children: [
               const Icon(Icons.star, color: Colors.amber, size: 24),
@@ -45,6 +46,8 @@ class TRatingAndShare extends StatelessWidget {
               ),
             ],
           ),
+
+           */
         ],
       ),
     );

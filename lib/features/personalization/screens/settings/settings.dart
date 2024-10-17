@@ -78,6 +78,7 @@ class SettingsScreen extends StatelessWidget {
                         const TSectionHeading(title: 'Alkalmazás beállításai', showActionButton: false),
                         const SizedBox(height: TSize.spaceBetweenItems),
 
+
                         TSettingsMenuTitle(
                           icon: Icons.notifications,
                           title: 'Értesítések',
@@ -85,6 +86,7 @@ class SettingsScreen extends StatelessWidget {
                           trailing: Switch(value: true, onChanged: (value) {
                           }),
                         ),
+
                       ],
                     ),
                   ),

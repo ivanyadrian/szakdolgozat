@@ -44,7 +44,7 @@ class UploadImageController extends GetxController {
       for (var image in selectedImages) {
         await _repository.uploadImage(image);
       }
-      TLoaders.successSnackBar(title: 'Siker', message: 'Képek sikeresen feltöltve!', duration: 2);
+      TLoaders.successSnackBar(title: 'Nagyszerű', message: 'Képek sikeresen feltöltve!', duration: 2);
       selectedImages.clear();
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Hiba', message: 'Hiba történt a képek feltöltése során: $e', duration: 2);

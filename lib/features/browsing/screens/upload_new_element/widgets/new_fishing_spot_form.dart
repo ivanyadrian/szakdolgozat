@@ -32,7 +32,7 @@ class TNewFishingSpotForm extends StatelessWidget {
           /// Típusa (Dropdown)
           TCustomDropdown(
             labelText: 'Típusa',
-            items: ['Tó', 'Folyó', 'Patak', 'Csatorna', 'Mocsár'],
+            items: ['Tó', 'Folyó', 'Patak', 'Csatorna', 'Mocsár', 'Víztározó'],
             value: controller.waterType.text.isEmpty
                 ? null
                 : controller.waterType.text,
@@ -58,7 +58,7 @@ class TNewFishingSpotForm extends StatelessWidget {
           TCustomDropdown(
             labelText: 'Vármegye',
             items: [
-              'Budapest',
+              'Baranya',
               'Bács-Kiskun',
               'Békés',
               'Borsod-Abaúj-Zemplén',

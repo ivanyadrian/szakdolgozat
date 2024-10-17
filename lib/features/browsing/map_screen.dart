@@ -25,7 +25,7 @@ class MapScreen extends StatelessWidget {
       body: FlutterMap(
         options: MapOptions(
           initialCenter: center, // A térkép középpontja a megadott koordináták
-          initialZoom: 5, // Kezdő zoom szint
+          initialZoom: 13, // Kezdő zoom szint
         ),
         children: [
           TileLayer(

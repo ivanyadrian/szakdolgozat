@@ -34,6 +34,8 @@ class TWaterTypesByCounty extends StatelessWidget {
         return TImages.brook;
       case 'mocsár':
         return TImages.swamp;
+      case 'víztározó':
+        return TImages.reservoir;
       default:
         return TImages.placeholder;
     }

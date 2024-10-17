@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:szakdolgozat_app/common/widgets/loaders/loaders.dart';
@@ -19,7 +20,8 @@ class ForgetPasswordController extends GetxController {
   sendPasswordResetEmail() async {
     try {
       // Start Loader
-      TFullScreenLoader.openLoadingDialog('Feldolgozás...', TImages.loadingAnimation);
+      TFullScreenLoader.openLoadingDialog(
+          'Feldolgozás...', TImages.loadingAnimation);
 
       // Check Internet Connection
       final isConnected = await NetworkManager.instance.isConnected();
@@ -36,50 +38,48 @@ class ForgetPasswordController extends GetxController {
         return;
       }
 
-
       await AuthenticationRepository.instance.sendPasswordResetEmail(email.text.trim());
 
       // Remove Loader
       TFullScreenLoader.stopLoading();
 
       // Show Success Screen
-      TLoaders.successSnackBar(title: 'Email elküldve', message: 'A jelszó visszaállításához szükséges link elküldve'.tr);
+      TLoaders.successSnackBar(title: 'Email elküldve', message: 'A jelszó visszaállításához szükséges link elküldve', duration: 3);
 
       // Redirect
       Get.to(() => ResetPasswordScreen(email: email.text.trim()));
     } catch (e) {
       // Remove Loader
       TFullScreenLoader.stopLoading();
-      TLoaders.errorSnackBar(title: 'Hiba', message: e.toString());
+      TLoaders.errorSnackBar(title: 'Hiba', message: e.toString(), duration: 2);
     }
   }
 
-    resendPasswordResetEmail(String email) async {
-      try {
-        // Start Loader
-        TFullScreenLoader.openLoadingDialog('Feldolgozás...', TImages.loadingAnimation);
+  // Resend Password Reset Email
+  resendPasswordResetEmail(String email) async {
+    try {
+      TFullScreenLoader.openLoadingDialog('Feldolgozás...', TImages.loadingAnimation);
 
-        // Check Internet Connection
-        final isConnected = await NetworkManager.instance.isConnected();
-        if (!isConnected) {
-          // Remove Loader
-          TFullScreenLoader.stopLoading();
-          return;
-        }
-
-        // Send Email to Reset Password
-        await AuthenticationRepository.instance.sendPasswordResetEmail(email);
-
-        // Remove Loader
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
         TFullScreenLoader.stopLoading();
+        TLoaders.errorSnackBar(title: 'Nincs internetkapcsolat', message: 'Kérjük, ellenőrizd az internetkapcsolatodat.');
+        return;
+      }
 
-        // Show Success Screen
-        TLoaders.successSnackBar(title: 'Email elküldve', message: 'A jelszó visszaállításához szükséges link elküldve'.tr);
+      // Send Email to Reset Password
+      await AuthenticationRepository.instance.sendPasswordResetEmail(email);
 
-      } catch (e) {
-        // Remove Loader
-        TFullScreenLoader.stopLoading();
-        TLoaders.errorSnackBar(title: 'Hiba', message: e.toString());
+      TFullScreenLoader.stopLoading();
+      TLoaders.successSnackBar(title: 'Email elküldve', message: 'A jelszó visszaállításához szükséges link újraküldve.');
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
+      if (e is FirebaseAuthException) {
+        TLoaders.errorSnackBar(title: 'Firebase hiba', message: e.message ?? 'Ismeretlen hiba történt.', duration: 3);
+      } else {
+        TLoaders.errorSnackBar(title: 'Hiba', message: 'Nem sikerült újraküldeni a jelszó visszaállító linket.', duration: 3);
       }
     }
   }
+
+}

@@ -44,10 +44,14 @@ dependencies:
   # FIREBASE
   firebase_core: ^2.23.0
   firebase_auth: ^4.14.0 #videó 35
+  firebase_app_check: ^0.2.2
+
+
   cloud_firestore: ^4.13.1 #videó 35
   google_sign_in: ^6.1.6 #video38
   firebase_storage: ^11.6.0 # videó 41
   cached_network_image: ^3.4.1
+  firebase_messaging: ^14.2.0
 
 
 dev_dependencies:
