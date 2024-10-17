@@ -26,7 +26,7 @@ class TBrandCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final dark = CustomHelperFunctions.isDarkMode(context);
 
     // Kép kiválasztása a megye neve alapján a CountyImageProvider segítségével
     String imagePath = CountyImageProvider.getImagePath(countyName);

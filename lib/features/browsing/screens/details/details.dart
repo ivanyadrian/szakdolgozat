@@ -22,7 +22,7 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final dark = CustomHelperFunctions.isDarkMode(context);
 
     return Scaffold(
       bottomNavigationBar: TOpenMapButton(gpsCoordinates: fishingSpot.gpsCoordinates),
@@ -122,7 +122,7 @@ class ProductDetailScreen extends StatelessWidget {
   }
 
   Widget _buildDescriptionBox(BuildContext context, String description) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final dark = CustomHelperFunctions.isDarkMode(context);
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(TSize.defaultSpace),
@@ -163,7 +163,7 @@ class ProductDetailScreen extends StatelessWidget {
     required String title,
     required String value,
   }) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final dark = CustomHelperFunctions.isDarkMode(context);
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(TSize.md),

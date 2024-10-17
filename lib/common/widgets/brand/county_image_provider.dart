@@ -43,12 +43,6 @@ class CountyImageProvider {
         return TImages.pest;
       case 'Szabolcs-Szatmár-Bereg':
         return TImages.szabolcs_szatmar_bereg;
-      case 'Tolna':
-        return TImages.tolna;
-      case 'Vas':
-        return TImages.vas;
-      case 'Zala':
-        return TImages.zala;
       default:
         return TImages.placeholder;
     }

@@ -10,7 +10,7 @@ class TImages {
   static const String onBoardingImage1 = "assets/images/on_boarding_gifs/fisherman.gif";
   static const String onBoardingImage2 = "assets/images/on_boarding_gifs/search.gif";
   static const String onBoardingImage3 = "assets/images/on_boarding_gifs/location.gif";
-  static const String onBoardingImage4 = "assets/images/on_boarding_gifs/calendar.gif";
+  static const String onBoardingImage4 = "assets/images/on_boarding_gifs/upload.gif";
 
 
   static const String emailSent = "assets/images/signup_verification_images/emailsent.gif";

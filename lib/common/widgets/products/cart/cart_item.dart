@@ -23,7 +23,7 @@ class TCartItem extends StatelessWidget {
           width: 60,
           height: 60,
           padding: const EdgeInsets.all(TSize.sm),
-          backgroundColor: THelperFunctions.isDarkMode(context)
+          backgroundColor: CustomHelperFunctions.isDarkMode(context)
               ? TColors.darkerGrey
               : TColors.light,
         ),

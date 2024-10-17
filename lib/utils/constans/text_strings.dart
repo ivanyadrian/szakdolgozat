@@ -2,13 +2,13 @@ class TTexts {
   static const String onBoardingTitle1 = "Szeretsz horgászni?";
   static const String onBoardingTitle2 = "BÖNGÉSZÉS";
   static const String onBoardingTitle3 = "LOKÁCIÓ";
-  static const String onBoardingTitle4 = "FOGLALÁS";
+  static const String onBoardingTitle4 = "HOZZÁADÁS";
 
 
   static const String onBoardingSubTitle1 = "A megfelelő helyen jársz";
   static const String onBoardingSubTitle2 = "Keresgélj az appban elérhető helyek között";
-  static const String onBoardingSubTitle3 = "GPS koordináták elvezetnek a helyre";
-  static const String onBoardingSubTitle4 = "Foglald le napokkal korábban a szabad helyeket";
+  static const String onBoardingSubTitle3 = "A GPS koordináták segítségével könnyedén meghatározhatod egy hely pontos helyzetét.";
+  static const String onBoardingSubTitle4 = "Tölts fel horgászhelyeket vagy a nagy fogásaidat amikre büszke vagy.";
 
 
   static const String homeAppbarTitle = "Üdv,";

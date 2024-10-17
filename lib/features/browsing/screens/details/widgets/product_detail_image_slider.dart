@@ -27,7 +27,7 @@ class _TProductImageSliderState extends State<TProductImageSlider> {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final dark = CustomHelperFunctions.isDarkMode(context);
 
     // Handle case where imageUrls is empty
     if (widget.imageUrls.isEmpty) {

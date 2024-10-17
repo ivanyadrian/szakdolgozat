@@ -67,7 +67,7 @@ class TMethodInfoWidget extends StatelessWidget {
   }
 
   Widget _buildSectionHeader(BuildContext context, String title) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final dark = CustomHelperFunctions.isDarkMode(context);
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),

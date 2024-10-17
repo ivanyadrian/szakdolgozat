@@ -10,7 +10,7 @@ class FishingSpotDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final dark = CustomHelperFunctions.isDarkMode(context);
 
     return Scaffold(
       appBar: TAppBar(title: Text(fishingSpot.placeName), showBackArrow: true),

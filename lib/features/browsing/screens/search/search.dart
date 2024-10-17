@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:szakdolgozat_app/common/widgets/appbar/appbar.dart';
 import 'package:szakdolgozat_app/common/widgets/appbar/tabbar.dart';
-import 'package:szakdolgozat_app/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:szakdolgozat_app/common/widgets/layouts/grid_layout.dart';
 import 'package:szakdolgozat_app/common/widgets/shimmers/shimmer.dart';
 import 'package:szakdolgozat_app/common/widgets/text/section_heading.dart';
@@ -54,7 +53,7 @@ class SearchScreen extends StatelessWidget {
                   automaticallyImplyLeading: false,
                   pinned: true,
                   floating: true,
-                  backgroundColor: THelperFunctions.isDarkMode(context)
+                  backgroundColor: CustomHelperFunctions.isDarkMode(context)
                       ? TColors.black
                       : TColors.white,
                   expandedHeight: 440,

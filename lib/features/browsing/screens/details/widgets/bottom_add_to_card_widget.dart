@@ -4,11 +4,7 @@ import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
 
 import '../../../../../utils/constans/size.dart';
 
-import 'package:flutter/material.dart';
 import 'package:szakdolgozat_app/common/widgets/loaders/loaders.dart';
-import 'package:szakdolgozat_app/utils/constans/colors.dart';
-import 'package:szakdolgozat_app/utils/helpers/helper_functions.dart';
-import '../../../../../utils/constans/size.dart';
 import 'package:flutter/services.dart';
 
 import '../../../map_screen.dart'; // Import for clipboard functionality
@@ -20,7 +16,7 @@ class TOpenMapButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final dark = CustomHelperFunctions.isDarkMode(context);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: TSize.defaultSpace, vertical: TSize.defaultSpace / 2),
